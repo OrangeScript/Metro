@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags: []
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - Player
+  - Interactive
+  - Smoke
+  - Puzzle
+  - NPC
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: FarBackGround
+    uniqueID: 79398163
+    locked: 0
+  - name: MetroStructure
+    uniqueID: 4015108083
+    locked: 0
+  - name: Smoke
+    uniqueID: 557857163
+    locked: 0
+  - name: Interactables
+    uniqueID: 2589524607
+    locked: 0
+  - name: Character
+    uniqueID: 2139032589
+    locked: 0
+  - name: AboveCharacter
+    uniqueID: 1813379431
+    locked: 0
+  - name: UI_World
+    uniqueID: 441155343
+    locked: 0
+  - name: UI_Screen
+    uniqueID: 2500809753
+    locked: 0
