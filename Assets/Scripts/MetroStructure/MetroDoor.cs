@@ -91,7 +91,7 @@ public class MetroDoor : MonoBehaviour
     }
 
 
-    private void OpenDoor()
+    public void OpenDoor()
     {
         if (currentState == DoorState.Jammed)
         {

@@ -1,120 +1,28 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\unity\\Metro\\",
+  "WorkspaceRootPath": "D:\\2025coreblazer\\Metro\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|D:\\unity\\Metro\\assets\\scripts\\metrostructure\\metrodoor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|d:\\2025coreblazer\\metro\\assets\\scripts\\metrostructure\\metrodoor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\metrostructure\\metrodoor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|d:\\unity\\metro\\assets\\scripts\\maze\\mazerenderer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\maze\\mazerenderer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|D:\\unity\\Metro\\assets\\scripts\\player\\playercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\player\\playercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|D:\\unity\\Metro\\assets\\scripts\\npc\\npccontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\npc\\npccontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|D:\\unity\\Metro\\assets\\scripts\\maze\\mazemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\maze\\mazemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|D:\\unity\\Metro\\assets\\scripts\\leveleditor\\leveleditor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\leveleditor\\leveleditor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|D:\\unity\\Metro\\assets\\scripts\\interactables\\inventorysystem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\interactables\\inventorysystem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|D:\\unity\\Metro\\assets\\scripts\\interactables\\gasmask.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\interactables\\gasmask.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|D:\\unity\\Metro\\assets\\scripts\\manager\\gamemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\manager\\gamemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|D:\\unity\\Metro\\assets\\scripts\\interactables\\flashlight.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\interactables\\flashlight.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|D:\\unity\\Metro\\assets\\scripts\\interactables\\duct.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\interactables\\duct.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|D:\\unity\\Metro\\assets\\scripts\\metrostructure\\metroground.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\metrostructure\\metroground.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|D:\\unity\\Metro\\assets\\scripts\\interactables\\safetyhammer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\interactables\\safetyhammer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|D:\\unity\\Metro\\assets\\scripts\\interactables\\smokedetector.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\interactables\\smokedetector.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|D:\\unity\\Metro\\assets\\scripts\\manager\\uimanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\manager\\uimanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|D:\\unity\\Metro\\assets\\scripts\\interactables\\window.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\interactables\\window.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|D:\\unity\\Metro\\assets\\scripts\\interactables\\interactableobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\interactables\\interactableobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|D:\\unity\\Metro\\assets\\scripts\\interactables\\crowbar.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|d:\\2025coreblazer\\metro\\assets\\scripts\\interactables\\crowbar.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\interactables\\crowbar.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|D:\\unity\\Metro\\assets\\scripts\\maze\\mazegenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\maze\\mazegenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|d:\\2025coreblazer\\metro\\assets\\scripts\\arrow\\arrow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\arrow\\arrow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|D:\\unity\\Metro\\assets\\scripts\\maze\\mazeinput.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\maze\\mazeinput.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|D:\\unity\\Metro\\assets\\scripts\\smoke\\smokesystem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\smoke\\smokesystem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|D:\\unity\\Metro\\assets\\scripts\\interactables\\ladder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\interactables\\ladder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|D:\\unity\\Metro\\assets\\scripts\\interactables\\combustibleitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\interactables\\combustibleitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|D:\\unity\\Metro\\assets\\scripts\\interactables\\clothing.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\interactables\\clothing.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|D:\\unity\\Metro\\assets\\scripts\\interactables\\battery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\interactables\\battery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|D:\\unity\\Metro\\assets\\scripts\\leveleditor\\metrodooreditor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\leveleditor\\metrodooreditor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|D:\\unity\\Metro\\assets\\scripts\\arrow\\inputmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\arrow\\inputmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|d:\\2025coreblazer\\metro\\assets\\scripts\\arrow\\arrowmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\arrow\\arrowmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
-      "VerticalTabListWidth": 100,
+      "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
           "DockedWidth": 200,
@@ -132,327 +40,53 @@
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "MetroDoor.cs",
-              "DocumentMoniker": "D:\\unity\\Metro\\Assets\\Scripts\\MetroStructure\\MetroDoor.cs",
+              "DocumentMoniker": "D:\\2025coreblazer\\Metro\\Assets\\Scripts\\MetroStructure\\MetroDoor.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\MetroStructure\\MetroDoor.cs",
-              "ToolTip": "D:\\unity\\Metro\\Assets\\Scripts\\MetroStructure\\MetroDoor.cs",
+              "ToolTip": "D:\\2025coreblazer\\Metro\\Assets\\Scripts\\MetroStructure\\MetroDoor.cs",
               "RelativeToolTip": "Assets\\Scripts\\MetroStructure\\MetroDoor.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAyAAAAAAAAAA==",
+              "ViewState": "AgIAAFYAAAAAAAAAAAAgwGkAAAAcAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-21T08:43:21.962Z",
+              "WhenOpened": "2025-03-26T08:25:18.055Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "MazeManager.cs",
-              "DocumentMoniker": "D:\\unity\\Metro\\Assets\\Scripts\\Maze\\MazeManager.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Maze\\MazeManager.cs",
-              "ToolTip": "D:\\unity\\Metro\\Assets\\Scripts\\Maze\\MazeManager.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Maze\\MazeManager.cs",
-              "ViewState": "AgIAAAQAAAAAAAAAAAAAACIAAAAKAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-25T07:19:05.285Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 19,
-              "Title": "MazeInput.cs",
-              "DocumentMoniker": "D:\\unity\\Metro\\Assets\\Scripts\\Maze\\MazeInput.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Maze\\MazeInput.cs",
-              "ToolTip": "D:\\unity\\Metro\\Assets\\Scripts\\Maze\\MazeInput.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Maze\\MazeInput.cs",
-              "ViewState": "AgIAAAsAAAAAAAAAAADwvysAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-25T07:02:10.594Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "MazeRenderer.cs",
-              "DocumentMoniker": "D:\\unity\\Metro\\Assets\\Scripts\\Maze\\MazeRenderer.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Maze\\MazeRenderer.cs",
-              "ToolTip": "D:\\unity\\Metro\\Assets\\Scripts\\Maze\\MazeRenderer.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Maze\\MazeRenderer.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAAAAAAAAAAAAA==",
+              "Title": "Crowbar.cs",
+              "DocumentMoniker": "D:\\2025coreblazer\\Metro\\Assets\\Scripts\\Interactables\\Crowbar.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Interactables\\Crowbar.cs",
+              "ToolTip": "D:\\2025coreblazer\\Metro\\Assets\\Scripts\\Interactables\\Crowbar.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Interactables\\Crowbar.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAXAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-25T06:53:36.408Z",
+              "WhenOpened": "2025-03-26T08:25:04.419Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "MazeGenerator.cs",
-              "DocumentMoniker": "D:\\unity\\Metro\\Assets\\Scripts\\Maze\\MazeGenerator.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Maze\\MazeGenerator.cs",
-              "ToolTip": "D:\\unity\\Metro\\Assets\\Scripts\\Maze\\MazeGenerator.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Maze\\MazeGenerator.cs",
-              "ViewState": "AgIAABwAAAAAAAAAAAAAwDIAAAAhAAAAAAAAAA==",
+              "DocumentIndex": 3,
+              "Title": "ArrowManager.cs",
+              "DocumentMoniker": "D:\\2025coreblazer\\Metro\\Assets\\Scripts\\Arrow\\ArrowManager.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Arrow\\ArrowManager.cs",
+              "ToolTip": "D:\\2025coreblazer\\Metro\\Assets\\Scripts\\Arrow\\ArrowManager.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Arrow\\ArrowManager.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-25T06:51:03.997Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 24,
-              "Title": "Battery.cs",
-              "DocumentMoniker": "D:\\unity\\Metro\\Assets\\Scripts\\Interactables\\Battery.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Interactables\\Battery.cs",
-              "ToolTip": "D:\\unity\\Metro\\Assets\\Scripts\\Interactables\\Battery.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Interactables\\Battery.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAkAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-21T08:05:58.92Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 26,
-              "Title": "InputManager.cs",
-              "DocumentMoniker": "D:\\unity\\Metro\\Assets\\Scripts\\Arrow\\InputManager.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Arrow\\InputManager.cs",
-              "ToolTip": "D:\\unity\\Metro\\Assets\\Scripts\\Arrow\\InputManager.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Arrow\\InputManager.cs",
-              "ViewState": "AgIAAAcAAAAAAAAAAAAAwBMAAAAgAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-21T07:09:31.634Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 23,
-              "Title": "Clothing.cs",
-              "DocumentMoniker": "D:\\unity\\Metro\\Assets\\Scripts\\Interactables\\Clothing.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Interactables\\Clothing.cs",
-              "ToolTip": "D:\\unity\\Metro\\Assets\\Scripts\\Interactables\\Clothing.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Interactables\\Clothing.cs",
-              "ViewState": "AgIAAAcAAAAAAAAAAAAAwA0AAAAnAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-20T03:01:29.955Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "Duct.cs",
-              "DocumentMoniker": "D:\\unity\\Metro\\Assets\\Scripts\\Interactables\\Duct.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Interactables\\Duct.cs",
-              "ToolTip": "D:\\unity\\Metro\\Assets\\Scripts\\Interactables\\Duct.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Interactables\\Duct.cs",
-              "ViewState": "AgIAACwAAAAAAAAAAAAQwAsAAAATAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-20T02:47:34.781Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "SmokeDetector.cs",
-              "DocumentMoniker": "D:\\unity\\Metro\\Assets\\Scripts\\Interactables\\SmokeDetector.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Interactables\\SmokeDetector.cs",
-              "ToolTip": "D:\\unity\\Metro\\Assets\\Scripts\\Interactables\\SmokeDetector.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Interactables\\SmokeDetector.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAADEAAAAqAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-19T16:05:11.3Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "GasMask.cs",
-              "DocumentMoniker": "D:\\unity\\Metro\\Assets\\Scripts\\Interactables\\GasMask.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Interactables\\GasMask.cs",
-              "ToolTip": "D:\\unity\\Metro\\Assets\\Scripts\\Interactables\\GasMask.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Interactables\\GasMask.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAdAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-19T16:01:11.327Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "GameManager.cs",
-              "DocumentMoniker": "D:\\unity\\Metro\\Assets\\Scripts\\Manager\\GameManager.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Manager\\GameManager.cs",
-              "ToolTip": "D:\\unity\\Metro\\Assets\\Scripts\\Manager\\GameManager.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Manager\\GameManager.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-19T09:02:50.166Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 22,
-              "Title": "CombustibleItem.cs",
-              "DocumentMoniker": "D:\\unity\\Metro\\Assets\\Scripts\\Interactables\\CombustibleItem.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Interactables\\CombustibleItem.cs",
-              "ToolTip": "D:\\unity\\Metro\\Assets\\Scripts\\Interactables\\CombustibleItem.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Interactables\\CombustibleItem.cs",
-              "ViewState": "AgIAABkAAAAAAAAAAAAAwBsAAAAPAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-19T00:34:58.418Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "UIManager.cs",
-              "DocumentMoniker": "D:\\unity\\Metro\\Assets\\Scripts\\Manager\\UIManager.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Manager\\UIManager.cs",
-              "ToolTip": "D:\\unity\\Metro\\Assets\\Scripts\\Manager\\UIManager.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Manager\\UIManager.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAADwvxYAAAAmAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-18T12:38:44.422Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "Window.cs",
-              "DocumentMoniker": "D:\\unity\\Metro\\Assets\\Scripts\\Interactables\\Window.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Interactables\\Window.cs",
-              "ToolTip": "D:\\unity\\Metro\\Assets\\Scripts\\Interactables\\Window.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Interactables\\Window.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAnAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-18T08:57:19.416Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "Crowbar.cs",
-              "DocumentMoniker": "D:\\unity\\Metro\\Assets\\Scripts\\Interactables\\Crowbar.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Interactables\\Crowbar.cs",
-              "ToolTip": "D:\\unity\\Metro\\Assets\\Scripts\\Interactables\\Crowbar.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Interactables\\Crowbar.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-17T12:14:45.536Z"
+              "WhenOpened": "2025-03-26T08:24:54.072Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "PlayerController.cs",
-              "DocumentMoniker": "D:\\unity\\Metro\\Assets\\Scripts\\Player\\PlayerController.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Player\\PlayerController.cs",
-              "ToolTip": "D:\\unity\\Metro\\Assets\\Scripts\\Player\\PlayerController.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Player\\PlayerController.cs",
-              "ViewState": "AgIAAKgAAAAAAAAAAAAuwMIAAAAdAAAAAAAAAA==",
+              "Title": "Arrow.cs",
+              "DocumentMoniker": "D:\\2025coreblazer\\Metro\\Assets\\Scripts\\Arrow\\Arrow.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Arrow\\Arrow.cs",
+              "ToolTip": "D:\\2025coreblazer\\Metro\\Assets\\Scripts\\Arrow\\Arrow.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Arrow\\Arrow.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-15T08:46:07.96Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "InventorySystem.cs",
-              "DocumentMoniker": "D:\\unity\\Metro\\Assets\\Scripts\\Interactables\\InventorySystem.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Interactables\\InventorySystem.cs",
-              "ToolTip": "D:\\unity\\Metro\\Assets\\Scripts\\Interactables\\InventorySystem.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Interactables\\InventorySystem.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAD0AAAAnAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-16T09:24:12.466Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 21,
-              "Title": "Ladder.cs",
-              "DocumentMoniker": "D:\\unity\\Metro\\Assets\\Scripts\\Interactables\\Ladder.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Interactables\\Ladder.cs",
-              "ToolTip": "D:\\unity\\Metro\\Assets\\Scripts\\Interactables\\Ladder.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Interactables\\Ladder.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-15T09:51:47.903Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 25,
-              "Title": "MetroDoorEditor.cs",
-              "DocumentMoniker": "D:\\unity\\Metro\\Assets\\Scripts\\LevelEditor\\MetroDoorEditor.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\LevelEditor\\MetroDoorEditor.cs",
-              "ToolTip": "D:\\unity\\Metro\\Assets\\Scripts\\LevelEditor\\MetroDoorEditor.cs",
-              "RelativeToolTip": "Assets\\Scripts\\LevelEditor\\MetroDoorEditor.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAABoAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-15T09:42:03.438Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "LevelEditor.cs",
-              "DocumentMoniker": "D:\\unity\\Metro\\Assets\\Scripts\\LevelEditor\\LevelEditor.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\LevelEditor\\LevelEditor.cs",
-              "ToolTip": "D:\\unity\\Metro\\Assets\\Scripts\\LevelEditor\\LevelEditor.cs",
-              "RelativeToolTip": "Assets\\Scripts\\LevelEditor\\LevelEditor.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAuwCEAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-15T09:40:41.837Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "NPCController.cs",
-              "DocumentMoniker": "D:\\unity\\Metro\\Assets\\Scripts\\NPC\\NPCController.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\NPC\\NPCController.cs",
-              "ToolTip": "D:\\unity\\Metro\\Assets\\Scripts\\NPC\\NPCController.cs",
-              "RelativeToolTip": "Assets\\Scripts\\NPC\\NPCController.cs",
-              "ViewState": "AgIAAB0AAAAAAAAAAAAUwKUAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-15T09:39:46.753Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 20,
-              "Title": "SmokeSystem.cs",
-              "DocumentMoniker": "D:\\unity\\Metro\\Assets\\Scripts\\Smoke\\SmokeSystem.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Smoke\\SmokeSystem.cs",
-              "ToolTip": "D:\\unity\\Metro\\Assets\\Scripts\\Smoke\\SmokeSystem.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Smoke\\SmokeSystem.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-15T09:38:21.818Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "InteractableObject.cs",
-              "DocumentMoniker": "D:\\unity\\Metro\\Assets\\Scripts\\Interactables\\InteractableObject.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Interactables\\InteractableObject.cs",
-              "ToolTip": "D:\\unity\\Metro\\Assets\\Scripts\\Interactables\\InteractableObject.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Interactables\\InteractableObject.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAABYAAAAZAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-15T09:36:27.582Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "MetroGround.cs",
-              "DocumentMoniker": "D:\\unity\\Metro\\Assets\\Scripts\\MetroStructure\\MetroGround.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\MetroStructure\\MetroGround.cs",
-              "ToolTip": "D:\\unity\\Metro\\Assets\\Scripts\\MetroStructure\\MetroGround.cs",
-              "RelativeToolTip": "Assets\\Scripts\\MetroStructure\\MetroGround.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB0AAAAUAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-15T09:35:16.675Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "FlashLight.cs",
-              "DocumentMoniker": "D:\\unity\\Metro\\Assets\\Scripts\\Interactables\\FlashLight.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Interactables\\FlashLight.cs",
-              "ToolTip": "D:\\unity\\Metro\\Assets\\Scripts\\Interactables\\FlashLight.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Interactables\\FlashLight.cs",
-              "ViewState": "AgIAAEMAAAAAAAAAAAAgwF4AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-15T09:12:39.879Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "SafetyHammer.cs",
-              "DocumentMoniker": "D:\\unity\\Metro\\Assets\\Scripts\\Interactables\\SafetyHammer.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Interactables\\SafetyHammer.cs",
-              "ToolTip": "D:\\unity\\Metro\\Assets\\Scripts\\Interactables\\SafetyHammer.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Interactables\\SafetyHammer.cs",
-              "ViewState": "AgIAAAsAAAAAAAAAAAAwwCYAAAArAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-15T09:12:14.423Z"
+              "WhenOpened": "2025-03-26T08:24:36.008Z",
+              "EditorCaption": ""
             }
           ]
         }
