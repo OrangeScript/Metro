@@ -1,9 +1,11 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class UIManager : MonoBehaviour
 {
     public static UIManager Instance;
+    private GameObject mazePanel;
 
     [SerializeField] private GameObject interactionPrompt;
     [SerializeField] private Text interactionText;
@@ -36,4 +38,16 @@ public class UIManager : MonoBehaviour
             interactionPrompt.SetActive(false);
         }
     }
+
+    public void ShowMazeUI()
+    {
+        mazePanel.SetActive(true);
+    }
+
+    public void HideMazeUI()
+    {
+        mazePanel.SetActive(false);
+    }
+
+
 }

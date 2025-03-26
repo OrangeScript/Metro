@@ -9,6 +9,12 @@ public class SafetyHammer : InteractableObject
     private int currentHits;
     private float lastHitTime;
 
+    protected override void Start()
+    {
+        base.Start();
+        destroyOnUse = false;
+    }
+
     protected override void HandleUse()
     {
         if (Time.time - lastHitTime > hitCooldown)
@@ -26,19 +32,11 @@ public class SafetyHammer : InteractableObject
 
     private void BreakWindow()
     {
-        Collider2D[] windows = Physics2D.OverlapCircleAll(
-            transform.position,
-            1.5f,
-            LayerMask.GetMask("Window")
-        );
-
-        foreach (var window in windows)
+        if(player==null) {return;}
+        if (player.nearestInteractable != null && player.nearestInteractable.CompareTag("Window"))
         {
-            Window windowComp = window.GetComponent<Window>();
-            if (windowComp != null)
-            {
-                windowComp.Break();
-            }
+            Window window = player.nearestInteractable.GetComponent<Window>();
+            if(window!=null)window.Break();
         }
     }
 }

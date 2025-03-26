@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class Battery : InteractableObject
 {
-    private PlayerController player;
-
+    public static bool isPowered=false;
     protected override void Start()
     {
         base.Start();
@@ -19,12 +18,11 @@ public class Battery : InteractableObject
         if (player.nearestInteractable != null && player.nearestInteractable.CompareTag("MetroDoor"))
         {
             MetroDoor door = player.nearestInteractable.GetComponent<MetroDoor>();
-            if (door != null)
+            if (door != null&&((door.currentFault==MetroDoor.FaultType.Type3)|| (door.currentFault == MetroDoor.FaultType.Type4) ||
+                (door.currentFault == MetroDoor.FaultType.Type5)))
             {
-                door.currentState = MetroDoor.DoorState.Open;
+                isPowered = true;
                 Debug.Log("车门已通电！");
-
-                InventorySystem.Instance.RemoveItem(this);
             }
         }
     }

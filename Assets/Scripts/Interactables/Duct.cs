@@ -15,15 +15,15 @@ public class Duct : MonoBehaviour
     private PlayerController player;
     private bool hasFlashlight;
 
-    void OnTriggerStay2D(Collider2D other)
+    void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
             player = other.GetComponent<PlayerController>();
-            if (player.isCrawling)
+            if (player != null && player.isCrawling)
             {
                 AdjustPlayerMovement();
-                HandleExitDiscovery();
+                CheckForHiddenExit();
             }
         }
     }
@@ -34,7 +34,7 @@ public class Duct : MonoBehaviour
         player.GetComponent<Rigidbody2D>().gravityScale = 0;
     }
 
-    void HandleExitDiscovery()
+    void CheckForHiddenExit()
     {
         Flashlight flashlight = player.GetComponentInChildren<Flashlight>();
         if (flashlight != null && flashlight.isFlashlightOn)

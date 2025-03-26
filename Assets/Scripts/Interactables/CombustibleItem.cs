@@ -17,8 +17,6 @@ public class CombustibleItem : InteractableObject
 
     private Rigidbody2D rb; // ÓÃÓÚÍ¶ÖÀ
 
-    private PlayerController player;
-
     protected override void Start()
     {
         base.Start();

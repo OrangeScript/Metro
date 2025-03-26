@@ -5,11 +5,11 @@ using System.Collections.Generic;
 public class SmokeSystem : MonoBehaviour
 {
     public enum SmokeLevel { Level1, Level2, Level3, Sober }
-    public static SmokeSystem Instance { get; private set; }
+    public static SmokeSystem S { get; private set; }
 
     void Awake()
     {
-        if (Instance == null) Instance = this;
+        if (S == null) S = this;
         else Destroy(gameObject);
     }
 

@@ -4,8 +4,10 @@ public abstract class InteractableObject : MonoBehaviour
 {
     public string itemName;
     public Sprite itemIcon;
-    public ItemCategory category;
+    public ItemCategory category=ItemCategory.Equipment;
     protected bool isEquipped = false;
+
+    protected PlayerController player;
 
     public enum ItemCategory { Mask, Equipment }
 
@@ -30,35 +32,30 @@ public abstract class InteractableObject : MonoBehaviour
         HandleUnequip();
     }
 
-    public virtual bool CanBePickedUp()
-    {
-        return true; // 默认可以被拾取
-    }
 
     public virtual void OnInteract()
     {
-        if (CanBePickedUp() && InventorySystem.Instance != null)
+        if (InventorySystem.Instance != null)
         {
             InventorySystem.Instance.AddItem(this);
             gameObject.SetActive(false);
+            Debug.Log("物品已拾取！");
         }
     }
 
     public virtual void UseItem()
     {
-        if (isEquipped)
-        {
             HandleUse();
             if (destroyOnUse)
             {
-                Destroy(gameObject); // 直接销毁
+            InventorySystem.Instance.RemoveItem(this);
+            Destroy(gameObject); // 直接销毁
             }
             else
             {
                 InventorySystem.Instance.AddItem(this); // 重新存入背包
                 gameObject.SetActive(false); // 隐藏物品
             }
-        }
     }
 
     protected virtual void Start() { }

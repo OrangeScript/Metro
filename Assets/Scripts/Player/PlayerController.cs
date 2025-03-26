@@ -78,7 +78,7 @@ public class PlayerController : MonoBehaviour
     {
         if (currentState != PlayerState.Illusion)
         {
-            rb.velocity = movement.normalized * (isCrawling ? crawlSpeed : walkSpeed);
+            rb.velocity = new Vector2(movement.x * (isCrawling ? crawlSpeed : walkSpeed), rb.velocity.y);
         }
         else
         {
@@ -126,6 +126,7 @@ public class PlayerController : MonoBehaviour
         }
         else if (equippedItem != null)
         {
+            //TODO:防毒面具处理逻辑
             equippedItem.UseItem();
         }
     }

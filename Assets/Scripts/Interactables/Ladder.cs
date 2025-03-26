@@ -9,12 +9,12 @@ public class Ladder : InteractableObject
     public float extendSpeed = 2f;     // 伸缩速度
     private bool isExtended = false;   // 记录是否已伸长
     private bool isPlayerOnLadder = false; // 记录玩家是否在梯子上
-    private PlayerController player;
 
     protected override void Start()
     {
         base.Start();
         player = FindObjectOfType<PlayerController>(); // 获取玩家
+        destroyOnUse = false;
     }
 
     public override void OnInteract()

@@ -14,6 +14,12 @@ public class SmokeDetector : InteractableObject
 
     private Coroutine detectionCoroutine;
 
+    protected override void Start()
+    {
+        base.Start();
+        destroyOnUse = false;
+    }
+
     public override void OnInteract()
     {
         if (!isEquipped)
@@ -40,7 +46,7 @@ public class SmokeDetector : InteractableObject
     {
         while (true)
         {
-            SmokeSystem.SmokeLevel highestLevel = SmokeSystem.Instance.GetSmokeLevelAtPosition(transform.position);
+            SmokeSystem.SmokeLevel highestLevel = SmokeSystem.S.GetSmokeLevelAtPosition(transform.position);
             UpdateWarningUI(highestLevel);
             yield return new WaitForSeconds(checkInterval);
         }
