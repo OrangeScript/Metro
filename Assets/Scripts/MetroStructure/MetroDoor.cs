@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class MetroDoor : MonoBehaviour
@@ -19,18 +18,24 @@ public class MetroDoor : MonoBehaviour
     private Animator animator;
     private AudioSource audioSource;
 
-    //QQ炫舞
     private float arrowDuration = 5f;
     private float arrowTime = 0;
     public static bool isDancing;
     private int correctInputs;
 
-    //迷宫解谜
-
     public static MetroDoor S;
+
     private void Awake()
     {
         S = this;
+        if (ArrowManager.S == null)
+        {
+            ArrowManager.S = FindObjectOfType<ArrowManager>();
+        }
+        if (MazeManager.S == null)
+        {
+            MazeManager.S = FindObjectOfType<MazeManager>();
+        }
     }
 
     void Start()
@@ -39,62 +44,54 @@ public class MetroDoor : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
     }
 
+    void Update()
+    {
+        if (isDancing)
+        {
+            arrowTime += Time.deltaTime;
+            if (arrowTime > arrowDuration)
+            {
+                FinishWave();
+            }
+        }
+    }
+
     public void TryInteract(PlayerController player)
     {
         if (!Battery.isPowered)
         {
-            Debug.Log("需要备用电池才能修复门！");
+            if (currentFault == FaultType.Type3 || currentFault == FaultType.Type4)
+            {
+                Debug.Log("电池不足，无法修复此故障！");
+            }
+            else
+            {
+                Debug.Log("需要备用电池才能修复门！");
+            }
             return;
         }
 
         switch (currentFault)
         {
             case FaultType.Type1:
-                StartFault1();
+            case FaultType.Type3:
+                StartArrowPuzzle();
                 break;
             case FaultType.Type2:
-                StartFault2();
-                break;
-            case FaultType.Type3:
-                if (Battery.isPowered) StartFault1();
-                break;
             case FaultType.Type4:
-                if (Battery.isPowered) StartFault2();
+                StartMazePuzzle();
                 break;
             case FaultType.Type5:
-                if (Battery.isPowered) StartFault5();
+                StartMazePuzzleWithNoChange();
+                StartArrowPuzzle();
                 break;
             default:
-                Debug.Log("门无故障，无法交互！");
                 break;
         }
     }
 
-    private void StartFault1()
-    {
-        //TODO:UI显示按下F
-        Debug.Log("进入QQ炫舞解密界面...");
-        ArrowPhase();
-    }
 
-    private void StartFault2()
-    {
-        //TODO:UI显示按下F
-        Debug.Log("进入迷宫解密界面...");
-        MazePhase();
-    }
-
-    private void StartFault5()
-    {
-        //TODO:UI显示按下F
-        Debug.Log("进入迷宫解密界面但不能改变门状态...");
-        MazePhaseNULL();
-        Debug.Log("进入QQ炫舞解密界面...");
-        ArrowPhase();
-    }
-
-
-    public void OpenDoor()
+    private void OpenDoor()
     {
         if (currentState == DoorState.Jammed)
         {
@@ -106,12 +103,13 @@ public class MetroDoor : MonoBehaviour
         }
         else
         {
-            Debug.Log("门不为撬棍状态，无法被撬棍打开！");
+            Debug.Log("门无法打开！");
         }
     }
 
-    public void ArrowPhase()
+    private void StartArrowPuzzle()
     {
+        Debug.Log("进入QQ炫舞解谜界面...");
         if (ArrowManager.S != null)
         {
             ArrowManager.S.CreateWave(10);
@@ -122,52 +120,39 @@ public class MetroDoor : MonoBehaviour
         }
         isDancing = true;
         correctInputs = 0;
-        if (arrowTime > arrowDuration)
-        {
-            FinishWave();
-        }
     }
 
-    public void MazePhase()
+    private void StartMazePuzzle()
     {
-        if (MazeManager.S != null)
-        {
-            MazeManager.S.StartMazePuzzle(OnMazeSolved);
-        }
-        else
-        {
-            Debug.LogError("MazeManager instance is null");
-        }
+        Debug.Log("进入迷宫解谜界面...");
+        MazeManager.S?.StartMazePuzzle(OnMazeSolved);
     }
 
-    public void MazePhaseNULL()
+    private void StartMazePuzzleWithNoChange()
     {
-        if (MazeManager.S != null)
-        {
-            MazeManager.S.StartMazePuzzle(OnMazeSolvedNULL);
-        }
-        else
-        {
-            Debug.LogError("MazeManager instance is null");
-        }
+        Debug.Log("进入迷宫解谜界面但不会影响门状态...");
+        MazeManager.S?.StartMazePuzzle(OnMazeSolvedNoChange);
     }
+
     private void OnMazeSolved()
     {
-        Debug.Log("迷宫解谜成功，门变为撬棍状态");
-        currentState = DoorState.Jammed; 
+        Debug.Log("迷宫解谜成功，门变为卡住状态");
+        currentState = DoorState.Jammed;
     }
 
-    private void OnMazeSolvedNULL()
-    { 
-        Debug.Log("迷宫解谜成功，门状态不变"); 
+    private void OnMazeSolvedNoChange()
+    {
+        Debug.Log("迷宫解谜成功，但门状态不变");
     }
 
     public void FinishWave()
     {
         isDancing = false;
-        ArrowManager.S.ClearWave();
-        if (correctInputs == 10)
+        ArrowManager.S?.ClearWave();
+
+        if (correctInputs >= 10)  // 确保至少按对 10 次
         {
+            Debug.Log("QQ炫舞解谜成功，门变为撬棍状态");
             currentState = DoorState.Jammed;
         }
     }
