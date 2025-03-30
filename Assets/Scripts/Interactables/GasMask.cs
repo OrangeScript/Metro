@@ -5,27 +5,29 @@ using UnityEngine.UI;
 
 public class GasMask : InteractableObject
 {
+    private void Awake()
+    {
+        category = ItemCategory.Mask;
+    }
+
     protected override void Start()
     {
         base.Start();
-        destroyOnUse = false ;
-    }
-
-    public GasMask()
-    {
-        category=ItemCategory.Mask;
+        destroyOnUse = false;
     }
 
     public override void OnEquip(Transform parent)
     {
         base.OnEquip(parent);
-        player.HasGasMask=true;
+        player.equippedMask = this;
     }
 
     public override void OnUnequip()
     {
         base.OnUnequip();
-        player.HasGasMask = false;
+        if (player.equippedMask == this)
+        {
+            player.equippedMask = null; 
+        }
     }
-
 }

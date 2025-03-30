@@ -8,7 +8,6 @@ public class Battery : InteractableObject
     protected override void Start()
     {
         base.Start();
-        player = GameManager.Instance.player;
         destroyOnUse = true;
     }
 

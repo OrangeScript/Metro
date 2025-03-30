@@ -60,15 +60,11 @@ public class MetroDoor : MonoBehaviour
     {
         if (!Battery.isPowered)
         {
-            if (currentFault == FaultType.Type3 || currentFault == FaultType.Type4)
-            {
-                Debug.Log("电池不足，无法修复此故障！");
-            }
-            else
+            if (currentFault == FaultType.Type3 || currentFault == FaultType.Type4||currentFault==FaultType.Type5)
             {
                 Debug.Log("需要备用电池才能修复门！");
+                return;
             }
-            return;
         }
 
         switch (currentFault)

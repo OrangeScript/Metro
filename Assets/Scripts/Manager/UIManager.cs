@@ -6,6 +6,7 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager Instance;
     private GameObject mazePanel;
+    public Text messageText;
 
     [SerializeField] private GameObject interactionPrompt;
     [SerializeField] private Text interactionText;
@@ -49,5 +50,9 @@ public class UIManager : MonoBehaviour
         mazePanel.SetActive(false);
     }
 
+    public void ShowMessage(string message)
+    {
+        messageText.text = message;
+    }
 
 }

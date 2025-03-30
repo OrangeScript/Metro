@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(Animator))]
 public class PlayerController : MonoBehaviour
@@ -8,7 +9,6 @@ public class PlayerController : MonoBehaviour
     [Header("角色状态")]
     public PlayerState currentState = PlayerState.Normal;
     public bool isCrawling = false;
-    public bool HasGasMask = false; // 是否佩戴防毒面具
 
     [Header("移动设置")]
     [SerializeField] public float walkSpeed = 5f;
@@ -17,11 +17,12 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
 
     [Header("组件引用")]
-    [SerializeField] private Transform equipPoint;  // 物品挂点
-    [SerializeField] private Transform maskEquipPoint;  // 防毒面具挂点
+    [SerializeField] private Transform equipPoint;
+    [SerializeField] private Transform maskEquipPoint;
     private Animator anim;
     public InventorySystem inventory;
     public InteractableObject equippedItem = null;
+    public InteractableObject equippedMask = null;
 
     [Header("交互设置")]
     [SerializeField] private float interactRadius = 1f;
@@ -57,12 +58,18 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            movement = Vector2.zero; // 在幻觉世界中无法自由移动
+            movement.x = Input.GetAxisRaw("Horizontal");
         }
 
         if (Input.GetKeyDown(KeyCode.F)) HandleInteraction();
-        if (Input.GetKeyDown(KeyCode.Q)) inventory.SwitchItem(-1);
-        if (Input.GetKeyDown(KeyCode.E)) inventory.SwitchItem(1);
+    }
+
+    public void SwitchEquippedItem(int index)
+    {
+        if (index >= 0 && index < inventory.equippedItems.Count)
+        {
+            EquipItem(inventory.equippedItems[index]); 
+        }
     }
 
     private void HandleAnimation()
@@ -82,7 +89,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            rb.velocity = Vector2.zero;
+            rb.velocity = new Vector2(movement.x * (isCrawling ? crawlSpeed : walkSpeed), 0);
         }
     }
 
@@ -107,14 +114,6 @@ public class PlayerController : MonoBehaviour
         }
 
         nearestInteractable = closestObj;
-        if (nearestInteractable != null)
-        {
-            UIManager.Instance.ShowInteractionPrompt($"[F]拾取 {nearestInteractable.itemName}", nearestInteractable.transform.position);
-        }
-        else
-        {
-            UIManager.Instance.HideInteractionPrompt();
-        }
     }
 
     private void HandleInteraction()
@@ -122,51 +121,34 @@ public class PlayerController : MonoBehaviour
         if (nearestInteractable != null)
         {
             nearestInteractable.OnInteract();
-            UIManager.Instance.HideInteractionPrompt();
-        }
-        else if (equippedItem != null)
-        {
-            //TODO:防毒面具处理逻辑
-            equippedItem.UseItem();
         }
     }
 
-    public void HandleCharacterEnterSmoke(SmokeSystem.SmokeLevel level)
+    public void EquipItem(InteractableObject item)
     {
-        if (level == SmokeSystem.SmokeLevel.Level2 && !HasGasMask)
+        if (item == null) return;
+
+        if (item.category == InteractableObject.ItemCategory.Equipment)
         {
-            EnterIllusionWorld();
+            if (equippedItem != null)
+            {
+                equippedItem.OnUnequip();
+                equippedItem.gameObject.SetActive(false);
+            }
+
+            equippedItem = item;
+            item.OnEquip(GetEquipPoint(item));
         }
-        else if (level == SmokeSystem.SmokeLevel.Level3 && !HasGasMask)
+        else if (item.category == InteractableObject.ItemCategory.Mask)
         {
-            BlockMovement();
-        }
-    }
+            if (equippedMask != null)
+            {
+                equippedMask.OnUnequip();
+                equippedMask.gameObject.SetActive(false);
+            }
 
-    public void EnterIllusionWorld()
-    {
-        currentState = PlayerState.Illusion;
-        //UIManager.Instance.ShowMessage("你进入了幻觉世界...");
-        // 传送到幻觉场景
-    }
-
-    public void BlockMovement()
-    {
-        rb.velocity = Vector2.zero;
-        //UIManager.Instance.ShowMessage("烟雾太浓，你无法前进！");
-    }
-
-    public void RecoverFromIllusion()
-    {
-        currentState = PlayerState.Normal;
-        //UIManager.Instance.ShowMessage("你恢复了意识。");
-    }
-
-    public void RecoverFromEffects()
-    {
-        if (currentState == PlayerState.Illusion)
-        {
-            RecoverFromIllusion();
+            equippedMask = item;
+            item.OnEquip(GetEquipPoint(item));
         }
     }
 
@@ -175,27 +157,29 @@ public class PlayerController : MonoBehaviour
         return item.category == InteractableObject.ItemCategory.Equipment ? equipPoint : maskEquipPoint;
     }
 
-    public void EquipItem(InteractableObject item)
+
+    public void EnterIllusionWorld()
     {
-        if (item == null) return;
+        currentState = PlayerState.Illusion;
+        UIManager.Instance.ShowMessage("你进入了幻觉世界...");
+        SceneManager.LoadScene("IllusionScene");
+        //传送到幻觉场景
+    }
 
-        // 处理装备类物品
-        if (item.category == InteractableObject.ItemCategory.Equipment)
-        {
-            // 卸下当前装备
-            if (equippedItem != null)
-            {
-                equippedItem.OnUnequip();
-                equippedItem.gameObject.SetActive(false); // 放回背包
-            }
+    public void BlockMovement()
+    {
+        rb.velocity = Vector2.zero;
+        UIManager.Instance.ShowMessage("烟雾太浓，你无法前进！");
+    }
 
-            equippedItem = item;
-            item.OnEquip(GetEquipPoint(item));
-        }
-        else // 处理其他类型物品（如面具）
+    public void RecoverFromIllusion()
+    {
+        if (currentState == PlayerState.Illusion)
         {
-            equippedItem = item;
-            item.OnEquip(GetEquipPoint(item));
+            currentState = PlayerState.Normal;
+            UIManager.Instance.ShowMessage("你恢复了意识。");
+            // 切换回正常世界的场景
+            SceneManager.LoadScene("NormalScene"); 
         }
     }
 }

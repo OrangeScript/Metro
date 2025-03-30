@@ -149,19 +149,19 @@ public class SmokeSystem : MonoBehaviour
         switch (level)
         {
             case SmokeLevel.Level2:
-                if (!player.HasGasMask)
+                if (!player.equippedMask)
                 {
                     player.EnterIllusionWorld();
                 }
                 break;
             case SmokeLevel.Level3:
-                if (!player.HasGasMask)
+                if (!player.equippedMask)
                 {
                     player.BlockMovement();
                 }
                 break;
             case SmokeLevel.Sober:
-                player.RecoverFromIllusion();
+                //TODO:NPC
                 break;
         }
     }

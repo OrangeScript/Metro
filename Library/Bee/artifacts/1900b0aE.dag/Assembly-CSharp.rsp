@@ -405,6 +405,7 @@
 "Assets/Scripts/LevelEditor/MetroDoorEditor.cs"
 "Assets/Scripts/Manager/AudioManager.cs"
 "Assets/Scripts/Manager/GameManager.cs"
+"Assets/Scripts/Manager/SceneManager.cs"
 "Assets/Scripts/Manager/UIManager.cs"
 "Assets/Scripts/Maze/MazeGenerator.cs"
 "Assets/Scripts/Maze/MazeInput.cs"
@@ -414,6 +415,7 @@
 "Assets/Scripts/MetroStructure/MetroGround.cs"
 "Assets/Scripts/NPC/NPCController.cs"
 "Assets/Scripts/Player/PlayerController.cs"
+"Assets/Scripts/Smoke/IllusionWorld.cs"
 "Assets/Scripts/Smoke/SmokeSystem.cs"
 -langversion:9.0
 /deterministic

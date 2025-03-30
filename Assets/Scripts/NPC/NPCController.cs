@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class NPCController : MonoBehaviour
 {
-    public enum NPCState { Normal, Hallucinating, Unconscious }
+    public enum NPCState { 
+        Normal,//清醒
+        Hallucinating, //幻觉
+        Unconscious //昏迷
+    }
     public enum NPCLevel { Tier1, Tier2 }
 
     [Header("NPC设置")]
@@ -41,14 +45,14 @@ public class NPCController : MonoBehaviour
         normalSprite = spriteRenderer.sprite;
     }
 
-    public void ChangeState(NPCState newState)
+    public void ChangeState(NPCState State)
     {
-        if (currentState == newState) return;
+        if (currentState == State) return;
 
-        currentState = newState;
+        currentState = State;
         if (stateRoutine != null) StopCoroutine(stateRoutine);
 
-        switch (newState)
+        switch (State)
         {
             case NPCState.Hallucinating:
                 stateRoutine = StartCoroutine(HallucinationRoutine());
@@ -154,9 +158,7 @@ public class NPCController : MonoBehaviour
 
     public void SetCarriedState(bool isCarried)
     {
-        spriteRenderer.sprite = isCarried ? carriedSprite : normalSprite;
-        // 添加其他携带状态效果（如粒子效果等）
-    }
+        spriteRenderer.sprite = isCarried ? carriedSprite : normalSprite;    }
 
     public void RecoverFromEffects()
     {
