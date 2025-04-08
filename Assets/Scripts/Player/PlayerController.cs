@@ -45,9 +45,10 @@ public class PlayerController : MonoBehaviour
     [Header("¶¯»­¿ØÖÆ")]
     private int[] protectedStates = { 2, 3, 4 }; // Climbing, Carrying, Illusion
 
-    
 
 
+    [Header("test")]
+    [SerializeField] private bool no;
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
