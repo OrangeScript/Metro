@@ -3,11 +3,7 @@
   "WorkspaceRootPath": "E:\\Games\\2025coreblazer\\2025coreblazer\\Metro\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|e:\\games\\2025coreblazer\\2025coreblazer\\metro\\assets\\scripts\\npc\\npccontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\npc\\npccontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|E:\\Games\\2025coreblazer\\2025coreblazer\\Metro\\assets\\scripts\\player\\playercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|e:\\games\\2025coreblazer\\2025coreblazer\\metro\\assets\\scripts\\player\\playercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\player\\playercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -15,8 +11,24 @@
       "RelativeMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\facingcamera.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|E:\\Games\\2025coreblazer\\2025coreblazer\\Metro\\Assets\\Script\\FacingCamera.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Script\\FacingCamera.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|e:\\games\\2025coreblazer\\2025coreblazer\\metro\\assets\\scripts\\rotatingcamera.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\rotatingcamera.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|e:\\games\\2025coreblazer\\2025coreblazer\\metro\\assets\\scripts\\interactables\\flashlight.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\interactables\\flashlight.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|e:\\games\\2025coreblazer\\2025coreblazer\\metro\\assets\\scripts\\interactables\\ventilation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\interactables\\ventilation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|e:\\games\\2025coreblazer\\2025coreblazer\\metro\\assets\\scripts\\interactables\\interactableobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\interactables\\interactableobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|E:\\Games\\2025coreblazer\\2025coreblazer\\Metro\\assets\\scripts\\npc\\npccontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\npc\\npccontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|E:\\Games\\2025coreblazer\\2025coreblazer\\Metro\\Assets\\Script\\PlayerMovement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -30,7 +42,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 11,
           "Children": [
             {
               "$type": "Bookmark",
@@ -45,69 +57,110 @@
               "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
             },
             {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Ventilation.cs",
+              "DocumentMoniker": "E:\\Games\\2025coreblazer\\2025coreblazer\\Metro\\Assets\\Scripts\\Interactables\\Ventilation.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Interactables\\Ventilation.cs",
+              "ToolTip": "E:\\Games\\2025coreblazer\\2025coreblazer\\Metro\\Assets\\Scripts\\Interactables\\Ventilation.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Interactables\\Ventilation.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB0AAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-08T13:05:04.581Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "FlashLight.cs",
+              "DocumentMoniker": "E:\\Games\\2025coreblazer\\2025coreblazer\\Metro\\Assets\\Scripts\\Interactables\\FlashLight.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Interactables\\FlashLight.cs",
+              "ToolTip": "E:\\Games\\2025coreblazer\\2025coreblazer\\Metro\\Assets\\Scripts\\Interactables\\FlashLight.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Interactables\\FlashLight.cs",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAiwAkAAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-08T13:04:28.881Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "InteractableObject.cs",
+              "DocumentMoniker": "E:\\Games\\2025coreblazer\\2025coreblazer\\Metro\\Assets\\Scripts\\Interactables\\InteractableObject.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Interactables\\InteractableObject.cs",
+              "ToolTip": "E:\\Games\\2025coreblazer\\2025coreblazer\\Metro\\Assets\\Scripts\\Interactables\\InteractableObject.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Interactables\\InteractableObject.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-08T13:04:14.122Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "RotatingCamera.cs",
+              "DocumentMoniker": "E:\\Games\\2025coreblazer\\2025coreblazer\\Metro\\Assets\\Scripts\\RotatingCamera.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\RotatingCamera.cs",
+              "ToolTip": "E:\\Games\\2025coreblazer\\2025coreblazer\\Metro\\Assets\\Scripts\\RotatingCamera.cs",
+              "RelativeToolTip": "Assets\\Scripts\\RotatingCamera.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAATAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-08T12:43:19.703Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "FacingCamera.cs",
+              "DocumentMoniker": "E:\\Games\\2025coreblazer\\2025coreblazer\\Metro\\Assets\\Scripts\\FacingCamera.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\FacingCamera.cs",
+              "ToolTip": "E:\\Games\\2025coreblazer\\2025coreblazer\\Metro\\Assets\\Scripts\\FacingCamera.cs",
+              "RelativeToolTip": "Assets\\Scripts\\FacingCamera.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAUwBEAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-08T03:13:11.701Z",
+              "EditorCaption": ""
+            },
+            {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 6,
               "Title": "NPCController.cs",
               "DocumentMoniker": "E:\\Games\\2025coreblazer\\2025coreblazer\\Metro\\Assets\\Scripts\\NPC\\NPCController.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\NPC\\NPCController.cs",
               "ToolTip": "E:\\Games\\2025coreblazer\\2025coreblazer\\Metro\\Assets\\Scripts\\NPC\\NPCController.cs",
               "RelativeToolTip": "Assets\\Scripts\\NPC\\NPCController.cs",
-              "ViewState": "AgIAAGYAAAAAAAAAAAAqwHkAAAAgAAAAAAAAAA==",
+              "ViewState": "AgIAAH0AAAAAAAAAAAAwwI4AAAAhAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-08T03:18:41.198Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "FacingCamera.cs",
-              "DocumentMoniker": "E:\\Games\\2025coreblazer\\2025coreblazer\\Metro\\Assets\\Scripts\\FacingCamera.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\FacingCamera.cs",
-              "ToolTip": "E:\\Games\\2025coreblazer\\2025coreblazer\\Metro\\Assets\\Scripts\\FacingCamera.cs",
-              "RelativeToolTip": "Assets\\Scripts\\FacingCamera.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-08T03:13:11.701Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "FacingCamera.cs",
-              "DocumentMoniker": "E:\\Games\\2025coreblazer\\2025coreblazer\\Metro\\Assets\\Script\\FacingCamera.cs",
-              "RelativeDocumentMoniker": "Assets\\Script\\FacingCamera.cs",
-              "ToolTip": "E:\\Games\\2025coreblazer\\2025coreblazer\\Metro\\Assets\\Script\\FacingCamera.cs",
-              "RelativeToolTip": "Assets\\Script\\FacingCamera.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-08T02:32:40.482Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 7,
               "Title": "PlayerMovement.cs",
               "DocumentMoniker": "E:\\Games\\2025coreblazer\\2025coreblazer\\Metro\\Assets\\Script\\PlayerMovement.cs",
               "RelativeDocumentMoniker": "Assets\\Script\\PlayerMovement.cs",
               "ToolTip": "E:\\Games\\2025coreblazer\\2025coreblazer\\Metro\\Assets\\Script\\PlayerMovement.cs",
               "RelativeToolTip": "Assets\\Script\\PlayerMovement.cs",
-              "ViewState": "AgIAABgAAAAAAAAAAAAiwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-08T02:32:43.621Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "PlayerController.cs",
               "DocumentMoniker": "E:\\Games\\2025coreblazer\\2025coreblazer\\Metro\\Assets\\Scripts\\Player\\PlayerController.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Player\\PlayerController.cs",
               "ToolTip": "E:\\Games\\2025coreblazer\\2025coreblazer\\Metro\\Assets\\Scripts\\Player\\PlayerController.cs",
               "RelativeToolTip": "Assets\\Scripts\\Player\\PlayerController.cs",
-              "ViewState": "AgIAACMAAAAAAAAAAAAswDEAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAIoAAAAAAAAAAAAvwKwAAAAsAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-08T01:36:27.108Z"
+              "WhenOpened": "2025-04-08T01:36:27.108Z",
+              "EditorCaption": ""
             }
           ]
         }

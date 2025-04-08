@@ -7,16 +7,13 @@ public class RotatingCamera : MonoBehaviour
     public float rotateTime = 0.2f;
     [SerializeField]private Transform player;
     private bool isRotating = false;
-    void Start()
-    {
-        //player = GameObject.FindGameObjectWithTag("Player").transform;
-    }
+  
 
     void Update()
     {
         transform.position = player.position;
 
-        Rotate();
+        //Rotate();
     }
 
     void Rotate()

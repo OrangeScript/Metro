@@ -96,6 +96,7 @@
     <Compile Include="Assets\Scripts\RotatingCamera.cs" />
     <Compile Include="Assets\Scripts\Interactables\GasMask.cs" />
     <Compile Include="Assets\Scripts\MetroStructure\MetroGround.cs" />
+    <Compile Include="Assets\Scripts\FlashLights.cs" />
     <Compile Include="Assets\Scripts\LevelEditor\LevelEditor.cs" />
   </ItemGroup>
   <ItemGroup>

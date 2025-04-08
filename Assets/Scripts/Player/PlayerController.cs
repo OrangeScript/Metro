@@ -169,6 +169,8 @@ public class PlayerController : MonoBehaviour
         if (!anim) return;
 
         anim.SetInteger("PlayerState", (int)currentState);
+        anim.SetFloat("inputX", movement.x);
+        anim.SetFloat("inputY", movement.y);
         anim.SetFloat("Speed", CalculateAnimationSpeed());
         anim.SetBool("InTunnel", isInTunnel);
         //test:anim.SetBool("IsCrawling", currentState == PlayerState.Crawling);

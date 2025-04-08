@@ -7,7 +7,7 @@ public class Flashlight : InteractableObject
     public bool isFlashlightOn = false; // 是否开启手电筒
     private bool isNearVentExit = false; // 是否靠近通风管道出口
     private bool isInVentilation = false; // 是否在通风管道内
-    private GameObject actionUI; // UI 提示
+    private GameObject actionUI; // UI 提示s
 
     protected override void Start()
     {
@@ -68,27 +68,27 @@ public class Flashlight : InteractableObject
         gameObject.SetActive(false);
     }
 
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("VentExit"))
-        {
-            isNearVentExit = true;
-        }
-        else if (other.CompareTag("Ventilation"))
-        {
-            isInVentilation = true;
-        }
-    }
+    //void OnTriggerEnter2D(Collider2D other)
+    //{
+    //    if (other.CompareTag("VentExit"))
+    //    {
+    //        isNearVentExit = true;
+    //    }
+    //    else if (other.CompareTag("Ventilation"))
+    //    {
+    //        isInVentilation = true;
+    //    }
+    //}
 
-    void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.CompareTag("VentExit"))
-        {
-            isNearVentExit = false;
-        }
-        else if (other.CompareTag("Ventilation"))
-        {
-            isInVentilation = false;
-        }
-    }
+    //void OnTriggerExit2D(Collider2D other)
+    //{
+    //    if (other.CompareTag("VentExit"))
+    //    {
+    //        isNearVentExit = false;
+    //    }
+    //    else if (other.CompareTag("Ventilation"))
+    //    {
+    //        isInVentilation = false;
+    //    }
+    //}
 }

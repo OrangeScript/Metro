@@ -390,6 +390,7 @@
 "Assets/Scripts/Arrow/ArrowManager.cs"
 "Assets/Scripts/Arrow/InputManager.cs"
 "Assets/Scripts/FacingCamera.cs"
+"Assets/Scripts/FlashLights.cs"
 "Assets/Scripts/Interactables/Battery.cs"
 "Assets/Scripts/Interactables/Clothing.cs"
 "Assets/Scripts/Interactables/CombustibleItem.cs"

@@ -16,9 +16,15 @@ public class FacingCamera : MonoBehaviour
 
     void Update()
     {
-        for (int i = 0; i < childs.Length; i++)
+        //for (int i = 0; i < childs.Length; i++)
+        //{
+        //    childs[i].rotation = Camera.main.transform.rotation;
+        //}
+        Vector3 camEuler = Camera.main.transform.eulerAngles;
+        foreach (Transform child in childs)
         {
-            childs[i].rotation = Camera.main.transform.rotation;
+            Vector3 selfEuler = child.eulerAngles;
+            child.rotation = Quaternion.Euler(camEuler.x, selfEuler.y, selfEuler.z);
         }
     }
 }
