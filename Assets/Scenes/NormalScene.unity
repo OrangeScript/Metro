@@ -677,11 +677,11 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: -0.38268343, y: -0, z: -0, w: 0.92387956}
-  m_LocalPosition: {x: -0.41150874, y: -9.660905, z: 1.0009747}
+  m_LocalPosition: {x: 0, y: -7.66, z: -7.98}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1594336559}
+  m_Father: {fileID: 2111378666}
   m_LocalEulerAnglesHint: {x: -45, y: 0, z: 0}
 --- !u!1 &553900270
 GameObject:
@@ -1343,6 +1343,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentState: 0
   walkSpeed: 5
+  movement: {x: 0, y: 0}
   inventory: {fileID: 695888140}
   maskEquipPoint: {fileID: 1597837808}
   npcEquipPoint: {fileID: 2118358713}
@@ -1360,6 +1361,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   tunnelSpeedMultiplier: 0.4
+  no: 0
 --- !u!70 &695888135
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -1483,14 +1485,14 @@ Transform:
   m_GameObject: {fileID: 695888133}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.84, z: 0}
-  m_LocalScale: {x: 8.825845, y: 13.099322, z: 13.099322}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 8, y: 8, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1033624902}
   - {fileID: 1597837808}
   - {fileID: 2118358713}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1452308872}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &695888139
 Animator:
@@ -3559,12 +3561,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2762703506980554517, guid: f35e5d469a370ab4b9cdce09efe81a6a, type: 3}
   m_PrefabInstance: {fileID: 7944255404669396698}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1573550987 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7514294777063726768, guid: 35a9d74ea2bbe0a45b342208b8565ca8, type: 3}
-  m_PrefabInstance: {fileID: 5756828373318696398}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1594336557
+--- !u!1 &1452308871
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3572,45 +3569,48 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1594336559}
-  - component: {fileID: 1594336558}
+  - component: {fileID: 1452308872}
+  - component: {fileID: 1452308873}
   m_Layer: 0
-  m_Name: CameraPos
+  m_Name: layout
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1594336558
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1594336557}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75628c9d902cf5a408750e4b972db5b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rotateTime: 0.2
-  player: {fileID: 695888138}
---- !u!4 &1594336559
+--- !u!4 &1452308872
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1594336557}
+  m_GameObject: {fileID: 1452308871}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.41150874, y: -0.13909501, z: -9.500975}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 519420032}
+  - {fileID: 695888138}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1452308873
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1452308871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ccf098aea21412459e0f8a36d7c4192, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &1573550987 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7514294777063726768, guid: 35a9d74ea2bbe0a45b342208b8565ca8, type: 3}
+  m_PrefabInstance: {fileID: 5756828373318696398}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1594588255
 GameObject:
   m_ObjectHideFlags: 0
@@ -4310,6 +4310,53 @@ RectTransform:
   m_AnchoredPosition: {x: 10, y: -10}
   m_SizeDelta: {x: 0, y: 33}
   m_Pivot: {x: 0, y: 1}
+--- !u!1 &2111378664
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2111378666}
+  - component: {fileID: 2111378665}
+  m_Layer: 0
+  m_Name: Camara
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2111378665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2111378664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e58fc5e9009aebc4caa360df67d74b72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotateTime: 0.2
+  player: {fileID: 695888138}
+--- !u!4 &2111378666
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2111378664}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 519420032}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2118358712
 GameObject:
   m_ObjectHideFlags: 0
@@ -4799,11 +4846,11 @@ SceneRoots:
   - {fileID: 761563250}
   - {fileID: 746901031}
   - {fileID: 1890899375}
-  - {fileID: 695888138}
+  - {fileID: 1452308872}
   - {fileID: 1087095455}
   - {fileID: 2058564550}
   - {fileID: 1594588259}
   - {fileID: 444405721}
   - {fileID: 1208035922}
   - {fileID: 1306712497}
-  - {fileID: 1594336559}
+  - {fileID: 2111378666}
