@@ -1,22 +1,70 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "E:\\Games\\2025coreblazer\\2025coreblazer\\Metro\\",
+  "WorkspaceRootPath": "D:\\Metro\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|E:\\Games\\2025coreblazer\\2025coreblazer\\Metro\\assets\\scripts\\player\\playercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|d:\\metro\\assets\\scripts\\interactables\\interactableobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\interactables\\interactableobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|d:\\metro\\assets\\scripts\\interactables\\inventorysystem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\interactables\\inventorysystem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|D:\\Metro\\assets\\scripts\\player\\playercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\player\\playercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|e:\\games\\2025coreblazer\\2025coreblazer\\metro\\assets\\scripts\\npc\\npccontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|d:\\metro\\assets\\scripts\\interactables\\combustibleitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\interactables\\combustibleitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|D:\\Metro\\assets\\scripts\\npc\\npccontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\npc\\npccontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|E:\\Games\\2025coreblazer\\2025coreblazer\\Metro\\assets\\scripts\\facingcamera.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\facingcamera.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|d:\\metro\\assets\\scripts\\objectpool\\objectpoolmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\objectpool\\objectpoolmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|E:\\Games\\2025coreblazer\\2025coreblazer\\Metro\\Assets\\Script\\PlayerMovement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Script\\PlayerMovement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|D:\\Metro\\assets\\scripts\\metrostructure\\metrodoor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\metrostructure\\metrodoor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|d:\\metro\\assets\\scripts\\interactables\\gasmask.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\interactables\\gasmask.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|d:\\metro\\assets\\scripts\\interactables\\safetyhammer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\interactables\\safetyhammer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|d:\\metro\\assets\\scripts\\camera\\rotatingcamera.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\camera\\rotatingcamera.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|d:\\metro\\assets\\scripts\\camera\\facingcamera.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\camera\\facingcamera.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|D:\\Metro\\assets\\scripts\\interactables\\smokedetector.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\interactables\\smokedetector.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|d:\\metro\\assets\\scripts\\smoke\\smokedata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:assets\\scripts\\smoke\\smokedata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|d:\\metro\\assets\\scripts\\smoke\\smokesystem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\smoke\\smokesystem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|D:\\Metro\\assets\\scripts\\leveleditor\\smokesystemeditor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\leveleditor\\smokesystemeditor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|D:\\Metro\\assets\\scripts\\interactables\\battery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\interactables\\battery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,31 +74,204 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 3,
           "Children": [
             {
-              "$type": "Bookmark",
-              "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "RotatingCamera.cs",
+              "DocumentMoniker": "D:\\Metro\\Assets\\Scripts\\Camera\\RotatingCamera.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Camera\\RotatingCamera.cs",
+              "ToolTip": "D:\\Metro\\Assets\\Scripts\\Camera\\RotatingCamera.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Camera\\RotatingCamera.cs",
+              "ViewState": "AgIAABUAAAAAAAAAAAAuwCgAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-08T12:24:14.965Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "FacingCamera.cs",
+              "DocumentMoniker": "D:\\Metro\\Assets\\Scripts\\Camera\\FacingCamera.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Camera\\FacingCamera.cs",
+              "ToolTip": "D:\\Metro\\Assets\\Scripts\\Camera\\FacingCamera.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Camera\\FacingCamera.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvw4AAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-08T12:18:18.534Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "SafetyHammer.cs",
+              "DocumentMoniker": "D:\\Metro\\Assets\\Scripts\\Interactables\\SafetyHammer.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Interactables\\SafetyHammer.cs",
+              "ToolTip": "D:\\Metro\\Assets\\Scripts\\Interactables\\SafetyHammer.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Interactables\\SafetyHammer.cs",
+              "ViewState": "AgIAACQAAAAAAAAAAAAIwFMAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-08T12:15:46.23Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "InteractableObject.cs",
+              "DocumentMoniker": "D:\\Metro\\Assets\\Scripts\\Interactables\\InteractableObject.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Interactables\\InteractableObject.cs",
+              "ToolTip": "D:\\Metro\\Assets\\Scripts\\Interactables\\InteractableObject.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Interactables\\InteractableObject.cs",
+              "ViewState": "AgIAADMAAAAAAAAAAAAvwEMAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-08T11:55:22.953Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Bookmark",
-              "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
             },
             {
               "$type": "Bookmark",
-              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "InventorySystem.cs",
+              "DocumentMoniker": "D:\\Metro\\Assets\\Scripts\\Interactables\\InventorySystem.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Interactables\\InventorySystem.cs",
+              "ToolTip": "D:\\Metro\\Assets\\Scripts\\Interactables\\InventorySystem.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Interactables\\InventorySystem.cs",
+              "ViewState": "AgIAAJ8AAAAAAAAAAADwv7sAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-08T11:40:12.601Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "GasMask.cs",
+              "DocumentMoniker": "D:\\Metro\\Assets\\Scripts\\Interactables\\GasMask.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Interactables\\GasMask.cs",
+              "ToolTip": "D:\\Metro\\Assets\\Scripts\\Interactables\\GasMask.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Interactables\\GasMask.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvxEAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-08T11:39:37.748Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ObjectPoolManager.cs",
+              "DocumentMoniker": "D:\\Metro\\Assets\\Scripts\\ObjectPool\\ObjectPoolManager.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\ObjectPool\\ObjectPoolManager.cs",
+              "ToolTip": "D:\\Metro\\Assets\\Scripts\\ObjectPool\\ObjectPoolManager.cs",
+              "RelativeToolTip": "Assets\\Scripts\\ObjectPool\\ObjectPoolManager.cs",
+              "ViewState": "AgIAAGoAAAAAAAAAAAAiwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-08T11:35:55.737Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "CombustibleItem.cs",
+              "DocumentMoniker": "D:\\Metro\\Assets\\Scripts\\Interactables\\CombustibleItem.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Interactables\\CombustibleItem.cs",
+              "ToolTip": "D:\\Metro\\Assets\\Scripts\\Interactables\\CombustibleItem.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Interactables\\CombustibleItem.cs",
+              "ViewState": "AgIAAEoAAAAAAAAAAAAhwFkAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-08T09:56:37.121Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "SmokeData.cs",
+              "DocumentMoniker": "D:\\Metro\\Assets\\Scripts\\Smoke\\SmokeData.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Smoke\\SmokeData.cs",
+              "ToolTip": "D:\\Metro\\Assets\\Scripts\\Smoke\\SmokeData.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Smoke\\SmokeData.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-08T09:13:42.493Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "SmokeSystemEditor.cs",
+              "DocumentMoniker": "D:\\Metro\\Assets\\Scripts\\LevelEditor\\SmokeSystemEditor.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\LevelEditor\\SmokeSystemEditor.cs",
+              "ToolTip": "D:\\Metro\\Assets\\Scripts\\LevelEditor\\SmokeSystemEditor.cs",
+              "RelativeToolTip": "Assets\\Scripts\\LevelEditor\\SmokeSystemEditor.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAAACgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-08T08:51:02.239Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "SmokeDetector.cs",
+              "DocumentMoniker": "D:\\Metro\\Assets\\Scripts\\Interactables\\SmokeDetector.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Interactables\\SmokeDetector.cs",
+              "ToolTip": "D:\\Metro\\Assets\\Scripts\\Interactables\\SmokeDetector.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Interactables\\SmokeDetector.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAACIAAABMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-08T07:29:21.725Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "SmokeSystem.cs",
+              "DocumentMoniker": "D:\\Metro\\Assets\\Scripts\\Smoke\\SmokeSystem.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Smoke\\SmokeSystem.cs",
+              "ToolTip": "D:\\Metro\\Assets\\Scripts\\Smoke\\SmokeSystem.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Smoke\\SmokeSystem.cs",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAewC4AAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-08T06:41:39.92Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "Battery.cs",
+              "DocumentMoniker": "D:\\Metro\\Assets\\Scripts\\Interactables\\Battery.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Interactables\\Battery.cs",
+              "ToolTip": "D:\\Metro\\Assets\\Scripts\\Interactables\\Battery.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Interactables\\Battery.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAuwCQAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-08T06:19:32.049Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "MetroDoor.cs",
+              "DocumentMoniker": "D:\\Metro\\Assets\\Scripts\\MetroStructure\\MetroDoor.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\MetroStructure\\MetroDoor.cs",
+              "ToolTip": "D:\\Metro\\Assets\\Scripts\\MetroStructure\\MetroDoor.cs",
+              "RelativeToolTip": "Assets\\Scripts\\MetroStructure\\MetroDoor.cs",
+              "ViewState": "AgIAADYAAAAAAAAAAAAYwEAAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-08T06:19:00.393Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "NPCController.cs",
-              "DocumentMoniker": "E:\\Games\\2025coreblazer\\2025coreblazer\\Metro\\Assets\\Scripts\\NPC\\NPCController.cs",
+              "DocumentMoniker": "D:\\Metro\\Assets\\Scripts\\NPC\\NPCController.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\NPC\\NPCController.cs",
-              "ToolTip": "E:\\Games\\2025coreblazer\\2025coreblazer\\Metro\\Assets\\Scripts\\NPC\\NPCController.cs",
+              "ToolTip": "D:\\Metro\\Assets\\Scripts\\NPC\\NPCController.cs",
               "RelativeToolTip": "Assets\\Scripts\\NPC\\NPCController.cs",
               "ViewState": "AgIAAGYAAAAAAAAAAAAqwHkAAAAgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -60,36 +281,12 @@
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "FacingCamera.cs",
-              "DocumentMoniker": "E:\\Games\\2025coreblazer\\2025coreblazer\\Metro\\Assets\\Scripts\\FacingCamera.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\FacingCamera.cs",
-              "ToolTip": "E:\\Games\\2025coreblazer\\2025coreblazer\\Metro\\Assets\\Scripts\\FacingCamera.cs",
-              "RelativeToolTip": "Assets\\Scripts\\FacingCamera.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-08T03:13:11.701Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "PlayerMovement.cs",
-              "DocumentMoniker": "E:\\Games\\2025coreblazer\\2025coreblazer\\Metro\\Assets\\Script\\PlayerMovement.cs",
-              "RelativeDocumentMoniker": "Assets\\Script\\PlayerMovement.cs",
-              "ToolTip": "E:\\Games\\2025coreblazer\\2025coreblazer\\Metro\\Assets\\Script\\PlayerMovement.cs",
-              "RelativeToolTip": "Assets\\Script\\PlayerMovement.cs",
-              "ViewState": "AgIAABgAAAAAAAAAAAAiwAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-08T02:32:43.621Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
               "Title": "PlayerController.cs",
-              "DocumentMoniker": "E:\\Games\\2025coreblazer\\2025coreblazer\\Metro\\Assets\\Scripts\\Player\\PlayerController.cs",
+              "DocumentMoniker": "D:\\Metro\\Assets\\Scripts\\Player\\PlayerController.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Player\\PlayerController.cs",
-              "ToolTip": "E:\\Games\\2025coreblazer\\2025coreblazer\\Metro\\Assets\\Scripts\\Player\\PlayerController.cs",
+              "ToolTip": "D:\\Metro\\Assets\\Scripts\\Player\\PlayerController.cs",
               "RelativeToolTip": "Assets\\Scripts\\Player\\PlayerController.cs",
-              "ViewState": "AgIAAB0AAAAAAAAAAAAiwDIAAAAlAAAAAAAAAA==",
+              "ViewState": "AgIAAKIBAAAAAAAAAAAvwLUBAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-08T01:36:27.108Z",
               "EditorCaption": ""

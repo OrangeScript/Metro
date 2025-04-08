@@ -54,7 +54,6 @@ public abstract class InteractableObject : MonoBehaviour
     public virtual void OnEquip(Transform parent)
     {
         if (isEquipped) return;
-
         isEquipped = true;
         transform.SetParent(parent);
         transform.localPosition = Vector2.zero;
@@ -85,8 +84,8 @@ public abstract class InteractableObject : MonoBehaviour
         {
             Debug.Log("销毁一次性物品");
 
-            if (InventorySystem.Instance.equippedItem == this)
-                InventorySystem.Instance.equippedItem = null;
+            if (player.equippedItem == this)
+                player.equippedItem = null;
             Destroy(gameObject);
             InventorySystem.Instance.UpdateEquippedUI();
         }

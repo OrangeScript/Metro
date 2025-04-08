@@ -35,6 +35,8 @@ public class PlayerController : MonoBehaviour
 
     [Header("门设置")]
     public MetroDoor nearestMetroDoor;
+    public bool awaitingSecondFPress = false;
+    public MetroDoor poweredDoor = null;
 
     [Header("管道设置")]
     [SerializeField] private LayerMask tunnelLayer;
@@ -69,7 +71,7 @@ public class PlayerController : MonoBehaviour
         HandleImmediateAnimation();
         CheckInteractables();
         CheckNearestMetroDoor();
-       
+        CheckPoweredDoor();
     }
 
     void FixedUpdate()
@@ -239,36 +241,65 @@ public class PlayerController : MonoBehaviour
 
     public void HandleUseItemInput()
     {
-        if (currentCarriedObject == null) return;
-
-        switch (currentCarriedObject.useTrigger)
+        if (equippedMask != null)
         {
-            case UseTrigger.KeyF:
-                if (Input.GetKeyDown(KeyCode.F))
-                {
-                    Debug.Log("开始使用物品（按下 F 键）");
-                    currentCarriedObject.UseItem();
-                }
-                break;
+            switch (equippedMask.useTrigger)
+            {
+                case UseTrigger.KeyF:
+                    if (Input.GetKeyDown(KeyCode.F))
+                    {
+                        Debug.Log("开始使用面具（按下 F 键）");
+                        equippedMask.UseItem();
+                    }
+                    break;
 
-            case UseTrigger.RightClick:
-                if (Input.GetMouseButtonDown(1)) 
-                {
-                    Debug.Log("开始使用物品（鼠标右键）");
-                    currentCarriedObject.UseItem();
-                }
-                break;
+                case UseTrigger.RightClick:
+                    if (Input.GetMouseButtonDown(1))
+                    {
+                        Debug.Log("开始使用面具（鼠标右键）");
+                        equippedMask.UseItem();
+                    }
+                    break;
 
-            case UseTrigger.OnEquip:
-                if (currentCarriedObject!=null)
-                {
-                    currentCarriedObject.UseItem(); // 一旦装备立即触发
-                }
-                break;
+                case UseTrigger.OnEquip:
+                    equippedMask.UseItem(); 
+                    break;
 
-            default:
-                Debug.LogError("未知的使用触发条件！");
-                break;
+                default:
+                    Debug.LogError("未知的使用触发条件！");
+                    break;
+            }
+        }
+
+        //处理已装备的普通物品
+        if (equippedItem != null)
+        {
+            switch (equippedItem.useTrigger)
+            {
+                case UseTrigger.KeyF:
+                    if (Input.GetKeyDown(KeyCode.F))
+                    {
+                        Debug.Log("开始使用物品（按下 F 键）");
+                        equippedItem.UseItem();
+                    }
+                    break;
+
+                case UseTrigger.RightClick:
+                    if (Input.GetMouseButtonDown(1))
+                    {
+                        Debug.Log("开始使用物品（鼠标右键）");
+                        equippedItem.UseItem();
+                    }
+                    break;
+
+                case UseTrigger.OnEquip:
+                    equippedItem.UseItem(); 
+                    break;
+
+                default:
+                    Debug.LogError("未知的使用触发条件！");
+                    break;
+            }
         }
     }
 
@@ -288,7 +319,7 @@ public class PlayerController : MonoBehaviour
             var obj = col.GetComponent<InteractableObject>();
             if (!obj) continue;
 
-            if (obj == currentCarriedObject) continue;
+            if (obj == equippedMask || obj == equippedItem) continue;
 
             float dist = Vector2.Distance(transform.position, col.transform.position);
             if (dist < minDist)
@@ -324,13 +355,40 @@ public class PlayerController : MonoBehaviour
         nearestMetroDoor = closestDoor;
         if (nearestMetroDoor == null)
         {
-            Debug.Log("范围内没有地铁门");
+            //Debug.Log("范围内没有地铁门");
         }
         else {
             if(currentCarriedObject != null &&
         (currentCarriedObject.CompareTag("Battery") ||
          currentCarriedObject.CompareTag("Crowbar")))
             nearestMetroDoor.TryInteract(this); }
+    }
+
+    private void CheckPoweredDoor()
+    {
+        if (awaitingSecondFPress && Input.GetKeyDown(KeyCode.F) && poweredDoor != null)
+        {
+            var door = poweredDoor;
+
+            if (door.currentFault == MetroDoor.FaultType.Type3)
+            {
+                door.currentFault = MetroDoor.FaultType.Type1;
+            }
+            else if (door.currentFault == MetroDoor.FaultType.Type4)
+            {
+                door.currentFault = MetroDoor.FaultType.Type2;
+            }
+            else if (door.currentFault == MetroDoor.FaultType.Type5)
+            {
+                door.currentFault = MetroDoor.FaultType.Type2;
+                door.StartMazePuzzleWithNoChange();
+                door.currentFault = MetroDoor.FaultType.Type1;
+            }
+
+            door.TryInteract(this);
+            awaitingSecondFPress = false;
+            poweredDoor = null;
+        }
     }
     #endregion
 
@@ -347,8 +405,13 @@ public class PlayerController : MonoBehaviour
             Debug.LogError("tatgetPoint is null");
         }
         item.OnEquip(targetPoint);
-
-        InventorySystem.Instance.equippedItem = item;
+        if (currentCarryType == InteractableObject.CarryType.Mask)
+        {
+            equippedMask = item;
+        }
+        else if(currentCarryType == InteractableObject.CarryType.Item)
+        {
+            equippedItem = item; }
     }
 
     private Transform GetAttachPoint(InteractableObject item)
@@ -364,20 +427,28 @@ public class PlayerController : MonoBehaviour
 
     public void UnequipItem(CarryType type)
     {
-        if (currentCarryType != type) return;
+        switch (type)
+        {
+            case CarryType.Mask:
+                if (equippedMask != null)
+                {
+                    InventorySystem.Instance.UnequipItem(equippedMask);
+                }
+                break;
 
-        if (type == CarryType.NPC)
-            walkSpeed /= npcSpeedPenalty;
+            case CarryType.Item:
+                if (equippedItem != null)
+                {
+                    InventorySystem.Instance.UnequipItem(equippedItem);
+                }
+                break;
+        }
 
-        currentCarriedObject.OnUnequip();
-        currentCarryType = CarryType.None;
-        currentCarriedObject = null;
-        //anim.SetBool("IsCarrying", false);
-
-        TransitionState(PlayerState.Normal);
-        InventorySystem.Instance.UnequipItem(currentCarriedObject);
-        currentCarriedObject = null;
+        // 更新当前携带状态
+        currentCarriedObject = equippedMask ?? equippedItem;
+        currentCarryType = currentCarriedObject?.carryType ?? CarryType.None;
     }
+
 
     #endregion
 
