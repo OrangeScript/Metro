@@ -83,7 +83,7 @@ public class Ladder : InteractableObject
             HandleClimbing();
         }
 
-        if (isExtended && Input.GetKeyDown(KeyCode.F))
+        if (isExtended&& Input.GetKeyDown(KeyCode.F))
         {
             CollectLadder();
         }

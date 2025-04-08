@@ -1,19 +1,39 @@
 using UnityEngine;
+using static UnityEditor.Progress;
 
 public abstract class InteractableObject : MonoBehaviour
 {
     public string itemName;
     public Sprite itemIcon;
-    public ItemCategory category = ItemCategory.Equipment;
     protected bool isEquipped = false;
 
     protected PlayerController player;
+    public string itemDescription;
 
-    public enum ItemCategory { Mask, Equipment }
+    public enum CarryType { None, Mask, NPC, Item }
+    public enum UseTrigger { KeyF,RightClick,OnEquip}
+
+    [Header("携带设置")]
+    public CarryType carryType = CarryType.None;
+    private SpriteRenderer spriteRenderer;
+
 
     [Header("物品属性")]
-    public bool destroyOnUse = false; 
+    public bool destroyOnUse = false;
+    public string poolTag = "Items";
+    public GameObject prefabReference;
+    public UseTrigger useTrigger;
+    public bool isContinuousUse = false;
 
+    private void Awake()
+    {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        if (spriteRenderer == null)
+        {
+            Debug.LogError($"{gameObject.name} 缺少 SpriteRenderer 组件！");
+            enabled = false; 
+        }
+    }
     protected virtual void Start()
     {
         player = InventorySystem.Instance?.GetPlayer();
@@ -25,23 +45,9 @@ public abstract class InteractableObject : MonoBehaviour
 
     public virtual void OnInteract()
     {
-        if (InventorySystem.Instance == null)
+        if (InventorySystem.Instance.AddItem(this))
         {
-            Debug.LogWarning("InventorySystem 未初始化，无法交互！");
-            return;
-        }
-
-        if (category == ItemCategory.Equipment || category == ItemCategory.Mask)
-        {
-            if (InventorySystem.Instance.AddItem(this))
-            {
-                gameObject.SetActive(false); // 隐藏物品
-                Debug.Log($"{itemName} 已拾取并存入背包！");
-            }
-            else
-            {
-                Debug.Log($"{itemName} 无法拾取，背包已满！");
-            }
+            gameObject.SetActive(false); // 禁用当前实例
         }
     }
 
@@ -52,7 +58,7 @@ public abstract class InteractableObject : MonoBehaviour
         isEquipped = true;
         transform.SetParent(parent);
         transform.localPosition = Vector2.zero;
-        gameObject.SetActive(true);
+        transform.localRotation = Quaternion.identity;
         HandleEquip();
     }
 
@@ -77,17 +83,80 @@ public abstract class InteractableObject : MonoBehaviour
 
         if (destroyOnUse)
         {
-            InventorySystem.Instance.RemoveItem(this);
+            Debug.Log("销毁一次性物品");
+
+            if (InventorySystem.Instance.equippedItem == this)
+                InventorySystem.Instance.equippedItem = null;
             Destroy(gameObject);
+            InventorySystem.Instance.UpdateEquippedUI();
         }
-        else
+        else if(!isContinuousUse)
         {
-            InventorySystem.Instance.AddItem(this);
-            gameObject.SetActive(false);
+            Debug.Log("非一次性物品可继续使用");
+        }
+    }
+
+    public virtual void ResetItemState()
+    {
+        // 重置物理状态
+        if (TryGetComponent<Rigidbody2D>(out var rb))
+        {
+            rb.velocity = Vector2.zero;
+            rb.angularVelocity = 0f;
+        }
+
+        // 重置碰撞体
+        if (TryGetComponent<Collider2D>(out var col))
+        {
+            col.enabled = true;
+        }
+
+        // 重置渲染器
+        if (TryGetComponent<SpriteRenderer>(out var sr))
+        {
+            sr.enabled = true;
+        }
+    }
+
+    void OnValidate()
+    {
+        if (prefabReference == null)
+        {
+            // 自动获取预制体引用
+            var prefab = UnityEditor.PrefabUtility.GetCorrespondingObjectFromSource(gameObject);
+            if (prefab != null)
+            {
+                prefabReference = prefab;
+                UnityEditor.EditorUtility.SetDirty(this);
+            }
         }
     }
 
     protected virtual void HandleEquip() { }
     protected virtual void HandleUnequip() { }
     protected virtual void HandleUse() { }
+
+    public void SetEquippedLayer()
+    {
+        spriteRenderer.sortingLayerName = "AboveCharacter";
+    }
+
+    public void ResetLayer()
+    {
+        spriteRenderer.sortingLayerName = "Interactables";
+    }
+    public string GetDescription()
+    {
+        return $"名称: {itemName}\n描述: {itemDescription}";
+    }
+
+    void OnDrawGizmos()
+    {
+        if (this.gameObject.activeInHierarchy) // 确保物品处于活动状态
+        {
+            Gizmos.color = Color.red; // 设置颜色为红色
+            Gizmos.DrawSphere(transform.position, 0.2f); // 在物品位置绘制球体
+        }
+    }
+
 }

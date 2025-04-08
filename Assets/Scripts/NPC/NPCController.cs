@@ -142,7 +142,7 @@ public class NPCController : MonoBehaviour
             itemSpawnPoint.position,
             Quaternion.identity);
 
-        player.inventory.AddItem(item.GetComponent<InteractableObject>());
+       // player.inventory.AddItem(item.GetComponent<InteractableObject>());
     }
 
     // ªË√‘◊¥Ã¨ŒÔ¿Ì…Ë÷√

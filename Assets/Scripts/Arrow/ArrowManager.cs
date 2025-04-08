@@ -21,13 +21,14 @@ public class ArrowManager : MonoBehaviour
     Queue<Arrow> arrows = new Queue<Arrow>();
     Arrow currentArrow;
 
-    public float waveTime = 9f;  // 每一轮的倒计时（秒）
+    public float waveTime = 9f;  
 
     private void Start() {}
 
     // 创建箭头波
     public void CreateWave(int length)
     {
+        arrowsHolder.gameObject.SetActive(true);
         Debug.Log($"正在生成箭头，剩余次数: {length}");
         arrows = new Queue<Arrow>();
         isFinish = false;
@@ -59,13 +60,13 @@ public class ArrowManager : MonoBehaviour
         if (ConvertKeyCodeToInt(inputKey) == currentArrow.arrowDir)
         {
             currentArrow.SetFinish();  // 输入正确，设置为完成状态
-            victorySound.Play();
+            //victorySound.Play();
             MetroDoor.S.RecordInput(true);  // 记录正确输入
         }
         else
         {
             currentArrow.SetError();  // 输入错误，显示错误颜色
-            missSound.Play();
+            //missSound.Play();
             MetroDoor.S.RecordInput(false);  // 记录错误输入
         }
 
@@ -78,6 +79,8 @@ public class ArrowManager : MonoBehaviour
         {
             isFinish = true;  // 如果所有箭头都输入完，标记关卡完成
         }
+
+        Debug.Log($"输入正确，当前 correctInputs: {MetroDoor.S.correctInputs}");
     }
 
     // 清空箭头波
@@ -88,6 +91,7 @@ public class ArrowManager : MonoBehaviour
         {
             Destroy(arrow.gameObject);
         }
+        arrowsHolder.gameObject.SetActive(false);
     }
 
     // 将键盘输入转换为箭头方向（0-3）

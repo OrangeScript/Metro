@@ -32,7 +32,7 @@ public class Flashlight : InteractableObject
     {
         if (isEquipped)
         {
-            if (Input.GetKeyDown(KeyCode.F))
+            //if (Input.GetKeyDown(KeyCode.F))
             {
                 if (isNearVentExit)
                 {

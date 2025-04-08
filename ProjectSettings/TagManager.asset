@@ -3,7 +3,11 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Window
+  - MetroDoor
+  - Battery
+  - Crowbar
   layers:
   - Default
   - TransparentFX
@@ -47,9 +51,6 @@ TagManager:
   - name: MetroStructure
     uniqueID: 4015108083
     locked: 0
-  - name: Smoke
-    uniqueID: 557857163
-    locked: 0
   - name: Interactables
     uniqueID: 2589524607
     locked: 0
@@ -58,6 +59,9 @@ TagManager:
     locked: 0
   - name: AboveCharacter
     uniqueID: 1813379431
+    locked: 0
+  - name: Smoke
+    uniqueID: 557857163
     locked: 0
   - name: UI_World
     uniqueID: 441155343

@@ -8,19 +8,24 @@ public class Crowbar : InteractableObject
     {
         base.Start();
         destroyOnUse = false;
+        useTrigger = UseTrigger.KeyF;
     }
 
     protected override void HandleUse()
     {
         if (player == null) return;
-        if (player.nearestInteractable != null && player.nearestInteractable.CompareTag("MetroDoor"))
+        MetroDoor door = player.nearestMetroDoor;
+
+        if (door != null &&
+            (door.currentFault == MetroDoor.FaultType.Type1 ||
+             door.currentFault == MetroDoor.FaultType.Type2))
         {
-            MetroDoor door = player.nearestInteractable.GetComponent<MetroDoor>();
-            if (door != null && ((door.currentFault == MetroDoor.FaultType.Type1) || (door.currentFault == MetroDoor.FaultType.Type2)))
-            {
-                Debug.Log("车门已打开！");
-                door.OpenDoor();
-            }
+            Debug.Log("车门已打开！");
+            door.OpenDoor();
+        }
+        else
+        {
+            Debug.LogError("Can't find MetroDoor");
         }
     }
 }

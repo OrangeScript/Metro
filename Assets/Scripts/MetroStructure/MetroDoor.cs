@@ -7,26 +7,33 @@ public class MetroDoor : MonoBehaviour
     public enum DoorState { Open, Closed, Jammed }
     public enum FaultType { None, Type1, Type2, Type3, Type4, Type5 }
 
-    [Header("门状态")]
+    [Header("门的状态")]
     public DoorState currentState = DoorState.Closed;
     public FaultType currentFault = FaultType.None;
+    private FaultType lastHandledFault = FaultType.None;
 
     [Header("门的属性")]
     public float openSpeed = 1.0f;
     public AudioClip openSound;
 
-    private Animator animator;
+    private Animator anim;
     private AudioSource audioSource;
 
     private float arrowDuration = 5f;
     private float arrowTime = 0;
     public static bool isDancing;
-    private int correctInputs;
+    public int correctInputs;
 
     public static MetroDoor S;
-
+    private PlayerController player;
     private void Awake()
     {
+        if (S != null && S != this)
+        {
+            Debug.LogWarning("发现多个 MetroDoor 实例，已销毁冗余实例");
+            Destroy(this.gameObject);
+            return;
+        }
         S = this;
         if (ArrowManager.S == null)
         {
@@ -36,12 +43,16 @@ public class MetroDoor : MonoBehaviour
         {
             MazeManager.S = FindObjectOfType<MazeManager>();
         }
+        player = GetComponent<PlayerController>();
     }
 
     void Start()
     {
-        animator = GetComponent<Animator>();
+        anim = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
+
+        currentState= DoorState.Closed;
+        anim.SetInteger("DoorState", (int)currentState);
     }
 
     void Update()
@@ -54,7 +65,15 @@ public class MetroDoor : MonoBehaviour
                 FinishWave();
             }
         }
+        anim.SetInteger("DoorState", (int)currentState);
+        if (currentFault != lastHandledFault)
+        {
+            //HandleFaultUpdate();
+            TryInteract(player);
+            lastHandledFault = currentFault;
+        }
     }
+
 
     public void TryInteract(PlayerController player)
     {
@@ -67,20 +86,27 @@ public class MetroDoor : MonoBehaviour
             }
         }
 
+        HandleFaultUpdate();
+    }
+
+    private void HandleFaultUpdate()
+    {
+        if (currentFault == lastHandledFault)
+            return;
         switch (currentFault)
         {
             case FaultType.Type1:
-            case FaultType.Type3:
+            //case FaultType.Type3:
                 StartArrowPuzzle();
                 break;
             case FaultType.Type2:
-            case FaultType.Type4:
+            //case FaultType.Type4:
                 StartMazePuzzle();
                 break;
-            case FaultType.Type5:
-                StartMazePuzzleWithNoChange();
-                StartArrowPuzzle();
-                break;
+            //case FaultType.Type5:
+                //StartMazePuzzleWithNoChange();
+                //StartArrowPuzzle();
+                //break;
             default:
                 break;
         }
@@ -93,7 +119,7 @@ public class MetroDoor : MonoBehaviour
         {
             Debug.Log("门正在打开...");
             currentState = DoorState.Open;
-            animator.SetTrigger("Open");
+            anim.SetInteger("DoorState", (int)currentState);
             if (openSound)
                 audioSource.PlayOneShot(openSound);
         }
@@ -124,7 +150,7 @@ public class MetroDoor : MonoBehaviour
         MazeManager.S?.StartMazePuzzle(OnMazeSolved);
     }
 
-    private void StartMazePuzzleWithNoChange()
+    public void StartMazePuzzleWithNoChange()
     {
         Debug.Log("进入迷宫解谜界面但不会影响门状态...");
         MazeManager.S?.StartMazePuzzle(OnMazeSolvedNoChange);
@@ -134,6 +160,7 @@ public class MetroDoor : MonoBehaviour
     {
         Debug.Log("迷宫解谜成功，门变为卡住状态");
         currentState = DoorState.Jammed;
+        anim.SetInteger("DoorState", (int)currentState);
     }
 
     private void OnMazeSolvedNoChange()
@@ -145,11 +172,13 @@ public class MetroDoor : MonoBehaviour
     {
         isDancing = false;
         ArrowManager.S?.ClearWave();
+        Debug.Log($"结束解谜，正确数为 {correctInputs}");
 
-        if (correctInputs >= 10)  // 确保至少按对 10 次
+        if (correctInputs == 10)  
         {
             Debug.Log("QQ炫舞解谜成功，门变为撬棍状态");
             currentState = DoorState.Jammed;
+            anim.SetInteger("DoorState", (int)currentState);
         }
     }
 

@@ -7,7 +7,7 @@ public class GasMask : InteractableObject
 {
     private void Awake()
     {
-        category = ItemCategory.Mask;
+        carryType = CarryType.Mask;
     }
 
     protected override void Start()
