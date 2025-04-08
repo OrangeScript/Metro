@@ -64,6 +64,7 @@
     <Compile Include="Assets\Scripts\Manager\TooltipManager.cs" />
     <Compile Include="Assets\Scripts\Interactables\Ventilation.cs" />
     <Compile Include="Assets\Scripts\Interactables\InteractableObject.cs" />
+    <Compile Include="Assets\Resources\dd.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerController.cs" />
     <Compile Include="Assets\Scripts\Arrow\InputManager.cs" />
     <Compile Include="Assets\Scripts\Interactables\Window.cs" />
