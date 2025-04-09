@@ -8,7 +8,7 @@ public class Flashlight : InteractableObject
     private bool isNearVentExit = false; // 是否靠近通风管道出口
     private bool isInVentilation = false; // 是否在通风管道内
     private GameObject actionUI; // UI 提示
-
+    [SerializeField]private new Light light;
     protected override void Start()
     {
         base.Start();
@@ -27,32 +27,20 @@ public class Flashlight : InteractableObject
         base.OnUnequip();
         isFlashlightOn = false;
     }
-
-    void Update()
+    public override void UseItem()
     {
-        if (isEquipped)
-        {
-            //if (Input.GetKeyDown(KeyCode.F))
-            {
-                if (isNearVentExit)
-                {
-                    EnterVentExit();
-                }
-                else if (isInVentilation)
-                {
-                    ReturnToInventory();
-                }
-                else
-                {
-                    ToggleFlashlight();
-                }
-            }
-        }
+        base.UseItem();
     }
+    protected override void HandleUse()
+    {
+        ToggleFlashlight();
+    }
+    
 
     private void ToggleFlashlight()
     {
         isFlashlightOn = !isFlashlightOn;
+        light.enabled = isFlashlightOn;
     }
 
     private void EnterVentExit()
