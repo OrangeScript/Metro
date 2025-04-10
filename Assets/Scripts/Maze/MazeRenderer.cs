@@ -2,52 +2,49 @@ using UnityEngine;
 
 public class MazeRenderer : MonoBehaviour
 {
-    public GameObject wallPrefab;
-    public GameObject pathPrefab;
+    public GameObject wallPrefab; // 墙壁预制体（如方块）
+    public GameObject pathPrefab; // 路径预制体（如平面）
+    public Material wallMaterial; // 可选：墙壁材质
 
-    //public void DrawMaze(int[,] maze)
-    //{
-    //    for (int x = 0; x < maze.GetLength(0); x++)
-    //    {
-    //        for (int y = 0; y < maze.GetLength(1); y++)
-    //        {
-    //            Vector3 pos = new Vector3(x, y, 0);
-    //            if (maze[x, y] == 0)
-    //            {
-    //                Instantiate(wallPrefab, pos, Quaternion.identity);
-    //            }
-    //            else
-    //            {
-    //                Instantiate(pathPrefab, pos, Quaternion.identity);
-    //            }
-    //        }
-    //    }
-    //}
-    public void DrawMaze(int[,] maze)
+    public void Render(int[,] maze, Bounds bounds, float cellSize)
     {
+        ClearOldMaze();
+
         int width = maze.GetLength(0);
         int height = maze.GetLength(1);
-
-        // 计算中心偏移量
-        float centerX = (width - 1) * 0.5f;
-        float centerY = (height - 1) * 0.5f;
 
         for (int x = 0; x < width; x++)
         {
             for (int y = 0; y < height; y++)
             {
-                // 计算相对于中心的位置
-                Vector3 pos = new Vector3(x - centerX, y - centerY, 0);
+                Vector3 worldPos = new Vector3(
+                    bounds.min.x + x * cellSize + cellSize / 2,
+                    bounds.min.y + y * cellSize + cellSize / 2,
+                    0
+                );
 
                 if (maze[x, y] == 0)
                 {
-                    Instantiate(wallPrefab, pos, Quaternion.identity);
+                    // 生成墙壁
+                    GameObject wall = Instantiate(wallPrefab, worldPos, Quaternion.identity);
+                    wall.transform.localScale = new Vector3(cellSize, cellSize, 1);
+                    wall.transform.SetParent(transform);
+                    if (wallMaterial) wall.GetComponent<Renderer>().material = wallMaterial;
                 }
                 else
                 {
-                    Instantiate(pathPrefab, pos, Quaternion.identity);
+                    // 生成路径
+                    GameObject path = Instantiate(pathPrefab, worldPos, Quaternion.identity);
+                    path.transform.localScale = new Vector3(cellSize, cellSize ,0);
+                    path.transform.SetParent(transform);
                 }
             }
         }
+    }
+
+    private void ClearOldMaze()
+    {
+        foreach (Transform child in transform)
+            Destroy(child.gameObject);
     }
 }

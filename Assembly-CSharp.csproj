@@ -85,7 +85,6 @@
     <Compile Include="Assets\Scripts\MetroStructure\MetroDoor.cs" />
     <Compile Include="Assets\Scripts\Interactables\Ladder.cs" />
     <Compile Include="Assets\Scripts\Smoke\IllusionWorld.cs" />
-    <Compile Include="Assets\Scripts\Maze\MazeInput.cs" />
     <Compile Include="Assets\Scripts\ObjectPool\ObjectPoolManager.cs" />
     <Compile Include="Assets\Scripts\Manager\UIManager.cs" />
     <Compile Include="Assets\Scripts\Interactables\CombustibleItem.cs" />
@@ -98,7 +97,6 @@
     <Compile Include="Assets\Scripts\Smoke\SmokeSystem.cs" />
     <Compile Include="Assets\Scripts\NPC\NPCStateMachine.cs" />
     <Compile Include="Assets\Scripts\Interactables\Battery.cs" />
-    <Compile Include="Assets\Scripts\NPC\NPCController.cs" />
     <Compile Include="Assets\Scripts\NPC\NPCHallucinatingState.cs" />
     <Compile Include="Assets\Scripts\Interactables\GasMask.cs" />
     <Compile Include="Assets\Scripts\NPC\Entity.cs" />

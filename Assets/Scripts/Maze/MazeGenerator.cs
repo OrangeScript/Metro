@@ -3,139 +3,276 @@ using UnityEngine;
 
 public class MazeGenerator : MonoBehaviour
 {
-    
-    public MazeRenderer mazeRenderer;
+    [Header("Settings")]
+    public float cellSize = 1.0f; // 每个格子对应的世界单位
+    public int padding = 2; // 迷宫边界留白
 
+    [Header("References")]
+    public MazeRenderer mazeRenderer;
+    public GameObject startPrefab;
+    public GameObject endPrefab;
+
+    private int[,] maze;
     public Vector3 start;
     public Vector3 end;
 
-    private int mazeSize = 11; // 迷宫尺寸（必须为奇数，否则可能无法保证起点/终点是通路）
-    public int[,] maze;
-    public int mainPathBias = 3;
-    [SerializeField] private GameObject startPrefab;
-    [SerializeField] private GameObject endPrefab;
-
-
-    public void GenerateMaze()
+    public void GenerateDynamicMaze()
     {
-        maze=new int[mazeSize,mazeSize];
-        for(int i = 0; i < mazeSize; i++)
-        {
-            for (int j = 0; j < mazeSize; j++)
-            {
-                maze[i,j]=0;
-            }
-        }
-        start=new Vector3(-7.38f, Random.Range(-3.47f,3.47f), 0);
-        end = new Vector3(7.38f, Random.Range(-3.47f, 3.47f), 0);
-        Vector2Int startCell = WorldToGrid(start);
-        Vector2Int endCell = WorldToGrid(end);
-        startCell = ClampCell(startCell);
-        endCell = ClampCell(endCell);
-        GenerateConnectedPath(startCell, endCell);
-    }
-    public void RenderMaze()
-    {
+        
+        start = new Vector3(7.3f, Random.Range(3.2f, -3.2f), 0);
+        end = new Vector3(-7.3f, Random.Range(3.2f, -3.2f), 0);
+        // 计算包围盒
+        Bounds bounds = new Bounds(start, Vector3.zero);
+        bounds.Encapsulate(end);
+        bounds.Expand(padding * cellSize * 2); // 边界扩展
+
+        // 计算网格尺寸
+        int gridWidth = Mathf.CeilToInt(bounds.size.x / cellSize);
+        int gridHeight = Mathf.CeilToInt(bounds.size.y / cellSize);
+        gridWidth = (gridWidth % 2 == 0) ? gridWidth + 1 : gridWidth; // 确保奇数
+        gridHeight = (gridHeight % 2 == 0) ? gridHeight + 1 : gridHeight;
+
+        // 初始化迷宫数组
+        maze = new int[gridWidth, gridHeight];
+        for (int x = 0; x < gridWidth; x++)
+            for (int y = 0; y < gridHeight; y++)
+                maze[x, y] = 0;
+
+        // 转换坐标到网格空间 ------------------------------------------------
+        Vector2Int startGrid = WorldToGrid(start, bounds);
+        Vector2Int endGrid = WorldToGrid(end, bounds);
+
+        // 生成迷宫路径 -----------------------------------------------------
+        GenerateConnectedMaze(startGrid, endGrid);
+
+        // 标记起点终点
+        maze[startGrid.x, startGrid.y] = 1;
+        maze[endGrid.x, endGrid.y] = 1;
+
+        // 传递数据给渲染器
+        mazeRenderer.Render(maze, bounds, cellSize);
         Instantiate(startPrefab, start, Quaternion.identity);
         Instantiate(endPrefab, end, Quaternion.identity);
-
-        mazeRenderer.DrawMaze(maze);
-        Debug.Log($"预期尺寸: {mazeSize}x{mazeSize}，实际数组尺寸: {maze.GetLength(0)}x{maze.GetLength(1)}");
-    }
-    private Vector2Int WorldToGrid(Vector3 worldPos)
-    {
-        // 将世界坐标转换为网格索引
-        float cellSize = 14.76f / (mazeSize - 1); // 根据你的场景宽度计算
-        int x = Mathf.RoundToInt((worldPos.x + 7.38f) / cellSize);
-        int y = Mathf.RoundToInt((worldPos.y + 3.47f) / cellSize);
-        return new Vector2Int(x, y);
     }
 
-    private Vector2Int ClampCell(Vector2Int cell)
+    private Vector2Int WorldToGrid(Vector3 worldPos, Bounds bounds)
     {
-        // 确保坐标在迷宫范围内
-        cell.x = Mathf.Clamp(cell.x, 1, mazeSize - 2);
-        cell.y = Mathf.Clamp(cell.y, 1, mazeSize - 2);
-        return cell;
+        float x = (worldPos.x - bounds.min.x) / cellSize;
+        float y = (worldPos.y - bounds.min.y) / cellSize;
+        return new Vector2Int(Mathf.RoundToInt(x), Mathf.RoundToInt(y));
     }
 
-    private void GenerateConnectedPath(Vector2Int start, Vector2Int end)
+    private void GenerateConnectedMaze(Vector2Int start, Vector2Int end)
     {
-        // 使用A*算法生成主路径
-        List<Vector2Int> mainPath = AStar(start, end);
+        //when this method is fixed ,this part would be done quickly
+        // 使用Prim算法生成基础迷宫
+        RandomizedPrim();
 
-        // 生成主路径
-        foreach (var cell in mainPath)
+        //// 强制连通路径// Do you know how to make it work properly?
+        //List<Vector2Int> path = AStar(start, end);
+        //foreach (var cell in path)
+        //{
+        //    maze[cell.x, cell.y] = 1;
+        //    ConnectNeighbors(cell);
+        //}
+    }
+    //TODO: this method still has lot of bugs and I don't know how to fix it
+    private void RandomizedPrim()
+    {
+        List<Vector2Int> walls = new List<Vector2Int>();
+        HashSet<Vector2Int> visited = new HashSet<Vector2Int>();
+
+        // 随机起点（奇数坐标）
+        Vector2Int startCell = new Vector2Int(
+            Random.Range(1, maze.GetLength(0)- 1) | 1,
+            Random.Range(1, maze.GetLength(1) - 1) | 1
+        );
+        maze[startCell.x, startCell.y] = 1;
+        visited.Add(startCell);
+
+        AddWalls(startCell, walls, visited);
+
+        while (walls.Count > 0)
         {
-            maze[cell.x, cell.y] = 1;
-        }
+            int randomIndex = Random.Range(0, walls.Count);
+            Vector2Int wall = walls[randomIndex];
+            walls.RemoveAt(randomIndex);
 
-        // 添加随机分支
-        AddRandomBranches(mainPath);
-    }
-
-    private List<Vector2Int> AStar(Vector2Int start, Vector2Int end)
-    {
-        // 简单A*算法实现
-        List<Vector2Int> path = new List<Vector2Int>();
-        Vector2Int current = start;
-
-        while (current != end)
-        {
-            // 向终点方向移动
-            int dx = end.x - current.x;
-            int dy = end.y - current.y;
-
-            if (Mathf.Abs(dx) > Mathf.Abs(dy))
+            List<Vector2Int> cells = GetAdjacentCells(wall);
+            if (cells.Count == 2)
             {
-                current.x += (int)Mathf.Sign(dx);
-            }
-            else
-            {
-                current.y += (int)Mathf.Sign(dy);
-            }
+                Vector2Int a = cells[0];
+                Vector2Int b = cells[1];
 
-            // 防止越界
-            current.x = Mathf.Clamp(current.x, 1, mazeSize - 2);
-            current.y = Mathf.Clamp(current.y, 1, mazeSize - 2);
-
-            path.Add(current);
-        }
-
-        return path;
-    }
-
-    private void AddRandomBranches(List<Vector2Int> mainPath)
-    {
-        // 随机添加分支路径
-        foreach (var cell in mainPath)
-        {
-            if (Random.Range(0, 100) < 30) // 30%概率生成分支
-            {
-                int branchLength = Random.Range(1, 4);
-                Vector2Int dir = GetRandomDirection();
-
-                Vector2Int current = cell;
-                for (int i = 0; i < branchLength; i++)
+                if (visited.Contains(a) ^ visited.Contains(b))
                 {
-                    current += dir;
-                    if (current.x < 1 || current.x >= mazeSize - 1 ||
-                        current.y < 1 || current.y >= mazeSize - 1) break;
-
-                    maze[current.x, current.y] = 1;
+                    maze[wall.x, wall.y] = 1;
+                    Vector2Int newCell = visited.Contains(a) ? b : a;
+                    maze[newCell.x, newCell.y] = 1;
+                    visited.Add(newCell);
+                    AddWalls(newCell, walls, visited);
                 }
             }
         }
     }
 
-    private Vector2Int GetRandomDirection()
+    // 3. 添加墙到列表（上下左右，必须是墙，并且另一边是未访问的格子）
+    private void AddWalls(Vector2Int cell, List<Vector2Int> walls, HashSet<Vector2Int> visited)
     {
         Vector2Int[] directions = {
-            Vector2Int.up,
-            Vector2Int.down,
-            Vector2Int.left,
-            Vector2Int.right
-        };
-        return directions[Random.Range(0, 4)];
+        new Vector2Int(2, 0),
+        new Vector2Int(-2, 0),
+        new Vector2Int(0, 2),
+        new Vector2Int(0, -2)
+    };
+
+        foreach (var dir in directions)
+        {
+            Vector2Int neighbor = cell + dir;
+            Vector2Int wall = cell + dir / 2;
+
+            if (IsInBounds(neighbor) && !visited.Contains(neighbor) && maze[neighbor.x, neighbor.y] == 0)
+            {
+                walls.Add(wall);
+            }
+        }
     }
+
+    // 4. 获取墙两侧的两个单元格
+    private List<Vector2Int> GetAdjacentCells(Vector2Int wall)
+    {
+        List<Vector2Int> cells = new List<Vector2Int>();
+
+        Vector2Int[] directions = {
+        new Vector2Int(1, 0),
+        new Vector2Int(-1, 0),
+        new Vector2Int(0, 1),
+        new Vector2Int(0, -1)
+    };
+
+        foreach (var dir in directions)
+        {
+            Vector2Int cell = wall + dir;
+            if (IsInBounds(cell) && maze[cell.x, cell.y] == 1)
+            {
+                cells.Add(cell);
+            }
+        }
+
+        return cells;
+    }
+
+    // 5. 判断是否在边界内（除去边缘）
+    private bool IsInBounds(Vector2Int pos)
+    {
+        return pos.x > 0 && pos.x < maze.GetLength(0) - 1 && pos.y > 0 && pos.y < maze.GetLength(1) - 1;
+    }
+
+    private class AStarNode
+    {
+        public Vector2Int pos;
+        public AStarNode parent;
+        public int gCost;  // 到起点的实际代价
+        public int hCost;  // 到终点的启发式代价
+        public int FCost => gCost + hCost;
+    }
+
+    private List<Vector2Int> AStar(Vector2Int start, Vector2Int targetEnd)
+    {
+        // 初始化数据结构
+        Dictionary<Vector2Int, AStarNode> allNodes = new Dictionary<Vector2Int, AStarNode>();
+        List<AStarNode> openSet = new List<AStarNode>();
+        HashSet<Vector2Int> closedSet = new HashSet<Vector2Int>();
+
+        // 创建起始节点
+        AStarNode startNode = new AStarNode
+        {
+            pos = start,
+            gCost = 0,
+            hCost = CalculateHeuristic(start, targetEnd)
+        };
+        allNodes.Add(start, startNode);
+        openSet.Add(startNode);
+
+        while (openSet.Count > 0)
+        {
+            // 找到当前最低代价节点
+            openSet.Sort((a, b) => a.FCost.CompareTo(b.FCost));
+            AStarNode current = openSet[0];
+            openSet.RemoveAt(0);
+
+            // 到达终点
+            if (current.pos == targetEnd)
+            {
+                return ReconstructPath(current);
+            }
+
+            closedSet.Add(current.pos);
+
+            // 检查四个方向
+            foreach (var dir in new[] { Vector2Int.up, Vector2Int.down,
+                     Vector2Int.left, Vector2Int.right })
+            {
+                Vector2Int neighborPos = current.pos + dir;
+
+                // 有效性检查
+                if (!IsPositionValid(neighborPos) || closedSet.Contains(neighborPos))
+                    continue;
+
+                // 计算移动代价（允许穿过墙壁但需要更高代价）
+                int moveCost = maze[neighborPos.x, neighborPos.y] == 0 ? 10 : 1;
+
+                // 创建/获取节点
+                if (!allNodes.TryGetValue(neighborPos, out AStarNode neighbor))
+                {
+                    neighbor = new AStarNode { pos = neighborPos };
+                    allNodes.Add(neighborPos, neighbor);
+                }
+
+                int tentativeGCost = current.gCost + moveCost;
+                if (tentativeGCost < neighbor.gCost || !openSet.Contains(neighbor))
+                {
+                    neighbor.gCost = tentativeGCost;
+                    neighbor.hCost = CalculateHeuristic(neighborPos, targetEnd);
+                    neighbor.parent = current;
+
+                    if (!openSet.Contains(neighbor))
+                        openSet.Add(neighbor);
+                }
+            }
+        }
+
+        Debug.LogWarning("未找到路径！");
+        return new List<Vector2Int>();
+    }
+
+    private int CalculateHeuristic(Vector2Int a, Vector2Int b)
+    {
+        // 使用曼哈顿距离
+        return Mathf.Abs(a.x - b.x) + Mathf.Abs(a.y - b.y);
+    }
+
+    private List<Vector2Int> ReconstructPath(AStarNode endNode)
+    {
+        List<Vector2Int> path = new List<Vector2Int>();
+        AStarNode current = endNode;
+        while (current != null)
+        {
+            path.Add(current.pos);
+            current = current.parent;
+        }
+        path.Reverse();
+        return path;
+    }
+
+    private bool IsPositionValid(Vector2Int pos)
+    {
+        // 检查是否在迷宫范围内
+        return pos.x >= 0 && pos.x < maze.GetLength(0) &&
+               pos.y >= 0 && pos.y < maze.GetLength(1);
+    }
+
+
+
+    
 }

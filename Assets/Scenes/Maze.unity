@@ -346,6 +346,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wallPrefab: {fileID: 82277436430214415, guid: 71b42a0f3fdae294a8a4d0d7abd7fd49, type: 3}
   pathPrefab: {fileID: 3611632390995356659, guid: 15641d85f1f6d8c4cb2c9ab699fa8c09, type: 3}
+  wallMaterial: {fileID: 0}
 --- !u!114 &1996860096
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -373,12 +374,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29f9b23368d495149a496da9668ed9df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cellSize: 1
+  padding: 2
   mazeRenderer: {fileID: 1996860095}
-  start: {x: 0, y: 0, z: 0}
-  end: {x: 0, y: 0, z: 0}
-  mainPathBias: 3
   startPrefab: {fileID: 649244867554535149, guid: 5a8df2b7aa21c194d86870df2cb45bfc, type: 3}
   endPrefab: {fileID: 8784465687441814534, guid: 9df91eb972fa43d4095150e32179804d, type: 3}
+  start: {x: 0, y: 0, z: 0}
+  end: {x: 12.77, y: 4.6, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

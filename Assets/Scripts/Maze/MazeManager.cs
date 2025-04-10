@@ -16,14 +16,13 @@ public class MazeManager : MonoBehaviour
     }
     private void Update()
     {
-        /*         * 这里是测试代码，按空格键生成迷宫和玩家
-         */
+        //press space to begin
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            mazeGenerator.GenerateMaze();
+            mazeGenerator.GenerateDynamicMaze();
             GameObject p=Instantiate(playerPrefab,mazeGenerator.start,Quaternion.identity);
             player=p.GetComponent<MazePlayer>();
-            mazeGenerator.RenderMaze();
+            //mazeGenerator.RenderMaze();
         }
         //test return
         if (Input.GetKeyDown(KeyCode.K))
@@ -31,24 +30,5 @@ public class MazeManager : MonoBehaviour
             SceneManager.LoadScene("NormalScene");
         }
     }
-    public void StartMazePuzzle()
-    {
-        Debug.Log("开启迷宫解谜...");
-        player.gameObject.transform.position = Vector3.one;
-        // 生成新的迷宫
-        mazeGenerator.GenerateMaze();
-        mazeGenerator.RenderMaze();  // 让迷宫可见
-
-        //// 显示 UI
-        //UIManager.Instance.ShowMazeUI();
-    }
-
-    private void OnMazeSolved()
-    {
-        Debug.Log("迷宫解谜成功！");
-        //onMazeComplete?.Invoke();
-        SceneManager.LoadScene("Normal");
-        ////关闭迷宫UI
-        //UIManager.Instance.HideMazeUI();
-    }
+    
 }

@@ -40,6 +40,10 @@ public class MazePlayer : MonoBehaviour
         {
             // 处理与墙壁的碰撞
             Debug.Log("与墙壁碰撞");
+
+            //show fail message
+
+
             //Destroy(gameObject);
         }
         else if (collision.CompareTag("MazeExit"))
