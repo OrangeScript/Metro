@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using static InteractableObject;
 using static UnityEditor.Progress;
 
+
 [RequireComponent(typeof(Rigidbody2D), typeof(Animator))]
 public class PlayerController : MonoBehaviour
 {
@@ -62,6 +63,10 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Alpha5))
+        {
+            SceneManager.LoadScene("Maze");
+        }
         if (MetroDoor.isDancing)
         {
             rb.velocity = Vector2.zero;  

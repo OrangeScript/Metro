@@ -276,7 +276,7 @@ public class SmokeSystem : MonoBehaviour
         Collider2D[] npcs = Physics2D.OverlapCircleAll(position, 2f, LayerMask.GetMask("NPC"));
         foreach (var npc in npcs)
         {
-            NPCController npcController = npc.GetComponent<NPCController>();
+            NPC npcController = npc.GetComponent<NPC>();
             if (npcController != null)
             {
                 npcController.RecoverFromEffects();

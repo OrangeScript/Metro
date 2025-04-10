@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class MetroDoor : MonoBehaviour
 {
     public enum DoorState { Open, Closed, Jammed }
@@ -39,9 +39,9 @@ public class MetroDoor : MonoBehaviour
         {
             ArrowManager.S = FindObjectOfType<ArrowManager>();
         }
-        if (MazeManager.S == null)
+        if (MazeManager.instance == null)
         {
-            MazeManager.S = FindObjectOfType<MazeManager>();
+            MazeManager.instance = FindObjectOfType<MazeManager>();
         }
         player = GetComponent<PlayerController>();
     }
@@ -135,14 +135,14 @@ public class MetroDoor : MonoBehaviour
 
     private void StartMazePuzzle()
     {
-        Debug.Log("进入迷宫解谜界面...");//When get into every stage,you should shut down the last stage and show it only.
-        MazeManager.S?.StartMazePuzzle(OnMazeSolved);
+        Debug.Log("进入迷宫解谜界面...");
+        //MazeManager.S?.StartMazePuzzle(OnMazeSolved);
     }
 
     public void StartMazePuzzleWithNoChange()
     {
         Debug.Log("进入迷宫解谜界面但不会影响门状态...");
-        MazeManager.S?.StartMazePuzzle(OnMazeSolvedNoChange);
+        //MazeManager.S?.StartMazePuzzle(OnMazeSolvedNoChange);
     }
 
     private void OnMazeSolved()

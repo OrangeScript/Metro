@@ -148,7 +148,7 @@ CapsuleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.009360023, y: -0.064479604}
@@ -168,6 +168,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentState: 0
   walkSpeed: 5
+  movement: {x: 0, y: 0}
   inventory: {fileID: 8333713207522594396}
   maskEquipPoint: {fileID: 8501330013234920067}
   npcEquipPoint: {fileID: 4626292130521211209}
@@ -181,10 +182,13 @@ MonoBehaviour:
     m_Bits: 128
   nearestInteractable: {fileID: 0}
   nearestMetroDoor: {fileID: 0}
+  awaitingSecondFPress: 0
+  poweredDoor: {fileID: 0}
   tunnelLayer:
     serializedVersion: 2
     m_Bits: 0
   tunnelSpeedMultiplier: 0.4
+  no: 0
 --- !u!95 &8743913967969947486
 Animator:
   serializedVersion: 5
@@ -225,8 +229,6 @@ MonoBehaviour:
   inventorySlotPrefab: {fileID: 1215960049955312265, guid: 1b2b2d6332197884abceb9e65ff514b6, type: 3}
   background: {fileID: 7853364175085887869, guid: e3e6b3d6c57dc7b488e7d1e8be902988, type: 3}
   equippedItemsContainer: {fileID: 0}
-  equippedMask: {fileID: 0}
-  equippedItem: {fileID: 0}
 --- !u!1 &2252888939243561988
 GameObject:
   m_ObjectHideFlags: 0
