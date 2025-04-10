@@ -65,7 +65,6 @@
     <Compile Include="Assets\Scripts\NPC\NPCState.cs" />
     <Compile Include="Assets\Scripts\Interactables\Ventilation.cs" />
     <Compile Include="Assets\Scripts\Interactables\InteractableObject.cs" />
-    <Compile Include="Assets\Resources\dd.cs" />
     <Compile Include="Assets\Scripts\NPC\NPCUnconsciousState.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerController.cs" />
     <Compile Include="Assets\Scripts\Camera\FacingCamera.cs" />
@@ -76,6 +75,7 @@
     <Compile Include="Assets\Scripts\Interactables\ItemSlotUI.cs" />
     <Compile Include="Assets\Scripts\Arrow\ArrowManager.cs" />
     <Compile Include="Assets\Scripts\Interactables\InventorySystem.cs" />
+    <Compile Include="Assets\Scripts\Maze\MazePlayer.cs" />
     <Compile Include="Assets\Scripts\Interactables\Crowbar.cs" />
     <Compile Include="Assets\Scripts\Interactables\FlashLight.cs" />
     <Compile Include="Assets\Scripts\Manager\AudioManager.cs" />
@@ -103,6 +103,7 @@
     <Compile Include="Assets\Scripts\Interactables\GasMask.cs" />
     <Compile Include="Assets\Scripts\NPC\Entity.cs" />
     <Compile Include="Assets\Scripts\MetroStructure\MetroGround.cs" />
+    <Compile Include="Assets\Scripts\FlashLights.cs" />
     <Compile Include="Assets\Scripts\NPC\NPC.cs" />
     <Compile Include="Assets\Scripts\LevelEditor\LevelEditor.cs" />
   </ItemGroup>

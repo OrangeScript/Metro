@@ -12,6 +12,7 @@ TagManager:
   - Level2Smoke
   - Level3Smoke
   - SoberSmoke
+  - MazeWall
   layers:
   - Default
   - TransparentFX

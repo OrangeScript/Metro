@@ -3,81 +3,139 @@ using UnityEngine;
 
 public class MazeGenerator : MonoBehaviour
 {
-    public int mazeSize = 11;
-    public int[,] maze;
+    
     public MazeRenderer mazeRenderer;
 
-    public Vector2Int start;
-    public Vector2Int end;
+    public Vector3 start;
+    public Vector3 end;
+
+    private int mazeSize = 11; // 迷宫尺寸（必须为奇数，否则可能无法保证起点/终点是通路）
+    public int[,] maze;
+    public int mainPathBias = 3;
+    [SerializeField] private GameObject startPrefab;
+    [SerializeField] private GameObject endPrefab;
+
 
     public void GenerateMaze()
     {
-        maze = new int[mazeSize, mazeSize];
-
-        for (int x = 0; x < mazeSize; x++)
+        maze=new int[mazeSize,mazeSize];
+        for(int i = 0; i < mazeSize; i++)
         {
-            for (int y = 0; y < mazeSize; y++)
+            for (int j = 0; j < mazeSize; j++)
             {
-                maze[x, y] = 0; // 初始化所有格子为墙壁
+                maze[i,j]=0;
             }
         }
+        start=new Vector3(-7.38f, Random.Range(-3.47f,3.47f), 0);
+        end = new Vector3(7.38f, Random.Range(-3.47f, 3.47f), 0);
+        Vector2Int startCell = WorldToGrid(start);
+        Vector2Int endCell = WorldToGrid(end);
+        startCell = ClampCell(startCell);
+        endCell = ClampCell(endCell);
+        GenerateConnectedPath(startCell, endCell);
+    }
+    public void RenderMaze()
+    {
+        Instantiate(startPrefab, start, Quaternion.identity);
+        Instantiate(endPrefab, end, Quaternion.identity);
 
-        start = new Vector2Int(1, 1);
-        end = new Vector2Int(mazeSize - 2, mazeSize - 2);
-
-        GeneratePath(start);
-
-        // 确保终点是路径
-        maze[end.x, end.y] = 1;
+        mazeRenderer.DrawMaze(maze);
+        Debug.Log($"预期尺寸: {mazeSize}x{mazeSize}，实际数组尺寸: {maze.GetLength(0)}x{maze.GetLength(1)}");
+    }
+    private Vector2Int WorldToGrid(Vector3 worldPos)
+    {
+        // 将世界坐标转换为网格索引
+        float cellSize = 14.76f / (mazeSize - 1); // 根据你的场景宽度计算
+        int x = Mathf.RoundToInt((worldPos.x + 7.38f) / cellSize);
+        int y = Mathf.RoundToInt((worldPos.y + 3.47f) / cellSize);
+        return new Vector2Int(x, y);
     }
 
-    private void GeneratePath(Vector2Int start)
+    private Vector2Int ClampCell(Vector2Int cell)
     {
-        Stack<Vector2Int> stack = new Stack<Vector2Int>();
-        stack.Push(start);
-        maze[start.x, start.y] = 1;
+        // 确保坐标在迷宫范围内
+        cell.x = Mathf.Clamp(cell.x, 1, mazeSize - 2);
+        cell.y = Mathf.Clamp(cell.y, 1, mazeSize - 2);
+        return cell;
+    }
 
-        while (stack.Count > 0)
+    private void GenerateConnectedPath(Vector2Int start, Vector2Int end)
+    {
+        // 使用A*算法生成主路径
+        List<Vector2Int> mainPath = AStar(start, end);
+
+        // 生成主路径
+        foreach (var cell in mainPath)
         {
-            Vector2Int current = stack.Peek();
-            List<Vector2Int> neighbors = GetUnvisitedNeighbors(current);
+            maze[cell.x, cell.y] = 1;
+        }
 
-            if (neighbors.Count > 0)
+        // 添加随机分支
+        AddRandomBranches(mainPath);
+    }
+
+    private List<Vector2Int> AStar(Vector2Int start, Vector2Int end)
+    {
+        // 简单A*算法实现
+        List<Vector2Int> path = new List<Vector2Int>();
+        Vector2Int current = start;
+
+        while (current != end)
+        {
+            // 向终点方向移动
+            int dx = end.x - current.x;
+            int dy = end.y - current.y;
+
+            if (Mathf.Abs(dx) > Mathf.Abs(dy))
             {
-                Vector2Int next = neighbors[Random.Range(0, neighbors.Count)];
-                Vector2Int between = new Vector2Int((current.x + next.x) / 2, (current.y + next.y) / 2);
-                maze[between.x, between.y] = 1; // 打通墙壁
-                maze[next.x, next.y] = 1; // 走到下一个点
-                stack.Push(next);
+                current.x += (int)Mathf.Sign(dx);
             }
             else
             {
-                stack.Pop();
+                current.y += (int)Mathf.Sign(dy);
             }
+
+            // 防止越界
+            current.x = Mathf.Clamp(current.x, 1, mazeSize - 2);
+            current.y = Mathf.Clamp(current.y, 1, mazeSize - 2);
+
+            path.Add(current);
         }
+
+        return path;
     }
 
-    private List<Vector2Int> GetUnvisitedNeighbors(Vector2Int cell)
+    private void AddRandomBranches(List<Vector2Int> mainPath)
     {
-        List<Vector2Int> neighbors = new List<Vector2Int>();
-        Vector2Int[] directions = { new(0, 2), new(0, -2), new(2, 0), new(-2, 0) };
-
-        foreach (var dir in directions)
+        // 随机添加分支路径
+        foreach (var cell in mainPath)
         {
-            Vector2Int neighbor = cell + dir;
-            if (neighbor.x > 0 && neighbor.x < mazeSize - 1 &&
-                neighbor.y > 0 && neighbor.y < mazeSize - 1 &&
-                maze[neighbor.x, neighbor.y] == 0)
+            if (Random.Range(0, 100) < 30) // 30%概率生成分支
             {
-                neighbors.Add(neighbor);
+                int branchLength = Random.Range(1, 4);
+                Vector2Int dir = GetRandomDirection();
+
+                Vector2Int current = cell;
+                for (int i = 0; i < branchLength; i++)
+                {
+                    current += dir;
+                    if (current.x < 1 || current.x >= mazeSize - 1 ||
+                        current.y < 1 || current.y >= mazeSize - 1) break;
+
+                    maze[current.x, current.y] = 1;
+                }
             }
         }
-
-        return neighbors;
     }
 
-    public void RenderMaze()
+    private Vector2Int GetRandomDirection()
     {
-        mazeRenderer.DrawMaze(maze);
+        Vector2Int[] directions = {
+            Vector2Int.up,
+            Vector2Int.down,
+            Vector2Int.left,
+            Vector2Int.right
+        };
+        return directions[Random.Range(0, 4)];
     }
 }
