@@ -13,7 +13,13 @@ public class MazeManager : MonoBehaviour
     {
         S = this;
     }
-
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.M))
+        {
+            StartMazePuzzle(OnMazeSolved);
+        }
+    }
     public void StartMazePuzzle(Action onComplete)
     {
         Debug.Log("ø™∆Ù√‘π¨Ω‚√’...");

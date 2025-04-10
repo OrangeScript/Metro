@@ -6,6 +6,7 @@ public class MazeGenerator : MonoBehaviour
     public int mazeSize = 11;
     public int[,] maze;
     public MazeRenderer mazeRenderer;
+    [SerializeField] private Transform MazeCanvas;
 
     public Vector2Int start;
     public Vector2Int end;
@@ -78,6 +79,6 @@ public class MazeGenerator : MonoBehaviour
 
     public void RenderMaze()
     {
-        mazeRenderer.DrawMaze(maze);
+        mazeRenderer.DrawMaze(maze,MazeCanvas);
     }
 }

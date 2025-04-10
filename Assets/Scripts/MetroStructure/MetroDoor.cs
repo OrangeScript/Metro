@@ -135,7 +135,7 @@ public class MetroDoor : MonoBehaviour
 
     private void StartMazePuzzle()
     {
-        Debug.Log("进入迷宫解谜界面...");
+        Debug.Log("进入迷宫解谜界面...");//When get into every stage,you should shut down the last stage and show it only.
         MazeManager.S?.StartMazePuzzle(OnMazeSolved);
     }
 
