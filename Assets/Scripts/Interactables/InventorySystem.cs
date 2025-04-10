@@ -21,8 +21,6 @@ public class InventorySystem : MonoBehaviour
 
     [Header("装备栏设置")]
     public Transform equippedItemsContainer;//装备容器
-    public InteractableObject equippedMask; // Mask装备槽
-    public InteractableObject equippedItem; // Item装备槽
     private PlayerController player;
 
 
@@ -113,35 +111,29 @@ public class InventorySystem : MonoBehaviour
     {
         if (!items.Contains(item)) return;
 
-        // 获取预制体引用（确保InteractableObject有prefab字段）
-        GameObject prefab = item.prefabReference;
+        // 直接使用物品实例而不是创建新实例
+        InteractableObject equipTarget = item;
 
-        // 从对象池获取新实例
-        GameObject newObj = ObjectPoolManager.Instance.GetObject(prefab);
-        InteractableObject newItem = newObj.GetComponent<InteractableObject>();
-
-        // 装备新实例
-        switch (newItem.carryType)
+        // 处理装备逻辑
+        switch (equipTarget.carryType)
         {
             case InteractableObject.CarryType.Mask:
-                if (equippedMask != null) UnequipItem(equippedMask);
-                equippedMask = newItem;
+                if (player.equippedMask != null)
+                    UnequipItem(player.equippedMask);
+                player.equippedMask = equipTarget;
                 break;
 
             case InteractableObject.CarryType.Item:
-                if (equippedItem != null) UnequipItem(equippedItem);
-                equippedItem = newItem;
+                if (player.equippedItem != null)
+                    UnequipItem(player.equippedItem);
+                player.equippedItem = equipTarget;
                 break;
         }
 
-        // 处理原始实例
+        // 从背包移动到装备状态
         items.Remove(item);
-        ObjectPoolManager.Instance.ReturnObject(prefab, item.gameObject); // 返回原实例到对象池
-
-        // 应用效果到新实例
-        ApplyEquipmentEffects(newItem);
+        ApplyEquipmentEffects(equipTarget);
         UpdateUI();
-        newItem.gameObject.SetActive(true);
     }
 
 
@@ -158,29 +150,41 @@ public class InventorySystem : MonoBehaviour
     {
         if (item == null) return;
 
-        item.ResetLayer();
+        // 处理物品返回对象池
+        ReturnItemToPool(item);
+
+        // 清除玩家引用
         switch (item.carryType)
         {
             case InteractableObject.CarryType.Mask:
-                if (equippedMask == item)
-                {
-                    DropItemToWorld(item); // 直接丢弃到地图
-                    equippedMask = null;
-                }
+                if (player.equippedMask == item)
+                    player.equippedMask = null;
                 break;
 
             case InteractableObject.CarryType.Item:
-                if (equippedItem == item)
-                {
-                    DropItemToWorld(item); // 直接丢弃到地图
-                    equippedItem = null;
-                }
+                if (player.equippedItem == item)
+                    player.equippedItem = null;
                 break;
         }
 
         RemoveEquipmentEffects(item);
-        UpdateInventoryUI();
-        UpdateEquippedUI();
+        UpdateUI();
+    }
+
+    private void ReturnItemToPool(InteractableObject item)
+    {
+        // 重置物品状态
+        item.ResetLayer();
+        item.OnUnequip();
+
+        // 返回对象池并生成世界实例
+        GameObject prefab = item.prefabReference;
+        ObjectPoolManager.Instance.ReturnObject(prefab, item.gameObject);
+
+        // 生成新的世界实例
+        GameObject worldInstance = ObjectPoolManager.Instance.GetObject(prefab);
+        worldInstance.transform.position = player.transform.position;
+        worldInstance.SetActive(true);
     }
 
     public void DropItemToWorld(InteractableObject item)
@@ -273,10 +277,10 @@ public class InventorySystem : MonoBehaviour
             Destroy(child.gameObject);
 
         // 生成装备槽
-        if (equippedMask != null)
-            CreateEquippedSlot(equippedMask);
-        if (equippedItem != null)
-            CreateEquippedSlot(equippedItem);
+        if (player.equippedMask != null)
+            CreateEquippedSlot(player.equippedMask);
+        if (player.equippedItem != null)
+            CreateEquippedSlot( player.equippedItem);
     }
 
     private void CreateEquippedSlot(InteractableObject item)

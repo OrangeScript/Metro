@@ -8,6 +8,10 @@ TagManager:
   - MetroDoor
   - Battery
   - Crowbar
+  - Level1Smoke
+  - Level2Smoke
+  - Level3Smoke
+  - SoberSmoke
   layers:
   - Default
   - TransparentFX

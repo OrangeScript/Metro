@@ -6,7 +6,6 @@ public class SmokeDetector : InteractableObject
 {
     [Header("检测设置")]
     public float checkInterval = 0.5f;
-    public float detectionRadius = 3f;
 
     [Header("界面提示")]
     public GameObject warningUI;
@@ -14,20 +13,6 @@ public class SmokeDetector : InteractableObject
 
     private Coroutine detectionCoroutine;
 
-    protected override void Start()
-    {
-        base.Start();
-        destroyOnUse = false;
-    }
-
-    public override void OnInteract()
-    {
-        if (!isEquipped)
-        {
-            InventorySystem.Instance.AddItem(this);
-            gameObject.SetActive(false);
-        }
-    }
 
     public override void OnEquip(Transform parent)
     {
@@ -46,7 +31,8 @@ public class SmokeDetector : InteractableObject
     {
         while (true)
         {
-            SmokeSystem.SmokeLevel highestLevel = SmokeSystem.S.GetSmokeLevelAtPosition(transform.position);
+            SmokeSystem.SmokeLevel highestLevel = SmokeSystem.S.GetSmokeLevelFromTag(transform.position);
+            Debug.Log($"检测到烟雾等级: {highestLevel} 在位置: {transform.position}");
             UpdateWarningUI(highestLevel);
             yield return new WaitForSeconds(checkInterval);
         }
@@ -59,17 +45,11 @@ public class SmokeDetector : InteractableObject
         switch (level)
         {
             case SmokeSystem.SmokeLevel.Level2:
-                warningText.text = "警告：二级致幻烟雾！";
+                warningText.text = "危险烟雾，请佩戴防毒面具";
                 break;
             case SmokeSystem.SmokeLevel.Level3:
-                warningText.text = "危险：三级昏迷烟雾！";
+                warningText.text = "危险烟雾，请佩戴防毒面具";
                 break;
         }
-    }
-
-    void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, detectionRadius);
     }
 }

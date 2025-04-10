@@ -61,17 +61,24 @@ public class SafetyHammer : InteractableObject
                 Debug.Log("¾àÀë´°»§Ì«Ô¶£¬ÎÞ·¨ÔÒ»÷£¡");
             }
         }
+        else
+        {
+            Debug.LogError("Window is null");
+        }
     }
 
     private Window GetTargetWindow()
     {
         if (player == null) return null;
 
-        RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit2D hit = Physics2D.GetRayIntersection(ray);
+
         if (hit.collider != null && hit.collider.CompareTag("Window"))
         {
             return hit.collider.GetComponent<Window>();
         }
+
         return null;
     }
 }

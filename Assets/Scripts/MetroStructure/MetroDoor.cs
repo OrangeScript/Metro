@@ -66,12 +66,7 @@ public class MetroDoor : MonoBehaviour
             }
         }
         anim.SetInteger("DoorState", (int)currentState);
-        if (currentFault != lastHandledFault)
-        {
-            //HandleFaultUpdate();
-            TryInteract(player);
-            lastHandledFault = currentFault;
-        }
+        
     }
 
 
@@ -96,17 +91,11 @@ public class MetroDoor : MonoBehaviour
         switch (currentFault)
         {
             case FaultType.Type1:
-            //case FaultType.Type3:
                 StartArrowPuzzle();
                 break;
             case FaultType.Type2:
-            //case FaultType.Type4:
                 StartMazePuzzle();
                 break;
-            //case FaultType.Type5:
-                //StartMazePuzzleWithNoChange();
-                //StartArrowPuzzle();
-                //break;
             default:
                 break;
         }

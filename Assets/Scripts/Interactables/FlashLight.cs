@@ -7,8 +7,8 @@ public class Flashlight : InteractableObject
     public bool isFlashlightOn = false; // 是否开启手电筒
     private bool isNearVentExit = false; // 是否靠近通风管道出口
     private bool isInVentilation = false; // 是否在通风管道内
-    private GameObject actionUI; // UI 提示s
-
+    private GameObject actionUI; // UI 提示
+    [SerializeField]private new Light light;
     protected override void Start()
     {
         base.Start();
@@ -27,32 +27,20 @@ public class Flashlight : InteractableObject
         base.OnUnequip();
         isFlashlightOn = false;
     }
-
-    void Update()
+    public override void UseItem()
     {
-        if (isEquipped)
-        {
-            //if (Input.GetKeyDown(KeyCode.F))
-            {
-                if (isNearVentExit)
-                {
-                    EnterVentExit();
-                }
-                else if (isInVentilation)
-                {
-                    ReturnToInventory();
-                }
-                else
-                {
-                    ToggleFlashlight();
-                }
-            }
-        }
+        base.UseItem();
     }
+    protected override void HandleUse()
+    {
+        ToggleFlashlight();
+    }
+    
 
     private void ToggleFlashlight()
     {
         isFlashlightOn = !isFlashlightOn;
+        light.enabled = isFlashlightOn;
     }
 
     private void EnterVentExit()
@@ -68,27 +56,27 @@ public class Flashlight : InteractableObject
         gameObject.SetActive(false);
     }
 
-    //void OnTriggerEnter2D(Collider2D other)
-    //{
-    //    if (other.CompareTag("VentExit"))
-    //    {
-    //        isNearVentExit = true;
-    //    }
-    //    else if (other.CompareTag("Ventilation"))
-    //    {
-    //        isInVentilation = true;
-    //    }
-    //}
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("VentExit"))
+        {
+            isNearVentExit = true;
+        }
+        else if (other.CompareTag("Ventilation"))
+        {
+            isInVentilation = true;
+        }
+    }
 
-    //void OnTriggerExit2D(Collider2D other)
-    //{
-    //    if (other.CompareTag("VentExit"))
-    //    {
-    //        isNearVentExit = false;
-    //    }
-    //    else if (other.CompareTag("Ventilation"))
-    //    {
-    //        isInVentilation = false;
-    //    }
-    //}
+    void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("VentExit"))
+        {
+            isNearVentExit = false;
+        }
+        else if (other.CompareTag("Ventilation"))
+        {
+            isInVentilation = false;
+        }
+    }
 }
