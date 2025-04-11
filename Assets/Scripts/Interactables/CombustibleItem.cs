@@ -46,7 +46,6 @@ public class CombustibleItem : InteractableObject
 
     private void ThrowAndIgnite()
     {
-        InventorySystem.Instance.RemoveItem(this);
         transform.SetParent(null);
         isEquipped = false;
         rb.isKinematic = false;

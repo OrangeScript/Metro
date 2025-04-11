@@ -68,4 +68,91 @@ public class NPC : Entity
 
 
     }
+    
+    private void UpdateVisuals()
+    {
+        // 添加粒子效果、材质变化等其他视觉效果
+    }
+
+    private void ResetNPC()
+    {
+        hasGivenItem = false;
+        // 重置其他状态相关参数
+    }
+
+    // 玩家交互入口
+    public virtual void Interact(PlayerController player)
+    {
+        StartCoroutine(DialogueInteraction(player));
+    }
+
+    private IEnumerator DialogueInteraction(PlayerController player)
+    {
+        // 显示对话UI
+        string[] dialogue = GetCurrentDialogue();
+        //UIManager.Instance.ShowDialogue(dialogue);
+
+        // 等待对话完成
+        while (UIManager.Instance.IsDialogueActive)
+        {
+            yield return null;
+        }
+
+        // 一级NPC在清醒状态给予道具
+        if (npcLevel == NPCLevel.Tier1 &&
+            stateMachine.currentState!=unconsciousState&&
+            !hasGivenItem)
+        {
+            GiveCollectibleItem(player);
+            hasGivenItem = true;
+        }
+    }
+    private string[] GetCurrentDialogue()
+    {
+
+        
+        if (stateMachine.currentState == hallucinatingState)
+            return hallucinatingDialogue;
+        if ((stateMachine.currentState == normalState) && hasGivenItem)
+            return soberDialogue;
+        if (stateMachine.currentState == normalState)
+            return normalDialogue;
+
+        return new string[] { "..." };
+    }
+
+    private void GiveCollectibleItem(PlayerController player)
+    {
+        if (collectibleItemPrefab == null) return;
+
+        GameObject item = Instantiate(collectibleItemPrefab,
+            itemSpawnPoint.position,
+            Quaternion.identity);
+
+        // player.inventory.AddItem(item.GetComponent<InteractableObject>());
+    }
+
+    // 昏迷状态物理设置
+    public void SetUnconsciousPhysics(bool isUnconscious)
+    {
+        Collider2D col = GetComponent<Collider2D>();
+        Rigidbody2D rb = GetComponent<Rigidbody2D>();
+
+        col.enabled = !isUnconscious;
+        rb.simulated = !isUnconscious;
+        rb.velocity = Vector2.zero;
+    }
+
+    public void SetCarriedState(bool isCarried)
+    {
+        spriteRenderer.sprite = isCarried ? carriedSprite : normalSprite;
+    }
+
+    public void RecoverFromEffects()
+    {
+        // 处理NPC从烟雾或其他影响中恢复的逻辑
+        Debug.Log("NPC恢复了正常状态。");
+    }
+
+    public void SetPhysicsActive(bool isPhysicsActive) { }
 }

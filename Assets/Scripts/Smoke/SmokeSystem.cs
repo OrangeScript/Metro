@@ -230,7 +230,6 @@ public class SmokeSystem : MonoBehaviour
             Gizmos.DrawWireSphere(entry.Value.transform.position, detectionRadius);
         }
     }
-
     private Color GetLevelColor(SmokeLevel level)
     {
         return level switch
@@ -242,9 +241,22 @@ public class SmokeSystem : MonoBehaviour
             _ => Color.white
         };
     }
+
     #endregion
 
     #region Ωªª•…Ë÷√
+    private void ClearNearbyEffects(Vector2 position)
+    {
+        Collider2D[] npcs = Physics2D.OverlapCircleAll(position, 2f, LayerMask.GetMask("NPC"));
+        foreach (var npc in npcs)
+        {
+            NPC npcController = npc.GetComponent<NPC>();
+            if (npcController != null)
+            {
+                npcController.RecoverFromEffects();
+            }
+        }
+    }
     public void HandleCharacterEnterSmoke(PlayerController player, Vector2 position)
     {
         if (player == null)
