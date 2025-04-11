@@ -145,7 +145,6 @@ public class InventorySystem : MonoBehaviour
     }
 
 
-    // 修改后的UnequipItem方法
     public void UnequipItem(InteractableObject item)
     {
         if (item == null) return;
@@ -166,7 +165,7 @@ public class InventorySystem : MonoBehaviour
                     player.equippedItem = null;
                 break;
         }
-
+        DropItemToWorld(item);
         RemoveEquipmentEffects(item);
         UpdateUI();
     }

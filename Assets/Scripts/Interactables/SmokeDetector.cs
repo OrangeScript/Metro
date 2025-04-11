@@ -31,7 +31,7 @@ public class SmokeDetector : InteractableObject
     {
         while (true)
         {
-            SmokeSystem.SmokeLevel highestLevel = SmokeSystem.S.GetSmokeLevelFromTag(transform.position);
+            SmokeSystem.SmokeLevel highestLevel = SmokeSystem.S.DetectHighestSmokeLevel(transform.position);
             Debug.Log($"检测到烟雾等级: {highestLevel} 在位置: {transform.position}");
             UpdateWarningUI(highestLevel);
             yield return new WaitForSeconds(checkInterval);

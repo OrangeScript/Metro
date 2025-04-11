@@ -6,6 +6,7 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager Instance;
     private GameObject mazePanel;
+    public GameObject messagePanel;
     public Text messageText;
 
     [SerializeField] private GameObject interactionPrompt;
@@ -17,6 +18,7 @@ public class UIManager : MonoBehaviour
     {
         Instance = this;
         HideInteractionPrompt();
+        messagePanel.SetActive(false);
     }
 
     public void ShowInteractionPrompt(string message, Vector3 worldPosition)
@@ -53,6 +55,7 @@ public class UIManager : MonoBehaviour
     public void ShowMessage(string message)
     {
         messageText.text = message;
+        messagePanel.SetActive(true);   
     }
 
 }

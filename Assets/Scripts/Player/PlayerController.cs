@@ -1,9 +1,12 @@
 using System.Linq;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using static InteractableObject;
 using static UnityEditor.Progress;
+using System.Collections;
+using UnityEngine.Rendering;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(Animator))]
 public class PlayerController : MonoBehaviour
@@ -47,10 +50,22 @@ public class PlayerController : MonoBehaviour
     [Header("动画控制")]
     private int[] protectedStates = { 2, 3, 4 }; // Climbing, Carrying, Illusion
 
+    [Header("传送设置")]
+    public GameObject illusionExitTriggerPrefab;
+    private GameObject currentExitTrigger;
+    //持久化数字容器，存储传送前数据
+    public class PersistentDataContainer : MonoBehaviour
+    {
+        public static Vector3 enterPosition;
+    }
 
+    [Header("烟雾设置")]
+    private AirWallController airWall;
 
     [Header("test")]
     [SerializeField] private bool no;
+
+
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -58,6 +73,15 @@ public class PlayerController : MonoBehaviour
         rb.interpolation = RigidbodyInterpolation2D.Interpolate;//使运动看起来更加平滑
         inventory = GetComponent<InventorySystem>();
         inventory.SetPlayer(this);
+
+        if (GameObject.Find("DataKeeper") == null)
+        {
+            GameObject dataObj = new GameObject("DataKeeper");
+            dataObj.AddComponent<PersistentDataContainer>();
+            DontDestroyOnLoad(dataObj);
+        }
+        Debug.Log("Current Render Pipeline Asset: " + GraphicsSettings.renderPipelineAsset);
+        DontDestroyOnLoad(gameObject);
     }
 
     void Update()
@@ -457,28 +481,63 @@ public class PlayerController : MonoBehaviour
     #region 烟雾交互
     public void EnterIllusionWorld()
     {
-        if (currentState != PlayerState.Illusion)
-        {
-            TransitionState(PlayerState.Illusion);
-        }
+        PersistentDataContainer.enterPosition = transform.position;
+        currentState = PlayerState.Illusion;
+
         UIManager.Instance.ShowMessage("你进入了幻觉世界...");
-        SceneManager.LoadScene("IllusionScene");
+
+        SetIllusionHiddenObjects(false);
+        Debug.Log("准备生成trigger");
+        Vector3 triggerPos = transform.position + Vector3.right * 15f;
+        GameObject layoutGO = GameObject.Find("Layout"); 
+
+        if (layoutGO != null)
+        {
+            currentExitTrigger = Instantiate(illusionExitTriggerPrefab, triggerPos, Quaternion.identity, layoutGO.transform);
+            Debug.Log("Trigger 挂在 Layout 下生成成功");
+        }
+    }
+
+    void SetIllusionHiddenObjects(bool active)
+    {
+        foreach (GameObject go in GameObject.FindGameObjectsWithTag("Items"))
+        {
+            go.SetActive(active);
+        }//补充
+        foreach (GameObject go in GameObject.FindGameObjectsWithTag("Level2Smoke"))
+        {
+            go.SetActive(active);
+        }
+    }
+
+    public void ReturnFromIllusionWorld()
+    {
+        UIManager.Instance.ShowMessage("你恢复了意识。");
+        currentState = PlayerState.Idle;
+        Rigidbody rb = GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            rb.isKinematic = true;
+            transform.position = PersistentDataContainer.enterPosition;
+            rb.isKinematic = false;
+        }
+        else
+        {
+            transform.position = PersistentDataContainer.enterPosition;
+        }
+
+        SetIllusionHiddenObjects(true);
+
+        if (currentExitTrigger != null)
+            Destroy(currentExitTrigger);
     }
 
     public void BlockMovement()
     {
-        rb.velocity = Vector2.zero;
+        airWall = FindObjectOfType<AirWallController>();
+        airWall.SetMaskState(false);
         UIManager.Instance.ShowMessage("烟雾太浓，你无法前进！");
     }
 
-    public void RecoverFromIllusion()
-    {
-        if (currentState == PlayerState.Illusion)
-        {
-            TransitionState(PlayerState.Normal);
-            UIManager.Instance.ShowMessage("你恢复了意识。");
-            SceneManager.LoadScene("NormalScene"); 
-        }
-    }
     #endregion
 }

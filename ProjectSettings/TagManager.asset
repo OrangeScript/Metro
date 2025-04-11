@@ -12,6 +12,10 @@ TagManager:
   - Level2Smoke
   - Level3Smoke
   - SoberSmoke
+  - UI
+  - Manager
+  - Layout
+  - Items
   layers:
   - Default
   - TransparentFX
@@ -22,7 +26,7 @@ TagManager:
   - Player
   - Interactive
   - Smoke
-  - Puzzle
+  - 
   - NPC
   - 
   - 
@@ -66,6 +70,9 @@ TagManager:
     locked: 0
   - name: Smoke
     uniqueID: 557857163
+    locked: 0
+  - name: Flame
+    uniqueID: 2688099979
     locked: 0
   - name: UI_World
     uniqueID: 441155343

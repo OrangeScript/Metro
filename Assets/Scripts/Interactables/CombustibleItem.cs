@@ -7,7 +7,7 @@ public class CombustibleItem : InteractableObject
 
     [Header("燃烧物设置")]
     public CombustibleType type;
-    public ParticleSystem fireEffect;
+    public GameObject Flame;
     public bool isBurning = false;
     public float burnInterval = 1f;
 
@@ -15,7 +15,7 @@ public class CombustibleItem : InteractableObject
     public SmokeSystem smokeSystem;
     private Coroutine burnCoroutine;
 
-    private Rigidbody2D rb; // 用于投掷
+    private Rigidbody2D rb; 
 
     protected override void Start()
     {
@@ -30,10 +30,12 @@ public class CombustibleItem : InteractableObject
 
     public override void OnInteract()
     {
-        if (!isBurning) // 只有未燃烧时才能拾取
+        if (!isBurning) 
         {
-            InventorySystem.Instance.AddItem(this);
-            gameObject.SetActive(false);
+            if (InventorySystem.Instance.AddItem(this))
+            {
+                gameObject.SetActive(false); 
+            }
         }
     }
 
@@ -65,7 +67,7 @@ public class CombustibleItem : InteractableObject
         if (!isBurning)
         {
             isBurning = true;
-            fireEffect.Play();
+            Flame.SetActive(isBurning);
             burnCoroutine = StartCoroutine(GenerateSmoke());
             Debug.Log($"{type} 级燃烧物开始燃烧！");
         }
@@ -76,7 +78,7 @@ public class CombustibleItem : InteractableObject
         if (isBurning)
         {
             isBurning = false;
-            fireEffect.Stop();
+            Flame.SetActive(isBurning);
             if (burnCoroutine != null) StopCoroutine(burnCoroutine);
             Debug.Log("燃烧物已扑灭！");
         }

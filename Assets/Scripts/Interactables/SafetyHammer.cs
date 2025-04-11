@@ -72,7 +72,7 @@ public class SafetyHammer : InteractableObject
         if (player == null) return null;
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit2D hit = Physics2D.GetRayIntersection(ray);
+        RaycastHit2D hit = Physics2D.GetRayIntersection(ray); 
 
         if (hit.collider != null && hit.collider.CompareTag("Window"))
         {
@@ -81,4 +81,5 @@ public class SafetyHammer : InteractableObject
 
         return null;
     }
+
 }

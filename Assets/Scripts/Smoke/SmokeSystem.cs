@@ -1,292 +1,257 @@
 using UnityEngine;
-using UnityEditor;
 using System.Collections;
 using System.Collections.Generic;
-using static UnityEngine.ParticleSystem;
+using System.Linq;
+using UnityEngine.UIElements;
 
 public class SmokeSystem : MonoBehaviour
 {
-    public enum SmokeLevel { Level1, Level2, Level3, Sober }
+    public enum SmokeLevel { Sober,Level1, Level2, Level3 }
     public static SmokeSystem S { get; private set; }
 
-    [Header("不同等级烟雾的粒子预设")]
+    [Header("烟雾预制体")]
+    public GameObject soberParticlePrefab;
     public GameObject level1ParticlePrefab;
     public GameObject level2ParticlePrefab;
     public GameObject level3ParticlePrefab;
-    public GameObject soberParticlePrefab;
-    private Dictionary<Vector2, GameObject> smokeParticles = new Dictionary<Vector2, GameObject>();
 
-    public float detectionRadius=20f;
-    void Awake()
-    {
-        if (S == null) S = this;
-        else Destroy(gameObject);
-    }
+    [Header("烟雾监测设置")]
+    public float detectionRadius = 20f;
+    public float spreadInterval = 1.0f;
+    public float smokeLifetime = 10f;
+    public int initialSmokeAmount = 100;
 
     [System.Serializable]
     public class SmokeArea
     {
         public GameObject smokeObject;
         public SmokeLevel level;
-        public int amount=100;
+        public int amount = 100;
     }
 
-    public float spreadInterval = 1.0f; // 烟雾扩散的时间间隔
-    public float smokeLifetime = 10f;   // 烟雾持续时间
+    [System.Serializable]
+    public class TagLevelPair
+    {
+        public string tag;
+        public SmokeLevel level;
+    }
+
+    [Header("标签设置")]
+    public List<TagLevelPair> tagLevelMap = new List<TagLevelPair>
+    {
+        new TagLevelPair { tag = "SoberSmoke", level = SmokeLevel.Sober },
+        new TagLevelPair { tag = "Level1Smoke", level = SmokeLevel.Level1 },
+        new TagLevelPair { tag = "Level2Smoke", level = SmokeLevel.Level2 },
+        new TagLevelPair { tag = "Level3Smoke", level = SmokeLevel.Level3 }
+    };
+
+    private Dictionary<Vector2, GameObject> smokeParticles = new Dictionary<Vector2, GameObject>();
     public List<SmokeArea> activeSmoke = new List<SmokeArea>();
 
+    private PlayerController player;
+
+    void Awake()
+    {
+        if (S == null) S = this;
+        else Destroy(gameObject);
+        player = FindObjectOfType<PlayerController>();
+    }
 
     void Start()
     {
-        //StartCoroutine(SpreadSmoke());
+        InitializeSceneSmoke();
     }
 
     private void Update()
     {
-        //Debug.Log($"当前烟雾数量：{activeSmoke.Count}");
-        //TestParticles();
+        HandleCharacterEnterSmoke(player, player.transform.position);
     }
 
-
-    public SmokeLevel GetSmokeLevelAtPosition(Vector2 position)
+    private void InitializeSceneSmoke()
     {
-        foreach (var s in activeSmoke)
+        foreach (var pair in tagLevelMap)
         {
-            if (s.smokeObject == null) continue;
-
-            // 使用距离判断代替精确坐标比较
-            float distance = Vector2.Distance(s.smokeObject.transform.position, position);
-            if (distance < 0.1f) // 调整阈值根据实际情况
+            GameObject[] sceneSmokes = GameObject.FindGameObjectsWithTag(pair.tag);
+            foreach (GameObject smokeObj in sceneSmokes)
             {
-                Debug.Log($"找到烟雾区域 {position}, 实际位置 {s.smokeObject.transform.position}");
-                return s.level;
+                Vector2 position = smokeObj.transform.position;
+                AddSmoke(position, pair.level, initialSmokeAmount, smokeObj.transform.rotation);
+                Destroy(smokeObj);
             }
         }
-        return SmokeLevel.Level1;
     }
-    public void AddSmoke(Vector2 position, SmokeLevel level, int amount)
+
+    #region 烟雾管理
+    public void AddSmoke(Vector2 position, SmokeLevel level, int amount, Quaternion rotation = default)
     {
-        SmokeArea existingSmoke = activeSmoke.Find(s => s.smokeObject != null && (Vector2)s.smokeObject.transform.position == position);
-        if (existingSmoke != null)
+        if (smokeParticles.TryGetValue(position, out GameObject existing))
         {
-            existingSmoke.amount += amount;
-            existingSmoke.level = level;
-        }
-        else
-        {
-            GameObject particle = Instantiate(GetParticlePrefab(level), position, Quaternion.identity);
-            particle.tag = GetTagFromLevel(level);
-            activeSmoke.Add(new SmokeArea { smokeObject = particle, level = level, amount = amount });
-
-            smokeParticles[position] = particle; // 新增此行
-
-            Debug.Log($"在 {position} 产生 {amount} 单位的 {level} 级烟雾");
+            UpdateExistingSmoke(position, level, amount);
+            return;
         }
 
-        if (level == SmokeLevel.Sober)
+        GameObject prefab = GetParticlePrefab(level);
+        GameObject particle = Instantiate(prefab, position, rotation); // 修改这里
+        particle.transform.position = position;
+        particle.tag = GetTagFromLevel(level);
+
+        var ps = particle.GetComponent<ParticleSystem>();
+        if (ps != null) ps.Play();
+
+        smokeParticles.Add(position, particle);
+        activeSmoke.Add(new SmokeArea
         {
-            Debug.Log("清醒烟雾生效，解除昏迷状态！");
-            ClearNearbyEffects(position);
-        }
+            smokeObject = particle,
+            level = level,
+            amount = amount
+        });
 
         StartCoroutine(RemoveSmokeAfterTime(position, smokeLifetime));
     }
-    private string GetTagFromLevel(SmokeSystem.SmokeLevel level)
-    {
-        switch (level)
-        {
-            case SmokeSystem.SmokeLevel.Level1:
-                return "Level1Smoke";
-            case SmokeSystem.SmokeLevel.Level2:
-                return "Level2Smoke";
-            case SmokeSystem.SmokeLevel.Level3:
-                return "Level3Smoke";
-            case SmokeSystem.SmokeLevel.Sober:
-                return "SoberSmoke";
-            default:
-                return "Level1Smoke";
-        }
-    }
-    private GameObject GetParticlePrefab(SmokeLevel level)
-    {
-        switch (level)
-        {
-            case SmokeLevel.Level1: return level1ParticlePrefab;
-            case SmokeLevel.Level2: return level2ParticlePrefab;
-            case SmokeLevel.Level3: return level3ParticlePrefab;
-            case SmokeLevel.Sober: return soberParticlePrefab;
-            default: return level1ParticlePrefab;
-        }
-    }
 
-    private IEnumerator RemoveSmokeAfterTime(Vector2 position, float time)
+    private void UpdateExistingSmoke(Vector2 position, SmokeLevel newLevel, int addAmount)
     {
-        yield return new WaitForSeconds(time);
-        activeSmoke.RemoveAll(s => s.smokeObject != null && (Vector2)s.smokeObject.transform.position == position);
-
         if (smokeParticles.TryGetValue(position, out GameObject particle))
         {
-            Destroy(particle);
-            smokeParticles.Remove(position); // 正确移除
-        }
-    }
-
-    private IEnumerator SpreadSmoke()
-    {
-        while (true)
-        {
-            yield return new WaitForSeconds(spreadInterval);
-            Debug.Log("Spreading smoke...");
-            Debug.Log($"当前烟雾数量：{activeSmoke.Count}");
-
-            List<SmokeArea> currentSmokeSnapshot = new List<SmokeArea>(activeSmoke);
-
-            foreach (var smoke in currentSmokeSnapshot)
+            var smoke = activeSmoke.Find(s => s.smokeObject == particle);
+            if (smoke != null)
             {
-                if (smoke.smokeObject == null) continue;
-
-                Vector2 position = smoke.smokeObject.transform.position;
-                List<Vector2> neighbors = GetValidNeighborPositions(position);
-                foreach (var neighbor in neighbors)
+                smoke.amount += addAmount;
+                if (newLevel > smoke.level)
                 {
-                    SmokeArea neighborSmoke = activeSmoke.Find(s => s.smokeObject != null && (Vector2)s.smokeObject.transform.position == neighbor);
-                    if (neighborSmoke == null)
-                    {
-                        AddSmoke(neighbor, smoke.level, smoke.amount / 2);
-                        Debug.Log($"Spread smoke from {position} to {neighbor}.");
-                    }
-                    else if (neighborSmoke.level == smoke.level && neighborSmoke.amount < smoke.amount)
-                    {
-                        neighborSmoke.amount += smoke.amount / 2;
-                        Debug.Log($"Increased smoke amount at {neighbor} to {neighborSmoke.amount}.");
-                    }
+                    smoke.level = newLevel;
+                    particle.tag = GetTagFromLevel(newLevel);
                 }
-
-                smoke.amount = Mathf.Max(smoke.amount - 1, 0);
             }
-
-            activeSmoke.RemoveAll(s => s.amount <= 0 || s.smokeObject == null);
         }
     }
 
+    private IEnumerator RemoveSmokeAfterTime(Vector2 position, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        if (smokeParticles.TryGetValue(position, out GameObject particle))
+        {
+            activeSmoke.RemoveAll(s => s.smokeObject == particle);
+            smokeParticles.Remove(position);
+            Destroy(particle);
+        }
+    }
+    #endregion
 
-
-    public SmokeLevel GetSmokeLevelFromTag(Vector2 position)
+    #region 监测系统
+    public SmokeLevel DetectHighestSmokeLevel(Vector2 position)
     {
         SmokeLevel highestLevel = SmokeLevel.Level1;
-        int totalParticlesChecked = 0;
-        int totalParticlesHit = 0;
+        int particlesChecked = 0;
 
-        foreach (var particleObj in smokeParticles.Values)
+        foreach (var particleObj in smokeParticles.Values.ToList())
         {
-            var ps = particleObj.GetComponent<ParticleSystem>();
+            if (particleObj == null)
+            {
+                CleanupDictionary();
+                continue;
+            }
 
-            // 获取粒子数据（优化内存分配）
+            var ps = particleObj.GetComponent<ParticleSystem>();
+            if (ps == null) continue;
+
             ParticleSystem.Particle[] particles = new ParticleSystem.Particle[ps.main.maxParticles];
             int count = ps.GetParticles(particles);
-            totalParticlesChecked += count;
+            particlesChecked += count;
 
-            // 获取粒子系统世界坐标
-            Vector3 psWorldPos = ps.transform.position;
+            Vector3 psPos = ps.transform.position;
 
             for (int i = 0; i < count; i++)
             {
-                // 计算绝对世界坐标
-                Vector3 particleWorldPos = psWorldPos + particles[i].position;
-                float distance = Vector2.Distance(particleWorldPos, position);
+                Vector3 particlePos = psPos + particles[i].position;
+                if (Vector2.Distance(particlePos, position) > detectionRadius) continue;
 
-                if (distance < detectionRadius)
+                var currentLevel = GetLevelFromTag(particleObj.tag);
+                if (currentLevel > highestLevel)
                 {
-                    totalParticlesHit++;
-                    var currentLevel = GetLevelFromTag(particleObj.tag);
-                    if (currentLevel > highestLevel)
-                    {
-                        highestLevel = currentLevel;
-                    }
+                    highestLevel = currentLevel;
+                    // 如果已经找到最高等级可提前退出
+                    if (highestLevel == SmokeLevel.Level3) break;
                 }
             }
+
+            // 如果已经找到最高等级可提前终止检测
+            if (highestLevel == SmokeLevel.Level3) break;
         }
 
-        Debug.Log($"检测位置 {position}，总粒子数：{totalParticlesChecked}，命中粒子数：{totalParticlesHit}，最高等级：{highestLevel}");
+        Debug.Log($"检测位置 {position} 最高等级：{highestLevel} | 检查粒子数：{particlesChecked}");
         return highestLevel;
     }
 
-    void TestParticles()
+    private void CleanupDictionary()
     {
-        var go = Instantiate(level2ParticlePrefab, Vector2.zero, Quaternion.identity);
-        var ps = go.GetComponent<ParticleSystem>();
-        ps.Play();
-
-        StartCoroutine(DebugParticleCount(ps));
+        var nullEntries = smokeParticles.Where(kvp => kvp.Value == null).ToList();
+        foreach (var entry in nullEntries)
+        {
+            smokeParticles.Remove(entry.Key);
+        }
     }
+    #endregion
 
-    IEnumerator DebugParticleCount(ParticleSystem ps)
+    #region 工具方法
+    private string GetTagFromLevel(SmokeLevel level)
     {
-        yield return new WaitForSeconds(1f);
-        var particles = new ParticleSystem.Particle[ps.main.maxParticles];
-        int count = ps.GetParticles(particles);
-        Debug.Log($"测试粒子数量：{count}");
+        var pair = tagLevelMap.FirstOrDefault(p => p.level == level);
+        return pair != null ? pair.tag : "Level1Smoke";
     }
-
 
     private SmokeLevel GetLevelFromTag(string tag)
     {
-        return tag switch
+        var pair = tagLevelMap.FirstOrDefault(p => p.tag == tag);
+        return pair != null ? pair.level : SmokeLevel.Level1;
+    }
+
+    private GameObject GetParticlePrefab(SmokeLevel level)
+    {
+        return level switch
         {
-            "Level1Smoke" => SmokeLevel.Level1,
-            "Level2Smoke" => SmokeLevel.Level2,
-            "Level3Smoke" => SmokeLevel.Level3,
-            "SoberSmoke" => SmokeLevel.Sober,
-            _ => SmokeLevel.Level1
+            SmokeLevel.Sober => soberParticlePrefab,
+            SmokeLevel.Level1 => level1ParticlePrefab,
+            SmokeLevel.Level2 => level2ParticlePrefab,
+            SmokeLevel.Level3 => level3ParticlePrefab,
+            _ => level1ParticlePrefab
         };
     }
+    #endregion
 
-    private List<Vector2> GetValidNeighborPositions(Vector2 position)
+    #region 调试工具
+    void OnDrawGizmosSelected()
     {
-        List<Vector2> neighbors = new List<Vector2>
+        foreach (var entry in smokeParticles)
         {
-            position + Vector2.up,
-            position + Vector2.down,
-            position + Vector2.left,
-            position + Vector2.right
-        };
+            if (entry.Value == null) continue;
 
-        neighbors.RemoveAll(pos => !CanSmokePassThrough(pos));
-        return neighbors;
-    }
-
-    private bool CanSmokePassThrough(Vector2 position)
-    {
-        Collider2D door = Physics2D.OverlapPoint(position, LayerMask.GetMask("Door"));
-        if (door != null)
-        {
-            MetroDoor metrodoor = door.GetComponent<MetroDoor>();
-            if (metrodoor != null && (metrodoor.currentState == MetroDoor.DoorState.Open))
-            {
-                return true;
-            }
-        }
-
-        Collider2D wall = Physics2D.OverlapPoint(position, LayerMask.GetMask("Wall"));
-        return wall == null;
-    }
-
-    private void ClearNearbyEffects(Vector2 position)
-    {
-        Collider2D[] npcs = Physics2D.OverlapCircleAll(position, 2f, LayerMask.GetMask("NPC"));
-        foreach (var npc in npcs)
-        {
-            NPCController npcController = npc.GetComponent<NPCController>();
-            if (npcController != null)
-            {
-                npcController.RecoverFromEffects();
-            }
+            Gizmos.color = GetLevelColor(GetLevelFromTag(entry.Value.tag));
+            Gizmos.DrawWireSphere(entry.Value.transform.position, detectionRadius);
         }
     }
 
+    private Color GetLevelColor(SmokeLevel level)
+    {
+        return level switch
+        {
+            SmokeLevel.Sober => Color.gray,
+            SmokeLevel.Level1 => Color.green,
+            SmokeLevel.Level2 => Color.yellow,
+            SmokeLevel.Level3 => Color.red,
+            _ => Color.white
+        };
+    }
+    #endregion
+
+    #region 交互设置
     public void HandleCharacterEnterSmoke(PlayerController player, Vector2 position)
     {
-        SmokeLevel level = GetSmokeLevelAtPosition(position);
+        if (player == null)
+        {
+            Debug.LogError("Can't find the player");
+        }
+        SmokeLevel level = DetectHighestSmokeLevel(position);
 
         switch (level)
         {
@@ -307,29 +272,5 @@ public class SmokeSystem : MonoBehaviour
                 break;
         }
     }
-
-    void ValidateParticleCollision()
-    {
-        var prefabs = new[] { level1ParticlePrefab, level2ParticlePrefab, level3ParticlePrefab };
-        foreach (var prefab in prefabs)
-        {
-            var ps = prefab.GetComponent<ParticleSystem>();
-            if (!ps.collision.enabled)
-            {
-                Debug.LogError($"预制体 {prefab.name} 未启用碰撞！");
-            }
-        }
-    }
-
-    void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.yellow;
-        foreach (var smoke in activeSmoke)
-        {
-            if (smoke.smokeObject != null)
-            {
-                Gizmos.DrawWireSphere(smoke.smokeObject.transform.position, detectionRadius);
-            }
-        }
-    }
+    #endregion
 }
