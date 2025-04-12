@@ -73,9 +73,9 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1705442689
-  m_SortingLayer: 4
+  m_SortingLayer: 3
   m_SortingOrder: 3
-  m_Sprite: {fileID: 8638710384840876012, guid: 1ddc9afd21fec77489b1248d18f31b68, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1fd0c201c710392478fdc4643740ca75, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -100,9 +100,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: "\u64AC\u68CD"
   itemIcon: {fileID: 8638710384840876012, guid: 1ddc9afd21fec77489b1248d18f31b68, type: 3}
+  itemDescription: 
   carryType: 3
-  customAttachPoint: {fileID: 0}
   destroyOnUse: 0
+  poolTag: Items
+  prefabReference: {fileID: 0}
+  useTrigger: 0
+  isContinuousUse: 0
 --- !u!61 &7824389276817523779
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -139,7 +143,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.32, y: 0.32}
+    oldSize: {x: 20.48, y: 27.324455}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
