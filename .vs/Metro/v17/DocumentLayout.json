@@ -3,44 +3,52 @@
   "WorkspaceRootPath": "E:\\Games\\2025coreblazer\\2025coreblazer\\Metro\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|E:\\Games\\2025coreblazer\\2025coreblazer\\Metro\\assets\\scripts\\npc\\npc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\npc\\npc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|e:\\games\\2025coreblazer\\2025coreblazer\\metro\\assets\\scripts\\maze\\mazegenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\maze\\mazegenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|e:\\games\\2025coreblazer\\2025coreblazer\\metro\\assets\\scripts\\npc\\npcstate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\npc\\npcstate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|e:\\games\\2025coreblazer\\2025coreblazer\\metro\\assets\\scripts\\npc\\npcunconsciousstate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\npc\\npcunconsciousstate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|e:\\games\\2025coreblazer\\2025coreblazer\\metro\\assets\\scripts\\npc\\entity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\npc\\entity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|E:\\Games\\2025coreblazer\\2025coreblazer\\Metro\\assets\\scripts\\metrostructure\\metrodoor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\metrostructure\\metrodoor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|E:\\Games\\2025coreblazer\\2025coreblazer\\Metro\\assets\\scripts\\manager\\uimanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\manager\\uimanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|E:\\Games\\2025coreblazer\\2025coreblazer\\Metro\\assets\\scripts\\maze\\mazerenderer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\maze\\mazerenderer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|E:\\Games\\2025coreblazer\\2025coreblazer\\Metro\\assets\\scripts\\maze\\mazemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\maze\\mazemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|E:\\Games\\2025coreblazer\\2025coreblazer\\Metro\\assets\\scripts\\maze\\mazegenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\maze\\mazegenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|e:\\games\\2025coreblazer\\2025coreblazer\\metro\\assets\\scripts\\maze\\mazeplayer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\maze\\mazeplayer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|E:\\Games\\2025coreblazer\\2025coreblazer\\Metro\\assets\\scripts\\metrostructure\\metrodoor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\metrostructure\\metrodoor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|e:\\games\\2025coreblazer\\2025coreblazer\\metro\\assets\\scripts\\arrow\\inputmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\arrow\\inputmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|E:\\Games\\2025coreblazer\\2025coreblazer\\Metro\\assets\\scripts\\player\\playercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\player\\playercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|E:\\Games\\2025coreblazer\\2025coreblazer\\Metro\\assets\\scripts\\maze\\mazerenderer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\maze\\mazerenderer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|E:\\Games\\2025coreblazer\\2025coreblazer\\Metro\\assets\\scripts\\npc\\entity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\npc\\entity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|E:\\Games\\2025coreblazer\\2025coreblazer\\Metro\\assets\\scripts\\npc\\npcunconsciousstate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\npc\\npcunconsciousstate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|E:\\Games\\2025coreblazer\\2025coreblazer\\Metro\\assets\\scripts\\npc\\npc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\npc\\npc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|E:\\Games\\2025coreblazer\\2025coreblazer\\Metro\\assets\\scripts\\npc\\npcstate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\npc\\npcstate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|E:\\Games\\2025coreblazer\\2025coreblazer\\Metro\\assets\\scripts\\manager\\uimanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7D723F6E-3886-C591-B42B-543BF2FB8445}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\manager\\uimanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -50,7 +58,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 8,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -66,20 +74,111 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MazeGenerator.cs",
+              "DocumentMoniker": "E:\\Games\\2025coreblazer\\2025coreblazer\\Metro\\Assets\\Scripts\\Maze\\MazeGenerator.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Maze\\MazeGenerator.cs",
+              "ToolTip": "E:\\Games\\2025coreblazer\\2025coreblazer\\Metro\\Assets\\Scripts\\Maze\\MazeGenerator.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Maze\\MazeGenerator.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAIwBIAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-11T23:54:59.51Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "InputManager.cs",
+              "DocumentMoniker": "E:\\Games\\2025coreblazer\\2025coreblazer\\Metro\\Assets\\Scripts\\Arrow\\InputManager.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Arrow\\InputManager.cs",
+              "ToolTip": "E:\\Games\\2025coreblazer\\2025coreblazer\\Metro\\Assets\\Scripts\\Arrow\\InputManager.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Arrow\\InputManager.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-11T13:55:06.76Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 3,
+              "Title": "MazePlayer.cs",
+              "DocumentMoniker": "E:\\Games\\2025coreblazer\\2025coreblazer\\Metro\\Assets\\Scripts\\Maze\\MazePlayer.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Maze\\MazePlayer.cs",
+              "ToolTip": "E:\\Games\\2025coreblazer\\2025coreblazer\\Metro\\Assets\\Scripts\\Maze\\MazePlayer.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Maze\\MazePlayer.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAwBIAAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-11T13:37:03.919Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
               "Title": "Entity.cs",
               "DocumentMoniker": "E:\\Games\\2025coreblazer\\2025coreblazer\\Metro\\Assets\\Scripts\\NPC\\Entity.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\NPC\\Entity.cs",
               "ToolTip": "E:\\Games\\2025coreblazer\\2025coreblazer\\Metro\\Assets\\Scripts\\NPC\\Entity.cs",
               "RelativeToolTip": "Assets\\Scripts\\NPC\\Entity.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-10T13:53:18.961Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "PlayerController.cs",
+              "DocumentMoniker": "E:\\Games\\2025coreblazer\\2025coreblazer\\Metro\\Assets\\Scripts\\Player\\PlayerController.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Player\\PlayerController.cs",
+              "ToolTip": "E:\\Games\\2025coreblazer\\2025coreblazer\\Metro\\Assets\\Scripts\\Player\\PlayerController.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Player\\PlayerController.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAkwEMAAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-10T04:23:20.646Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "MazeRenderer.cs",
+              "DocumentMoniker": "E:\\Games\\2025coreblazer\\2025coreblazer\\Metro\\Assets\\Scripts\\Maze\\MazeRenderer.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Maze\\MazeRenderer.cs",
+              "ToolTip": "E:\\Games\\2025coreblazer\\2025coreblazer\\Metro\\Assets\\Scripts\\Maze\\MazeRenderer.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Maze\\MazeRenderer.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAIwBAAAABEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-10T02:19:07.935Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "MetroDoor.cs",
+              "DocumentMoniker": "E:\\Games\\2025coreblazer\\2025coreblazer\\Metro\\Assets\\Scripts\\MetroStructure\\MetroDoor.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\MetroStructure\\MetroDoor.cs",
+              "ToolTip": "E:\\Games\\2025coreblazer\\2025coreblazer\\Metro\\Assets\\Scripts\\MetroStructure\\MetroDoor.cs",
+              "RelativeToolTip": "Assets\\Scripts\\MetroStructure\\MetroDoor.cs",
+              "ViewState": "AgIAAIoAAAAAAAAAAAAUwIoAAAA8AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-10T02:19:56.044Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 2,
+              "Title": "MazeManager.cs",
+              "DocumentMoniker": "E:\\Games\\2025coreblazer\\2025coreblazer\\Metro\\Assets\\Scripts\\Maze\\MazeManager.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Maze\\MazeManager.cs",
+              "ToolTip": "E:\\Games\\2025coreblazer\\2025coreblazer\\Metro\\Assets\\Scripts\\Maze\\MazeManager.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Maze\\MazeManager.cs",
+              "ViewState": "AgIAACEAAAAAAAAAAAAUwCsAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-10T02:10:52.837Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
               "Title": "NPCUnconsciousState.cs",
               "DocumentMoniker": "E:\\Games\\2025coreblazer\\2025coreblazer\\Metro\\Assets\\Scripts\\NPC\\NPCUnconsciousState.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\NPC\\NPCUnconsciousState.cs",
@@ -91,8 +190,24 @@
               "EditorCaption": ""
             },
             {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 9,
+              "Title": "NPC.cs",
+              "DocumentMoniker": "E:\\Games\\2025coreblazer\\2025coreblazer\\Metro\\Assets\\Scripts\\NPC\\NPC.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\NPC\\NPC.cs",
+              "ToolTip": "E:\\Games\\2025coreblazer\\2025coreblazer\\Metro\\Assets\\Scripts\\NPC\\NPC.cs",
+              "RelativeToolTip": "Assets\\Scripts\\NPC\\NPC.cs",
+              "ViewState": "AgIAADEAAAAAAAAAAAAcwBoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-10T03:32:45.83Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
               "Title": "NPCState.cs",
               "DocumentMoniker": "E:\\Games\\2025coreblazer\\2025coreblazer\\Metro\\Assets\\Scripts\\NPC\\NPCState.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\NPC\\NPCState.cs",
@@ -100,77 +215,11 @@
               "RelativeToolTip": "Assets\\Scripts\\NPC\\NPCState.cs",
               "ViewState": "AgIAAAEAAAAAAAAAAAAAwCkAAAAEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-10T13:45:39.744Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-10T13:45:39.744Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "MazeManager.cs",
-              "DocumentMoniker": "E:\\Games\\2025coreblazer\\2025coreblazer\\Metro\\Assets\\Scripts\\Maze\\MazeManager.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Maze\\MazeManager.cs",
-              "ToolTip": "E:\\Games\\2025coreblazer\\2025coreblazer\\Metro\\Assets\\Scripts\\Maze\\MazeManager.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Maze\\MazeManager.cs",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAzwBoAAAAVAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-10T02:10:52.837Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "MazeGenerator.cs",
-              "DocumentMoniker": "E:\\Games\\2025coreblazer\\2025coreblazer\\Metro\\Assets\\Scripts\\Maze\\MazeGenerator.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Maze\\MazeGenerator.cs",
-              "ToolTip": "E:\\Games\\2025coreblazer\\2025coreblazer\\Metro\\Assets\\Scripts\\Maze\\MazeGenerator.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Maze\\MazeGenerator.cs",
-              "ViewState": "AgIAACIAAAAAAAAAAAAiwEoAAAAnAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-10T02:19:30.458Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "NPC.cs",
-              "DocumentMoniker": "E:\\Games\\2025coreblazer\\2025coreblazer\\Metro\\Assets\\Scripts\\NPC\\NPC.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\NPC\\NPC.cs",
-              "ToolTip": "E:\\Games\\2025coreblazer\\2025coreblazer\\Metro\\Assets\\Scripts\\NPC\\NPC.cs",
-              "RelativeToolTip": "Assets\\Scripts\\NPC\\NPC.cs",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAQwBoAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-10T03:32:45.83Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "PlayerController.cs",
-              "DocumentMoniker": "E:\\Games\\2025coreblazer\\2025coreblazer\\Metro\\Assets\\Scripts\\Player\\PlayerController.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Player\\PlayerController.cs",
-              "ToolTip": "E:\\Games\\2025coreblazer\\2025coreblazer\\Metro\\Assets\\Scripts\\Player\\PlayerController.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Player\\PlayerController.cs",
-              "ViewState": "AgIAACYAAAAAAAAAAAAmwEMAAAArAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-10T04:23:20.646Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "MazeRenderer.cs",
-              "DocumentMoniker": "E:\\Games\\2025coreblazer\\2025coreblazer\\Metro\\Assets\\Scripts\\Maze\\MazeRenderer.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Maze\\MazeRenderer.cs",
-              "ToolTip": "E:\\Games\\2025coreblazer\\2025coreblazer\\Metro\\Assets\\Scripts\\Maze\\MazeRenderer.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Maze\\MazeRenderer.cs",
-              "ViewState": "AgIAAAUAAAAAAAAAAAAIwAgAAAAnAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-10T02:19:07.935Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 11,
               "Title": "UIManager.cs",
               "DocumentMoniker": "E:\\Games\\2025coreblazer\\2025coreblazer\\Metro\\Assets\\Scripts\\Manager\\UIManager.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Manager\\UIManager.cs",
@@ -178,25 +227,7 @@
               "RelativeToolTip": "Assets\\Scripts\\Manager\\UIManager.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAA6AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-10T02:40:53.429Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "MetroDoor.cs",
-              "DocumentMoniker": "E:\\Games\\2025coreblazer\\2025coreblazer\\Metro\\Assets\\Scripts\\MetroStructure\\MetroDoor.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\MetroStructure\\MetroDoor.cs",
-              "ToolTip": "E:\\Games\\2025coreblazer\\2025coreblazer\\Metro\\Assets\\Scripts\\MetroStructure\\MetroDoor.cs",
-              "RelativeToolTip": "Assets\\Scripts\\MetroStructure\\MetroDoor.cs",
-              "ViewState": "AgIAAHMAAAAAAAAAAAAAwIwAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-10T02:19:56.044Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+              "WhenOpened": "2025-04-10T02:40:53.429Z"
             }
           ]
         }

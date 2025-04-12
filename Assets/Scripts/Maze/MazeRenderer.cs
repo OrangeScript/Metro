@@ -6,45 +6,41 @@ public class MazeRenderer : MonoBehaviour
     public GameObject pathPrefab; // 路径预制体（如平面）
     public Material wallMaterial; // 可选：墙壁材质
 
-    public void Render(int[,] maze, Bounds bounds, float cellSize)
-    {
-        ClearOldMaze();
+    public GameObject startPrefab;
+    public GameObject endPrefab;
 
+    public float cellSize = 1f;
+    public void RenderStartAndEnd(Vector3 startPos,Vector3 endPos)
+    {
+        Instantiate(startPrefab, startPos, Quaternion.identity,transform);
+
+        Instantiate(endPrefab, endPos, Quaternion.identity,transform);
+    }
+    public void DrawMaze(int[,] maze)
+    {
         int width = maze.GetLength(0);
         int height = maze.GetLength(1);
+
+        // 计算中心偏移
+        float offsetX = -(width * cellSize) / 2f + cellSize / 2f;
+        float offsetY = -(height * cellSize) / 2f + cellSize / 2f;
 
         for (int x = 0; x < width; x++)
         {
             for (int y = 0; y < height; y++)
             {
-                Vector3 worldPos = new Vector3(
-                    bounds.min.x + x * cellSize + cellSize / 2,
-                    bounds.min.y + y * cellSize + cellSize / 2,
-                    0
-                );
-
                 if (maze[x, y] == 0)
                 {
-                    // 生成墙壁
-                    GameObject wall = Instantiate(wallPrefab, worldPos, Quaternion.identity);
-                    wall.transform.localScale = new Vector3(cellSize, cellSize, 1);
-                    wall.transform.SetParent(transform);
-                    if (wallMaterial) wall.GetComponent<Renderer>().material = wallMaterial;
+                    Vector3 pos = new Vector3(x * cellSize + offsetX, y*cellSize+offsetY,0);
+                    Instantiate(wallPrefab, pos, Quaternion.identity, transform);
                 }
-                else
+                else if (maze[x, y] == 1)
                 {
-                    // 生成路径
-                    GameObject path = Instantiate(pathPrefab, worldPos, Quaternion.identity);
-                    path.transform.localScale = new Vector3(cellSize, cellSize ,0);
-                    path.transform.SetParent(transform);
+                    Vector3 pos = new Vector3(x * cellSize + offsetX, y * cellSize + offsetY, 0);
+                    Instantiate(pathPrefab, pos, Quaternion.identity, transform);
                 }
             }
         }
-    }
-
-    private void ClearOldMaze()
-    {
-        foreach (Transform child in transform)
-            Destroy(child.gameObject);
+        
     }
 }

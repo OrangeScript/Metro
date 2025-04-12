@@ -136,13 +136,13 @@ public class MetroDoor : MonoBehaviour
     private void StartMazePuzzle()
     {
         Debug.Log("进入迷宫解谜界面...");
-        //MazeManager.S?.StartMazePuzzle(OnMazeSolved);
+        MazeManager.instance?.StartMazePuzzle(OnMazeSolved);
     }
 
     public void StartMazePuzzleWithNoChange()
     {
         Debug.Log("进入迷宫解谜界面但不会影响门状态...");
-        //MazeManager.S?.StartMazePuzzle(OnMazeSolvedNoChange);
+        MazeManager.instance?.StartMazePuzzle(OnMazeSolvedNoChange);
     }
 
     private void OnMazeSolved()
