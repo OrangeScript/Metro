@@ -8,7 +8,6 @@ using static UnityEditor.Progress;
 using System.Collections;
 using UnityEngine.Rendering;
 
-
 [RequireComponent(typeof(Rigidbody2D), typeof(Animator))]
 public class PlayerController : MonoBehaviour
 {
@@ -486,14 +485,13 @@ public class PlayerController : MonoBehaviour
     #region 烟雾交互
     public void EnterIllusionWorld()
     {
-        PersistentDataContainer.enterPosition = transform.position;
         currentState = PlayerState.Illusion;
 
         UIManager.Instance.ShowMessage("你进入了幻觉世界...");
 
         SetIllusionHiddenObjects(false);
         Debug.Log("准备生成trigger");
-        Vector3 triggerPos = transform.position + Vector3.right * 15f;
+        Vector3 triggerPos = transform.position + Vector3.right * 10f;
         GameObject layoutGO = GameObject.Find("Layout"); 
 
         if (layoutGO != null)
@@ -502,6 +500,7 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Trigger 挂在 Layout 下生成成功");
         }
     }
+
 
     void SetIllusionHiddenObjects(bool active)
     {
@@ -518,7 +517,9 @@ public class PlayerController : MonoBehaviour
     public void ReturnFromIllusionWorld()
     {
         UIManager.Instance.ShowMessage("你恢复了意识。");
+        Debug.Log($"玩家当前状态为：{currentState}");
         currentState = PlayerState.Idle;
+        Debug.Log($"玩家当前状态为：{currentState}");
         Rigidbody rb = GetComponent<Rigidbody>();
         if (rb != null)
         {

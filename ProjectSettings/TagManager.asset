@@ -15,6 +15,11 @@ TagManager:
   - MazeWall
   - MazeExit
   - MazePath
+  - Items
+  - UI
+  - Manager
+  - Layout
+  - CombustibleItem
   layers:
   - Default
   - TransparentFX

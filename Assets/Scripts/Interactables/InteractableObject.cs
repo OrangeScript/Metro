@@ -86,6 +86,8 @@ public abstract class InteractableObject : MonoBehaviour
 
             if (player.equippedItem == this)
                 player.equippedItem = null;
+            if (player.equippedMask == this)
+                player.equippedMask = null;
             Destroy(gameObject);
             InventorySystem.Instance.UpdateEquippedUI();
         }

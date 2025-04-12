@@ -81,6 +81,7 @@
     <Compile Include="Assets\Scripts\Manager\GameManager.cs" />
     <Compile Include="Assets\Scripts\Interactables\SmokeDetector.cs" />
     <Compile Include="Assets\Scripts\Interactables\SafetyHammer.cs" />
+    <Compile Include="Assets\Scripts\Interactables\CombustibleItemEditor.cs" />
     <Compile Include="Assets\Scripts\MetroStructure\MetroDoor.cs" />
     <Compile Include="Assets\Scripts\Interactables\Ladder.cs" />
     <Compile Include="Assets\Scripts\ExitTrigger\ExitTrigger.cs" />

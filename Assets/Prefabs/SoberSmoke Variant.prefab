@@ -13,6 +13,10 @@ PrefabInstance:
       value: SoberSmoke Variant
       objectReference: {fileID: 0}
     - target: {fileID: 6887356635076798137, guid: 2ac96dbee28de45479d89bf1cae05cd6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6887356635076798137, guid: 2ac96dbee28de45479d89bf1cae05cd6, type: 3}
       propertyPath: m_TagString
       value: SoberSmoke
       objectReference: {fileID: 0}
