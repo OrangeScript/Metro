@@ -31,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 43851272396258703}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.84, z: 0}
+  m_LocalPosition: {x: -3.0667365, y: 0.5069535, z: 0}
   m_LocalScale: {x: 8.825845, y: 13.099322, z: 13.099322}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -148,7 +148,7 @@ CapsuleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.009360023, y: -0.064479604}
@@ -188,6 +188,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   tunnelSpeedMultiplier: 0.4
+  illusionExitTriggerPrefab: {fileID: 0}
   no: 0
 --- !u!95 &8743913967969947486
 Animator:

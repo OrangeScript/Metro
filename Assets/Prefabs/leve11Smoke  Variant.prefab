@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &4165624601081096274
+--- !u!1001 &6476815811487311277
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -10,19 +10,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6887356635076798137, guid: 2ac96dbee28de45479d89bf1cae05cd6, type: 3}
       propertyPath: m_Name
-      value: level3Smoke Variant
-      objectReference: {fileID: 0}
-    - target: {fileID: 6887356635076798137, guid: 2ac96dbee28de45479d89bf1cae05cd6, type: 3}
-      propertyPath: m_Layer
-      value: 8
+      value: leve11Smoke  Variant
       objectReference: {fileID: 0}
     - target: {fileID: 6887356635076798137, guid: 2ac96dbee28de45479d89bf1cae05cd6, type: 3}
       propertyPath: m_TagString
-      value: Level3Smoke
-      objectReference: {fileID: 0}
-    - target: {fileID: 7584277731237760278, guid: 2ac96dbee28de45479d89bf1cae05cd6, type: 3}
-      propertyPath: m_IsTrigger
-      value: 0
+      value: Level1Smoke
       objectReference: {fileID: 0}
     - target: {fileID: 7662943313366589322, guid: 2ac96dbee28de45479d89bf1cae05cd6, type: 3}
       propertyPath: m_LocalPosition.x
@@ -67,27 +59,5 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6887356635076798137, guid: 2ac96dbee28de45479d89bf1cae05cd6, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2401149006834515214}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ac96dbee28de45479d89bf1cae05cd6, type: 3}
---- !u!1 &7375642606727827179 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6887356635076798137, guid: 2ac96dbee28de45479d89bf1cae05cd6, type: 3}
-  m_PrefabInstance: {fileID: 4165624601081096274}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2401149006834515214
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7375642606727827179}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0046ebd38c5397f48bcdf8ff6cc9d540, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  airWallEnabled: 1
-  destroyAfterParticleGone: 1
