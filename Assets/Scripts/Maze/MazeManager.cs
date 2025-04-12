@@ -8,7 +8,7 @@ public class MazeManager : MonoBehaviour
 
     public MazeGenerator mazeGenerator; // 迷宫生成器
     public MazePlayer player; // 监听玩家解谜进度
-    [SerializeField] private GameObject playerPrefab;
+    [SerializeField] public GameObject playerPrefab;
     
     private void Awake()
     {
@@ -16,12 +16,11 @@ public class MazeManager : MonoBehaviour
     }
     private void Update()
     {
-        //press space to begin
+        //press space to begin//test method
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            mazeGenerator.GenerateDynamicMaze();
-            GameObject p=Instantiate(playerPrefab,mazeGenerator.start,Quaternion.identity);
-            player=p.GetComponent<MazePlayer>();
+            player=mazeGenerator.GenerateMaze();
+           
             //mazeGenerator.RenderMaze();
         }
         //test return
@@ -29,6 +28,37 @@ public class MazeManager : MonoBehaviour
         {
             SceneManager.LoadScene("NormalScene");
         }
+        if (player != null && player.failTheMaze)
+        {
+            DestroyMaze();
+
+            RestartMaze();
+        }
+        if (player != null && player.winTheMaze)
+        {
+            // 迷宫解谜成功，执行回调
+            onMazeComplete?.Invoke();
+        }
+    }
+
+    private void RestartMaze()
+    {
+        player = mazeGenerator.GenerateMaze();
+    }
+
+    private void DestroyMaze()
+    {
+        Destroy(player.gameObject);
+        foreach (Transform child in transform)
+        {
+            Destroy(child.gameObject); // 销毁子物体
+        }
+    }
+
+    public void StartMazePuzzle(Action action)
+    {
+        player = mazeGenerator.GenerateMaze();
+        onMazeComplete = action; // 设置回调
     }
     
 }
