@@ -18,6 +18,8 @@ public class MazePlayer : MonoBehaviour
     public bool failTheMaze = false;
     public bool winTheMaze = false;
 
+    private bool isLocked = false;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -28,11 +30,18 @@ public class MazePlayer : MonoBehaviour
     private void Update()
     {
         MoveCharacter();
+        if(!isLocked) {
+            MouseInput();
+        }
+    }
+
+    private void MouseInput()
+    {
         if (Input.GetMouseButtonDown(0))
         {
             StartTracing();
         }
-        if (isTracking&&Input.GetMouseButton(0))
+        if (isTracking && Input.GetMouseButton(0))
         {
             ContinueTracing();
         }
@@ -47,7 +56,6 @@ public class MazePlayer : MonoBehaviour
         isTracking = false;
         Debug.Log("Stop tracking mouse positions");
         StartCoroutine(ResetRun());
-        failTheMaze = true;
         // 处理鼠标轨迹
         //foreach (var pos in mousePositions)
         //{
@@ -88,7 +96,8 @@ public class MazePlayer : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(worldPoint2D, Vector2.zero);
         if(hit.collider!=null && hit.collider.CompareTag("MazeExit"))
         {
-
+            isLocked = true;
+            Debug.Log("到达迷宫出口");
 
         }
         
@@ -101,6 +110,7 @@ public class MazePlayer : MonoBehaviour
         else if (hit.collider != null && hit.collider.CompareTag("MazeWall"))
         {
             Debug.Log("与墙壁碰撞");
+            isLocked=true;
             StartCoroutine(ResetRunWithHitWall(hit.collider.GetComponent<SpriteRenderer>()));
             // 处理与墙壁的碰撞
             // 可以在这里添加其他逻辑，比如显示提示信息等
@@ -128,6 +138,8 @@ public class MazePlayer : MonoBehaviour
             SRs[i].color = Color.clear;
             yield return new WaitForSeconds(0.1f);
         }
+        isLocked = false;
+        failTheMaze = true;
     }
 
     // abadoned
