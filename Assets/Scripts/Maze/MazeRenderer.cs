@@ -16,6 +16,7 @@ public class MazeRenderer : MonoBehaviour
 
         Instantiate(endPrefab, endPos, Quaternion.identity,transform);
     }
+
     public void DrawMaze(int[,] maze)
     {
         int width = maze.GetLength(0);

@@ -3,6 +3,14 @@ using UnityEngine;
 
 public class Ladder : InteractableObject
 {
+    //when using the ladder, the ladder would be thrown on the ground and leave the package
+
+    //I divide it into such procedure:
+    //First: pick it up
+    /* Second: drop it on the ground and it lengthen automatically
+     * Third: interact with it to climb up
+     * 
+     */
     [Header("梯子设置")]
     public float extendedHeight = 5f;  // 最大伸展高度
     public float retractHeight = 1f;   // 收缩高度
@@ -22,22 +30,23 @@ public class Ladder : InteractableObject
         base.OnInteract();
         Debug.Log("梯子已拾取，存入背包！");
     }
-
-    public override void UseItem()
+    [SerializeField] private Transform layout;
+    protected override void HandleUse()
     {
-        if (isEquipped)
-        {
-            if (isExtended)
-            {
-                StartCoroutine(RetractLadder());
-            }
-            else
-            {
-                StartCoroutine(ExtendLadder());
-            }
-        }
+        base.HandleUse();
+        //remove it from inventory
+        Drop();
+        StartCoroutine(ExtendLadder());
     }
 
+    private void Drop()
+    {
+        gameObject.transform.position = player.transform.position;
+        gameObject.transform.SetParent(layout);
+        gameObject.SetActive(true);
+    }
+
+    
     private IEnumerator ExtendLadder()
     {
         Debug.Log("梯子正在伸展...");
@@ -78,6 +87,7 @@ public class Ladder : InteractableObject
 
     private void Update()
     {
+        Debug.Log("isplayeron" + isPlayerOnLadder+isExtended);
         if (isExtended && isPlayerOnLadder)
         {
             HandleClimbing();
@@ -96,11 +106,11 @@ public class Ladder : InteractableObject
         float climbSpeed = 3f;
         if (Input.GetKey(KeyCode.W))
         {
-            player.transform.position += Vector3.up * climbSpeed * Time.deltaTime;
+            player.transform.position += new Vector3(0,0,-1) * climbSpeed * Time.deltaTime;
         }
         else if (Input.GetKey(KeyCode.S))
         {
-            player.transform.position += Vector3.down * climbSpeed * Time.deltaTime;
+            player.transform.position += new Vector3(0,0,1) * climbSpeed * Time.deltaTime;
         }
     }
 
