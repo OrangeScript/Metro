@@ -21,30 +21,23 @@ public class MetroDoor : MonoBehaviour
 
     private float arrowDuration = 5f;
     private float arrowTime = 0;
-    public static bool isDancing;
+    public bool isDancing;
     public int correctInputs;
-
-    public static MetroDoor S;
     private PlayerController player;
     private void Awake()
     {
-        if (S != null && S != this)
-        {
-            Debug.LogWarning("发现多个 MetroDoor 实例，已销毁冗余实例");
-            Destroy(this.gameObject);
-            return;
-        }
-        S = this;
+        anim = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
+
         if (ArrowManager.S == null)
-        {
             ArrowManager.S = FindObjectOfType<ArrowManager>();
-        }
+
         if (MazeManager.instance == null)
-        {
             MazeManager.instance = FindObjectOfType<MazeManager>();
-        }
+
         player = GetComponent<PlayerController>();
     }
+
 
     void Start()
     {
@@ -123,7 +116,7 @@ public class MetroDoor : MonoBehaviour
         Debug.Log("进入QQ炫舞解谜界面...");
         if (ArrowManager.S != null)
         {
-            ArrowManager.S.CreateWave(10);
+            ArrowManager.S.CreateWave(10, this);
         }
         else
         {
@@ -132,6 +125,7 @@ public class MetroDoor : MonoBehaviour
         isDancing = true;
         correctInputs = 0;
     }
+
 
     private void StartMazePuzzle()
     {

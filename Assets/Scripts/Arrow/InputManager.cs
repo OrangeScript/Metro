@@ -11,10 +11,8 @@ public class InputManager : MonoBehaviour
 
     void Update()
     {
-        if (!MetroDoor.isDancing)
-        {
-            return;  // 如果游戏暂停，不处理输入
-        }
+        if (ArrowManager.S.IsInWave() == false)
+            return;
 
         if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
             ArrowManager.S.TypeArrow(KeyCode.UpArrow);
@@ -31,7 +29,7 @@ public class InputManager : MonoBehaviour
         // 如果玩家按下回车键，表示结束当前关卡
         if (Input.GetKeyDown(KeyCode.Return))
         {
-            MetroDoor.S.FinishWave();  // 完成关卡
+            ArrowManager.S.ForceFinish();   // 完成关卡
 
         }
     }

@@ -90,7 +90,7 @@ public class PlayerController : MonoBehaviour
         {
             SceneManager.LoadScene("Maze");
         }
-        if (MetroDoor.isDancing)
+        if (ArrowManager.S.IsInWave())
         {
             rb.velocity = Vector2.zero;  
             return; 
