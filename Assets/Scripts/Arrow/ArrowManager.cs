@@ -1,118 +1,125 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class ArrowManager : MonoBehaviour
 {
     public static ArrowManager S;
+
+    [Header("箭头配置")]
+    public GameObject arrowPrefab;
+    public Transform arrowsHolder;
+
+    [Header("音效")]
     [SerializeField] private AudioSource victorySound;
     [SerializeField] private AudioSource missSound;
+
+    private Queue<Arrow> arrows = new Queue<Arrow>();
+    private Arrow currentArrow;
+    private MetroDoor currentDoor;
+
+    public float waveTime = 9f;
+    public static bool isFinish;
 
     private void Awake()
     {
         S = this;
     }
 
-    public GameObject arrowPrefab;
-    public Transform arrowsHolder;
-    public static bool isFinish;
+    private void Start()
+    {
+        ClearWave();
+    }
 
-    Queue<Arrow> arrows = new Queue<Arrow>();
-    Arrow currentArrow;
-
-    public float waveTime = 9f;  
-
-    private void Start() {}
-
-    // 创建箭头波
-    public void CreateWave(int length)
+    public void CreateWave(int length, MetroDoor door)
     {
         arrowsHolder.gameObject.SetActive(true);
-        Debug.Log($"正在生成箭头，剩余次数: {length}");
-        arrows = new Queue<Arrow>();
+        Debug.Log($"正在生成箭头，数量: {length}");
+        arrows.Clear();
         isFinish = false;
+        currentDoor = door;
 
         for (int i = 0; i < length; i++)
         {
-            Arrow arrow = Instantiate(
-            arrowPrefab,
-            arrowsHolder.position, // 使用父物体位置
-            Quaternion.identity,
-            arrowsHolder)
-            .GetComponent<Arrow>();
+            GameObject arrowObj = Instantiate(arrowPrefab, arrowsHolder.position, Quaternion.identity, arrowsHolder);
+            arrowObj.transform.localPosition += new Vector3(i * 100, 0, 0);
 
-            arrow.transform.localPosition += new Vector3(i * 100, 0, 0);
-            int randomDir = Random.Range(0, 4);  // 随机生成箭头方向
+            Arrow arrow = arrowObj.GetComponent<Arrow>();
+            int randomDir = Random.Range(0, 4);
             arrow.Setup(randomDir);
-
             arrows.Enqueue(arrow);
         }
 
-        currentArrow = arrows.Dequeue();  // 获取第一个箭头
+        if (arrows.Count > 0)
+            currentArrow = arrows.Dequeue();
+        else
+            currentArrow = null;
     }
 
-    // 处理玩家输入
     public void TypeArrow(KeyCode inputKey)
     {
-        if (isFinish)
+        if (isFinish || currentArrow == null)
             return;
-        if (ConvertKeyCodeToInt(inputKey) == currentArrow.arrowDir)
+
+        bool correct = ConvertKeyCodeToInt(inputKey) == currentArrow.arrowDir;
+
+        if (correct)
         {
-            currentArrow.SetFinish();  // 输入正确，设置为完成状态
-            //victorySound.Play();
-            MetroDoor.S.RecordInput(true);  // 记录正确输入
+            currentArrow.SetFinish();
         }
         else
         {
-            currentArrow.SetError();  // 输入错误，显示错误颜色
-            //missSound.Play();
-            MetroDoor.S.RecordInput(false);  // 记录错误输入
+            currentArrow.SetError();
         }
 
-        // 继续到下一个箭头
+        currentDoor?.RecordInput(correct);
+
         if (arrows.Count > 0)
-        {
-            currentArrow = arrows.Dequeue();  // 继续下一个箭头
-        }
+            currentArrow = arrows.Dequeue();
         else
         {
-            isFinish = true;  // 如果所有箭头都输入完，标记关卡完成
+            isFinish = true;
+            Debug.Log($"箭头波完成，总正确数: {currentDoor?.correctInputs}");
         }
-
-        Debug.Log($"输入正确，当前 correctInputs: {MetroDoor.S.correctInputs}");
     }
 
-    // 清空箭头波
+    public void ForceFinish()
+    {
+        if (!isFinish)
+        {
+            currentDoor?.FinishWave();
+            ClearWave();
+        }
+    }
+
     public void ClearWave()
     {
-        arrows = new Queue<Arrow>();
         foreach (Transform arrow in arrowsHolder)
         {
             Destroy(arrow.gameObject);
         }
+
+        arrows.Clear();
+        currentArrow = null;
+        currentDoor = null;
+        isFinish = true;
+
         arrowsHolder.gameObject.SetActive(false);
     }
 
-    // 将键盘输入转换为箭头方向（0-3）
-    int ConvertKeyCodeToInt(KeyCode key)
+    public bool IsInWave()
     {
-        int result = 0;
-        switch (key)
+        return !isFinish;
+    }
+
+    private int ConvertKeyCodeToInt(KeyCode key)
+    {
+        return key switch
         {
-            case KeyCode.UpArrow:
-                result = 0;
-                break;
-            case KeyCode.DownArrow:
-                result = 1;
-                break;
-            case KeyCode.LeftArrow:
-                result = 2;
-                break;
-            case KeyCode.RightArrow:
-                result = 3;
-                break;
-        }
-        return result;
+            KeyCode.UpArrow => 0,
+            KeyCode.DownArrow => 1,
+            KeyCode.LeftArrow => 2,
+            KeyCode.RightArrow => 3,
+            _ => -1
+        };
     }
 }

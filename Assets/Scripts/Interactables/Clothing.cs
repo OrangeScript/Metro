@@ -3,11 +3,7 @@ using System.Collections;
 
 public class Clothing : InteractableObject
 {
-    protected override void Start()
-    {
-        base.Start();
-        destroyOnUse = true;
-    }
+
 
     protected override void HandleUse()
     {
