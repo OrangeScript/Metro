@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class FacingCamera : MonoBehaviour
 {
-    Transform[] childs;
+    private List<Transform> childs;
     void Start()
     {
-        childs = new Transform[transform.childCount];
+        childs =new List<Transform> ();
         for (int i = 0; i < transform.childCount; i++)
         {
-            childs[i] = transform.GetChild(i);
+            childs.Add(transform.GetChild(i));
         }
     }
 
@@ -20,6 +20,7 @@ public class FacingCamera : MonoBehaviour
         //{
         //    childs[i].rotation = Camera.main.transform.rotation;
         //}
+        childs.RemoveAll(child => child == null);
         Vector3 camEuler = Camera.main.transform.eulerAngles;
         foreach (Transform child in childs)
         {
