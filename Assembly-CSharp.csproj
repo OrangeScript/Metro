@@ -64,6 +64,7 @@
     <Compile Include="Assets\Scripts\Manager\TooltipManager.cs" />
     <Compile Include="Assets\Scripts\NPC\NPCState.cs" />
     <Compile Include="Assets\Scripts\Interactables\Ventilation.cs" />
+    <Compile Include="Assets\Scripts\Camera\CameraSwitcher.cs" />
     <Compile Include="Assets\Scripts\Interactables\InteractableObject.cs" />
     <Compile Include="Assets\Scripts\NPC\NPCUnconsciousState.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerController.cs" />
@@ -102,7 +103,6 @@
     <Compile Include="Assets\Scripts\NPC\Entity.cs" />
     <Compile Include="Assets\Scripts\Smoke\AirWallController.cs" />
     <Compile Include="Assets\Scripts\MetroStructure\MetroGround.cs" />
-    <Compile Include="Assets\Scripts\FlashLights.cs" />
     <Compile Include="Assets\Scripts\Smoke\SmokeMaskController.cs" />
     <Compile Include="Assets\Scripts\NPC\NPC.cs" />
     <Compile Include="Assets\Scripts\LevelEditor\LevelEditor.cs" />

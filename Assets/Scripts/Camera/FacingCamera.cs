@@ -23,6 +23,7 @@ public class FacingCamera : MonoBehaviour
         Vector3 camEuler = Camera.main.transform.eulerAngles;
         foreach (Transform child in childs)
         {
+            if (child == null) continue;
             Vector3 selfEuler = child.eulerAngles;
             child.rotation = Quaternion.Euler(camEuler.x, selfEuler.y, selfEuler.z);
         }

@@ -13,6 +13,7 @@ public class MazePlayer : MonoBehaviour
     private List<Vector2> mousePositions = new List<Vector2>();
     private bool isTracking = false;
     [SerializeField]private float minDistance;
+    [SerializeField] private Camera mazeCamera;
     private List<SpriteRenderer> SRs;
 
     public bool failTheMaze = false;
@@ -90,7 +91,7 @@ public class MazePlayer : MonoBehaviour
 
     private void CheckForSpriteInteraction(Vector2 screenPosition)
     {
-        Vector3 worldPos = Camera.main.ScreenToWorldPoint(screenPosition);
+        Vector3 worldPos = mazeCamera.ScreenToWorldPoint(screenPosition);
         Vector2 worldPoint2D = new Vector2(worldPos.x, worldPos.y);
 
         RaycastHit2D hit = Physics2D.Raycast(worldPoint2D, Vector2.zero);
@@ -98,7 +99,7 @@ public class MazePlayer : MonoBehaviour
         {
             isLocked = true;
             Debug.Log("到达迷宫出口");
-
+            winTheMaze = true;
         }
         
         if (hit.collider != null && hit.collider.CompareTag("MazePath"))
@@ -161,23 +162,4 @@ public class MazePlayer : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("MazeWall"))
-        {
-            // 处理与墙壁的碰撞
-            Debug.Log("与墙壁碰撞");
-
-            //show fail message
-
-
-            //Destroy(gameObject);
-        }
-        else if (collision.CompareTag("MazeExit"))
-        {
-            // 处理到达出口的逻辑
-            Debug.Log("到达迷宫出口");
-            //MazeManager.S.StartMazePuzzle();
-        }
-    }
 }

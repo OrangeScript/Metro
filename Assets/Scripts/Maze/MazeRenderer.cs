@@ -1,3 +1,4 @@
+using System.IO;
 using UnityEngine;
 
 public class MazeRenderer : MonoBehaviour
@@ -18,12 +19,20 @@ public class MazeRenderer : MonoBehaviour
     }
     public void DrawMaze(int[,] maze)
     {
+        Debug.Log("开始绘制迷宫");
+
         int width = maze.GetLength(0);
         int height = maze.GetLength(1);
 
         // 计算中心偏移
         float offsetX = -(width * cellSize) / 2f + cellSize / 2f;
         float offsetY = -(height * cellSize) / 2f + cellSize / 2f;
+
+        if (pathPrefab == null)
+        {
+            Debug.LogError("pathPrefab 未赋值！");
+            return;
+        }
 
         for (int x = 0; x < width; x++)
         {
@@ -37,10 +46,12 @@ public class MazeRenderer : MonoBehaviour
                 else if (maze[x, y] == 1)
                 {
                     Vector3 pos = new Vector3(x * cellSize + offsetX, y * cellSize + offsetY, 0);
-                    Instantiate(pathPrefab, pos, Quaternion.identity, transform);
+                    var path=Instantiate(pathPrefab, pos, Quaternion.identity, transform);
+                    path.name = $"Path({x},{y})";
+                    //Debug.Log($"生成 Path({x},{y})");
                 }
             }
         }
-        
+
     }
 }

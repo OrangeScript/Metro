@@ -179,10 +179,4 @@ public class MazeGenerator : MonoBehaviour
 
         return furthest;
     }
-
-
-
-
-
-    
 }

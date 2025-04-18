@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/IllusionScene.unity
     guid: c5503e09fdc301343b42ef22294c5083
+  - enabled: 1
+    path: Assets/Scenes/Maze.unity
+    guid: f24d69225f43f474c84633b336f0657a
   m_configObjects: {}

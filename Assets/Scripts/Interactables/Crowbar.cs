@@ -25,7 +25,7 @@ public class Crowbar : InteractableObject
         }
         else
         {
-            Debug.LogError("Can't find MetroDoor");
+            Debug.Log("找不到地铁门");
         }
     }
 }

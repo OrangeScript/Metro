@@ -144,7 +144,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: "\u5B89\u5168\u9524"
-  itemIcon: {fileID: 7293598183456022363, guid: 1ddc9afd21fec77489b1248d18f31b68, type: 3}
+  itemIcon: {fileID: 21300000, guid: b0f440b99c6586b46abbe0ce74a54f0d, type: 3}
   itemDescription: 
   carryType: 3
   destroyOnUse: 1

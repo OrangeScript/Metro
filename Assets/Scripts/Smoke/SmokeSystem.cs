@@ -91,7 +91,7 @@ public class SmokeSystem : MonoBehaviour
         }
 
         GameObject prefab = GetParticlePrefab(level);
-        GameObject particle = Instantiate(prefab, position, rotation); // 修改这里
+        GameObject particle = Instantiate(prefab, position, rotation);
         particle.transform.position = position;
         particle.tag = GetTagFromLevel(level);
 
@@ -179,7 +179,7 @@ public class SmokeSystem : MonoBehaviour
             if (highestLevel == SmokeLevel.Level3) break;
         }
 
-        Debug.Log($"检测位置 {position} 最高等级：{highestLevel} | 检查粒子数：{particlesChecked}");
+        //Debug.Log($"检测位置 {position} 最高等级：{highestLevel} | 检查粒子数：{particlesChecked}");
         return highestLevel;
     }
 
