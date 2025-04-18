@@ -56,27 +56,27 @@ public class Flashlight : InteractableObject
         gameObject.SetActive(false);
     }
 
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("VentExit"))
-        {
-            isNearVentExit = true;
-        }
-        else if (other.CompareTag("Ventilation"))
-        {
-            isInVentilation = true;
-        }
-    }
+    //void OnTriggerEnter2D(Collider2D other)
+    //{
+    //    if (other.CompareTag("VentExit"))
+    //    {
+    //        isNearVentExit = true;
+    //    }
+    //    else if (other.CompareTag("Ventilation"))
+    //    {
+    //        isInVentilation = true;
+    //    }
+    //}
 
-    void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.CompareTag("VentExit"))
-        {
-            isNearVentExit = false;
-        }
-        else if (other.CompareTag("Ventilation"))
-        {
-            isInVentilation = false;
-        }
-    }
+    //void OnTriggerExit2D(Collider2D other)
+    //{
+    //    if (other.CompareTag("VentExit"))
+    //    {
+    //        isNearVentExit = false;
+    //    }
+    //    else if (other.CompareTag("Ventilation"))
+    //    {
+    //        isInVentilation = false;
+    //    }
+    //}
 }

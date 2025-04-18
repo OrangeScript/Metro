@@ -17,6 +17,7 @@ public class MazeRenderer : MonoBehaviour
 
         Instantiate(endPrefab, endPos, Quaternion.identity,transform);
     }
+
     public void DrawMaze(int[,] maze)
     {
         Debug.Log("¿ªÊ¼»æÖÆÃÔ¹¬");
