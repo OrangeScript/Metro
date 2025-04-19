@@ -71,6 +71,7 @@
     <Compile Include="Assets\Scripts\Camera\FacingCamera.cs" />
     <Compile Include="Assets\Scripts\Arrow\InputManager.cs" />
     <Compile Include="Assets\Scripts\Camera\RotatingCamera.cs" />
+    <Compile Include="Assets\Scripts\FileDataHandler.cs" />
     <Compile Include="Assets\Scripts\Interactables\Window.cs" />
     <Compile Include="Assets\Scripts\Interactables\ItemSlotUI.cs" />
     <Compile Include="Assets\Scripts\Arrow\ArrowManager.cs" />
@@ -86,9 +87,12 @@
     <Compile Include="Assets\Scripts\MetroStructure\MetroDoor.cs" />
     <Compile Include="Assets\Scripts\Interactables\Ladder.cs" />
     <Compile Include="Assets\Scripts\ExitTrigger\ExitTrigger.cs" />
+    <Compile Include="Assets\Scripts\GameData.cs" />
     <Compile Include="Assets\Scripts\ObjectPool\ObjectPoolManager.cs" />
     <Compile Include="Assets\Scripts\Manager\UIManager.cs" />
     <Compile Include="Assets\Scripts\Interactables\CombustibleItem.cs" />
+    <Compile Include="Assets\Scripts\SerializableDictionary.cs" />
+    <Compile Include="Assets\Scripts\SaveManager.cs" />
     <Compile Include="Assets\Scripts\Maze\MazeManager.cs" />
     <Compile Include="Assets\Scripts\Maze\MazeGenerator.cs" />
     <Compile Include="Assets\Scripts\Arrow\Arrow.cs" />
@@ -98,13 +102,13 @@
     <Compile Include="Assets\Scripts\Player\PlayerManager.cs" />
     <Compile Include="Assets\Scripts\Smoke\SmokeSystem.cs" />
     <Compile Include="Assets\Scripts\NPC\NPCStateMachine.cs" />
+    <Compile Include="Assets\Scripts\ISaveManager.cs" />
     <Compile Include="Assets\Scripts\Interactables\Battery.cs" />
     <Compile Include="Assets\Scripts\NPC\NPCHallucinatingState.cs" />
     <Compile Include="Assets\Scripts\Interactables\GasMask.cs" />
     <Compile Include="Assets\Scripts\NPC\Entity.cs" />
     <Compile Include="Assets\Scripts\Smoke\AirWallController.cs" />
     <Compile Include="Assets\Scripts\MetroStructure\MetroGround.cs" />
-    <Compile Include="Assets\Scripts\FlashLights.cs" />
     <Compile Include="Assets\Scripts\Smoke\SmokeMaskController.cs" />
     <Compile Include="Assets\Scripts\NPC\NPC.cs" />
     <Compile Include="Assets\Scripts\LevelEditor\LevelEditor.cs" />

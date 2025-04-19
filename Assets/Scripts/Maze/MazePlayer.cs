@@ -29,9 +29,13 @@ public class MazePlayer : MonoBehaviour
 
     private void Update()
     {
-        MoveCharacter();
+        //MoveCharacter();
         if(!isLocked) {
             MouseInput();
+        }
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+            SaveManager.instance.LoadScene("NormalScene");
         }
     }
 
@@ -56,11 +60,6 @@ public class MazePlayer : MonoBehaviour
         isTracking = false;
         Debug.Log("Stop tracking mouse positions");
         StartCoroutine(ResetRun());
-        // 处理鼠标轨迹
-        //foreach (var pos in mousePositions)
-        //{
-        //    Debug.Log("Mouse Position: " + pos);
-        //}
     }
 
     private void ContinueTracing()
@@ -98,7 +97,7 @@ public class MazePlayer : MonoBehaviour
         {
             isLocked = true;
             Debug.Log("到达迷宫出口");
-
+            winTheMaze = true;
         }
         
         if (hit.collider != null && hit.collider.CompareTag("MazePath"))
@@ -161,23 +160,23 @@ public class MazePlayer : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("MazeWall"))
-        {
-            // 处理与墙壁的碰撞
-            Debug.Log("与墙壁碰撞");
+    //private void OnTriggerEnter2D(Collider2D collision)
+    //{
+    //    if (collision.CompareTag("MazeWall"))
+    //    {
+    //        // 处理与墙壁的碰撞
+    //        Debug.Log("与墙壁碰撞");
 
-            //show fail message
+    //        //show fail message
 
 
-            //Destroy(gameObject);
-        }
-        else if (collision.CompareTag("MazeExit"))
-        {
-            // 处理到达出口的逻辑
-            Debug.Log("到达迷宫出口");
-            //MazeManager.S.StartMazePuzzle();
-        }
-    }
+    //        //Destroy(gameObject);
+    //    }
+    //    else if (collision.CompareTag("MazeExit"))
+    //    {
+    //        // 处理到达出口的逻辑
+    //        Debug.Log("到达迷宫出口");
+    //        //MazeManager.S.StartMazePuzzle();
+    //    }
+    //}
 }

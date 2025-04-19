@@ -20,6 +20,10 @@ PrefabInstance:
       propertyPath: m_SortingLayerID
       value: 2139032589
       objectReference: {fileID: 0}
+    - target: {fileID: 6336893140059036922, guid: 2ac96dbee28de45479d89bf1cae05cd6, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e823cd5b5d27c0f4b8256e7c12ee3e6d, type: 2}
     - target: {fileID: 6887356635076798137, guid: 2ac96dbee28de45479d89bf1cae05cd6, type: 3}
       propertyPath: m_Name
       value: leve11Smoke  Variant

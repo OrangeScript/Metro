@@ -54,7 +54,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -107,6 +107,7 @@ MonoBehaviour:
   prefabReference: {fileID: 0}
   useTrigger: 0
   isContinuousUse: 0
+  ground: {fileID: 0}
 --- !u!61 &8927144217832770581
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -245,7 +246,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -298,8 +299,8 @@ MonoBehaviour:
   prefabReference: {fileID: 0}
   useTrigger: 0
   isContinuousUse: 0
+  ground: {fileID: 0}
   checkInterval: 0.5
-  detectionRadius: 3
   warningUI: {fileID: 0}
   warningText: {fileID: 0}
 --- !u!61 &6808412665806334582
@@ -401,7 +402,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -454,7 +455,9 @@ MonoBehaviour:
   prefabReference: {fileID: 0}
   useTrigger: 0
   isContinuousUse: 0
+  ground: {fileID: 0}
   isFlashlightOn: 0
+  light: {fileID: 0}
 --- !u!61 &1343130625986430754
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -554,7 +557,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -607,11 +610,15 @@ MonoBehaviour:
   prefabReference: {fileID: 0}
   useTrigger: 0
   isContinuousUse: 0
-  type: 0
-  fireEffect: {fileID: 0}
+  ground: {fileID: 0}
+  level: 0
   isBurning: 0
   burnInterval: 1
   smokeSystem: {fileID: 0}
+  targetRenderer: {fileID: 0}
+  visualSprite: {fileID: 0}
+  Flame: {fileID: 0}
+  flameOffset: {x: 0, y: 0.5, z: 0}
 --- !u!61 &3954571138784199831
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -711,7 +718,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -764,6 +771,7 @@ MonoBehaviour:
   prefabReference: {fileID: 0}
   useTrigger: 0
   isContinuousUse: 0
+  ground: {fileID: 0}
 --- !u!61 &8340214532374055912
 BoxCollider2D:
   m_ObjectHideFlags: 0
