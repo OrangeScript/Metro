@@ -54,7 +54,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: -1705442689
   m_SortingLayer: 3
   m_SortingOrder: 7
-  m_Sprite: {fileID: 4121880872312635667, guid: ffc9f271fad56c243a45f100b9dc6778, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0b16b53d490acd4468ca75620a2dc82f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: "\u9632\u6BD2\u9762\u5177"
-  itemIcon: {fileID: 4121880872312635667, guid: ffc9f271fad56c243a45f100b9dc6778, type: 3}
+  itemIcon: {fileID: 21300000, guid: 0b16b53d490acd4468ca75620a2dc82f, type: 3}
   itemDescription: "\u514D\u75AB\u6BD2\u6C14"
   carryType: 1
   destroyOnUse: 0
@@ -107,7 +107,6 @@ MonoBehaviour:
   prefabReference: {fileID: 3652430417070191378}
   useTrigger: 2
   isContinuousUse: 1
-  ground: {fileID: 0}
 --- !u!61 &3519593844170055559
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -144,7 +143,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0}
-    oldSize: {x: 3.2, y: 3.2}
+    oldSize: {x: 2, y: 2.6684039}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0

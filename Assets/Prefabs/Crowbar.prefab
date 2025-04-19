@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: "\u64AC\u68CD"
-  itemIcon: {fileID: 8638710384840876012, guid: 1ddc9afd21fec77489b1248d18f31b68, type: 3}
+  itemIcon: {fileID: 21300000, guid: 1fd0c201c710392478fdc4643740ca75, type: 3}
   itemDescription: 
   carryType: 3
   destroyOnUse: 0

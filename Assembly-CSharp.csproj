@@ -65,6 +65,7 @@
     <Compile Include="Assets\Scripts\Manager\TooltipManager.cs" />
     <Compile Include="Assets\Scripts\NPC\NPCState.cs" />
     <Compile Include="Assets\Scripts\Interactables\Ventilation.cs" />
+    <Compile Include="Assets\Scripts\Camera\CameraSwitcher.cs" />
     <Compile Include="Assets\Scripts\Interactables\InteractableObject.cs" />
     <Compile Include="Assets\Scripts\NPC\NPCUnconsciousState.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerController.cs" />

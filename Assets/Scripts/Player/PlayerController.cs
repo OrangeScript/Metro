@@ -80,8 +80,8 @@ public class PlayerController : MonoBehaviour
             dataObj.AddComponent<PersistentDataContainer>();
             DontDestroyOnLoad(dataObj);
         }
-        Debug.Log("Current Render Pipeline Asset: " + GraphicsSettings.renderPipelineAsset);
-        DontDestroyOnLoad(gameObject);
+        //Debug.Log("Current Render Pipeline Asset: " + GraphicsSettings.renderPipelineAsset);
+        //DontDestroyOnLoad(gameObject);
     }
 
     void Update()
@@ -383,41 +383,36 @@ public class PlayerController : MonoBehaviour
         }
 
         nearestMetroDoor = closestDoor;
-        if (nearestMetroDoor == null)
-        {
-            //Debug.Log("范围内没有地铁门");
+        if (Input.GetKeyDown(KeyCode.F)&& nearestMetroDoor != null){
+            var door = nearestMetroDoor;
+            door.TryInteract(this);
         }
-        else {
-            if(currentCarriedObject != null &&
-        (currentCarriedObject.CompareTag("Battery") ||
-         currentCarriedObject.CompareTag("Crowbar")))
-            nearestMetroDoor.TryInteract(this); }
     }
 
     private void CheckPoweredDoor()
     {
-        if (awaitingSecondFPress && Input.GetKeyDown(KeyCode.F) && poweredDoor != null)
+        if (Input.GetKeyDown(KeyCode.F) && poweredDoor != null)
         {
-            var door = poweredDoor;
+            if (awaitingSecondFPress)
+            {
+                var door = poweredDoor;
+                if (door.currentFault == MetroDoor.FaultType.Type3)
+                {
+                    door.currentFault = MetroDoor.FaultType.Type1;
+                }
+                else if (door.currentFault == MetroDoor.FaultType.Type4)
+                {
+                    door.currentFault = MetroDoor.FaultType.Type2;
+                }
+                else if (door.currentFault == MetroDoor.FaultType.Type5)
+                {
+                    StartCoroutine(door.HandleMazePuzzleWithNoChange(door));
+                }
 
-            if (door.currentFault == MetroDoor.FaultType.Type3)
-            {
-                door.currentFault = MetroDoor.FaultType.Type1;
+                door.TryInteract(this);
+                awaitingSecondFPress = false;
+                poweredDoor = null;
             }
-            else if (door.currentFault == MetroDoor.FaultType.Type4)
-            {
-                door.currentFault = MetroDoor.FaultType.Type2;
-            }
-            else if (door.currentFault == MetroDoor.FaultType.Type5)
-            {
-                door.currentFault = MetroDoor.FaultType.Type2;
-                door.StartMazePuzzleWithNoChange();
-                door.currentFault = MetroDoor.FaultType.Type1;
-            }
-
-            door.TryInteract(this);
-            awaitingSecondFPress = false;
-            poweredDoor = null;
         }
     }
     #endregion
@@ -486,57 +481,18 @@ public class PlayerController : MonoBehaviour
     public void EnterIllusionWorld()
     {
         currentState = PlayerState.Illusion;
-
         UIManager.Instance.ShowMessage("你进入了幻觉世界...");
 
-        SetIllusionHiddenObjects(false);
-        Debug.Log("准备生成trigger");
-        Vector3 triggerPos = transform.position + Vector3.right * 10f;
-        GameObject layoutGO = GameObject.Find("Layout"); 
-
-        if (layoutGO != null)
-        {
-            currentExitTrigger = Instantiate(illusionExitTriggerPrefab, triggerPos, Quaternion.identity, layoutGO.transform);
-            Debug.Log("Trigger 挂在 Layout 下生成成功");
-        }
     }
-
-
-    void SetIllusionHiddenObjects(bool active)
-    {
-        foreach (GameObject go in GameObject.FindGameObjectsWithTag("Items"))
-        {
-            go.SetActive(active);
-        }//补充
-        foreach (GameObject go in GameObject.FindGameObjectsWithTag("Level2Smoke"))
-        {
-            go.SetActive(active);
-        }
-    }
-
+   
     public void ReturnFromIllusionWorld()
     {
+        currentState = PlayerState.Normal;
         UIManager.Instance.ShowMessage("你恢复了意识。");
-        Debug.Log($"玩家当前状态为：{currentState}");
-        currentState = PlayerState.Idle;
-        Debug.Log($"玩家当前状态为：{currentState}");
-        Rigidbody rb = GetComponent<Rigidbody>();
-        if (rb != null)
-        {
-            rb.isKinematic = true;
-            transform.position = PersistentDataContainer.enterPosition;
-            rb.isKinematic = false;
-        }
-        else
-        {
-            transform.position = PersistentDataContainer.enterPosition;
-        }
-
-        SetIllusionHiddenObjects(true);
-
-        if (currentExitTrigger != null)
-            Destroy(currentExitTrigger);
     }
+
+  
+
 
     public void BlockMovement()
     {

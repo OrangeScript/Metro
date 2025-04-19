@@ -13,6 +13,7 @@ public class MazePlayer : MonoBehaviour
     private List<Vector2> mousePositions = new List<Vector2>();
     private bool isTracking = false;
     [SerializeField]private float minDistance;
+    [SerializeField] private Camera mazeCamera;
     private List<SpriteRenderer> SRs;
 
     public bool failTheMaze = false;
@@ -89,7 +90,7 @@ public class MazePlayer : MonoBehaviour
 
     private void CheckForSpriteInteraction(Vector2 screenPosition)
     {
-        Vector3 worldPos = Camera.main.ScreenToWorldPoint(screenPosition);
+        Vector3 worldPos = mazeCamera.ScreenToWorldPoint(screenPosition);
         Vector2 worldPoint2D = new Vector2(worldPos.x, worldPos.y);
 
         RaycastHit2D hit = Physics2D.Raycast(worldPoint2D, Vector2.zero);

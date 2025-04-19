@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3209190928602224860
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8752634842808496817}
+  - component: {fileID: 8687715413402233813}
+  m_Layer: 0
+  m_Name: SmokeSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8752634842808496817
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3209190928602224860}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -5, y: 1.1, z: -0.8155891}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8687715413402233813
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3209190928602224860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d20a24ccd66577c4baa6f5d42b62ff92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soberParticlePrefab: {fileID: 4513043228653038140, guid: 5644f7851ff3f8641aa0083db3f50f62, type: 3}
+  level1ParticlePrefab: {fileID: 465713493119271700, guid: 638a748b1c24c394aa130074bc86edb0, type: 3}
+  level2ParticlePrefab: {fileID: 6887356635076798137, guid: 2ac96dbee28de45479d89bf1cae05cd6, type: 3}
+  level3ParticlePrefab: {fileID: 7375642606727827179, guid: 7c687f2c0cabfff418aa704a7df5030f, type: 3}
+  detectionRadius: 4
+  spreadInterval: 1
+  smokeLifetime: 10
+  initialSmokeAmount: 100
+  tagLevelMap:
+  - tag: SoberSmoke
+    level: 0
+  - tag: Level1Smoke
+    level: 1
+  - tag: Level2Smoke
+    level: 2
+  - tag: Level3Smoke
+    level: 3
+  activeSmoke: []
