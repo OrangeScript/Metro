@@ -90,7 +90,7 @@ public class MazePlayer : MonoBehaviour
 
     private void CheckForSpriteInteraction(Vector2 screenPosition)
     {
-        Vector3 worldPos = mazeCamera.ScreenToWorldPoint(screenPosition);
+        Vector3 worldPos = Camera.main.ScreenToWorldPoint(screenPosition);
         Vector2 worldPoint2D = new Vector2(worldPos.x, worldPos.y);
 
         RaycastHit2D hit = Physics2D.Raycast(worldPoint2D, Vector2.zero);
