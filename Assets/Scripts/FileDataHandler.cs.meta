@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Scripts/FileDataHandler.cs.meta
+guid: c344e6389942d784ea5b99eed3262272
+========
+guid: d50a9ba69434bfa42b0a282c558df955
+>>>>>>>> origin/master:Assets/Scripts/Camera/CameraSwitcher.cs.meta
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

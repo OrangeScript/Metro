@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Scripts/FileDataHandler.cs.meta
+guid: 8e6eb42ed470dfc439a125526cdf845f
+========
 guid: d50a9ba69434bfa42b0a282c558df955
+>>>>>>>> origin/master:Assets/Scripts/Camera/CameraSwitcher.cs.meta
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2

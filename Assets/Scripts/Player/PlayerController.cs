@@ -88,7 +88,7 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Alpha5))
         {
-            SceneManager.LoadScene("Maze");
+            SaveManager.instance.LoadScene("Maze");
         }
         if (ArrowManager.S.IsInWave())
         {

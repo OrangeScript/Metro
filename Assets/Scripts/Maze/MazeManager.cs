@@ -1,7 +1,7 @@
 using UnityEngine;
 using System;
 using UnityEngine.SceneManagement;
-public class MazeManager : MonoBehaviour
+public class MazeManager : MonoBehaviour,ISaveManager
 {
     public static MazeManager instance;
     private Action onMazeComplete; // 迷宫解谜成功后的回调
@@ -21,7 +21,6 @@ public class MazeManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F))
         {
             player=mazeGenerator.GenerateMaze();
-           
             //mazeGenerator.RenderMaze();
         }
         //test return
@@ -37,9 +36,16 @@ public class MazeManager : MonoBehaviour
         }
         if (player != null && player.winTheMaze)
         {
-            // 迷宫解谜成功，执行回调
-            onMazeComplete?.Invoke();
+            Debug.Log("win");
+            //// 迷宫解谜成功，执行回调
+            BackToNormalScene(onMazeComplete);
         }
+    }
+
+    private static void BackToNormalScene(Action action)
+    {
+        SaveManager.instance.gameData1.money += 10000;
+        SaveManager.instance.LoadScene("NormalScene",action);
     }
 
     private void RestartMaze()
@@ -62,5 +68,14 @@ public class MazeManager : MonoBehaviour
         onMazeComplete = action; // 设置回调
         onMazeFailed = failedAction;
     }
-    
+    [SerializeField] private int mazeM;
+    public void LoadData(GameData _data)
+    {
+        mazeM = _data.mazeMoney;
+    }
+
+    public void SaveData(ref GameData _data)
+    {
+        _data.mazeMoney = mazeM;
+    }
 }

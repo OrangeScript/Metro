@@ -54,7 +54,6 @@ MonoBehaviour:
   itemIcon: {fileID: 450290032408717528}
   backgroundImage: {fileID: 4744551844698386215}
   itemDescriptionText: {fileID: 0}
-  textImage: {fileID: 0}
 --- !u!1 &4127902732127846389
 GameObject:
   m_ObjectHideFlags: 0
