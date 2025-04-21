@@ -11,7 +11,7 @@ public class ExitTrigger : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             Debug.Log("playerÓëexit²úÉúÅö×²");
-            player.ReturnFromIllusionWorld();
+            //player.ReturnFromIllusionWorld();
         }
     }
 }

@@ -107,6 +107,7 @@ MonoBehaviour:
   prefabReference: {fileID: 3652430417070191378}
   useTrigger: 2
   isContinuousUse: 1
+  ground: {fileID: 0}
 --- !u!61 &3519593844170055559
 BoxCollider2D:
   m_ObjectHideFlags: 0

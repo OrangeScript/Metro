@@ -109,12 +109,13 @@ MonoBehaviour:
   prefabReference: {fileID: 7055682786665693090}
   useTrigger: 0
   isContinuousUse: 0
+  ground: {fileID: 0}
   level: 0
   isBurning: 0
   burnInterval: 1
-  smokeSystem: {fileID: 8687715413402233813, guid: 52a0ad8dabf6e8e439a672cee73b55e5, type: 3}
+  smokeSystem: {fileID: 0}
   targetRenderer: {fileID: 106692122223116937}
-  visualSprite: {fileID: 4138223980208024357, guid: 5100b75572e484e458e4340e2afe9454, type: 3}
+  visualSprite: {fileID: 21300000, guid: 981c785022ed7fc4981a17d9849a534d, type: 3}
   Flame: {fileID: 1903742977107458354}
   flameOffset: {x: 0.15, y: 1.2, z: 0}
 --- !u!61 &6880322085305709655
@@ -211,15 +212,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1355975129314451126, guid: 3c4537b9e1a47a94083f9c2ff1b589c5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.51
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 1355975129314451126, guid: 3c4537b9e1a47a94083f9c2ff1b589c5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.97
+      value: 1.2
       objectReference: {fileID: 0}
     - target: {fileID: 1355975129314451126, guid: 3c4537b9e1a47a94083f9c2ff1b589c5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.045
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1355975129314451126, guid: 3c4537b9e1a47a94083f9c2ff1b589c5, type: 3}
       propertyPath: m_LocalRotation.w

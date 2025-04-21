@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7824389276817523779}
   m_Layer: 7
   m_Name: Crowbar
-  m_TagString: Untagged
+  m_TagString: Crowbar
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -29,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.86, y: -4.4, z: 0.021056673}
-  m_LocalScale: {x: 10.758, y: 10.758, z: 10.758}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -100,13 +100,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: "\u64AC\u68CD"
   itemIcon: {fileID: 21300000, guid: 1fd0c201c710392478fdc4643740ca75, type: 3}
-  itemDescription: 
+  itemDescription: "\u64AC\u5F00\u5904\u4E8E\u64AC\u68CD\u72B6\u6001\u7684\u95E8"
   carryType: 3
   destroyOnUse: 0
   poolTag: Items
-  prefabReference: {fileID: 0}
+  prefabReference: {fileID: 8964667004102005399}
   useTrigger: 0
   isContinuousUse: 0
+  ground: {fileID: 0}
 --- !u!61 &7824389276817523779
 BoxCollider2D:
   m_ObjectHideFlags: 0

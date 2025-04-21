@@ -480,7 +480,7 @@ public class PlayerController : MonoBehaviour
     #region 烟雾交互
     public void EnterIllusionWorld()
     {
-        currentState = PlayerState.Illusion;
+        //currentState = PlayerState.Illusion;
         UIManager.Instance.ShowMessage("你进入了幻觉世界...");
 
     }

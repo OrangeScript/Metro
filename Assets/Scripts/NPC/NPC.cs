@@ -90,7 +90,7 @@ public class NPC : Entity
     {
         // 显示对话UI
         string[] dialogue = GetCurrentDialogue();
-        //UIManager.Instance.ShowDialogue(dialogue);
+        UIManager.Instance.ShowDialogue(dialogue);
 
         // 等待对话完成
         while (UIManager.Instance.IsDialogueActive)

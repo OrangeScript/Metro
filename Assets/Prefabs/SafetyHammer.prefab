@@ -29,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 11.5, y: -4.68, z: 0.021056673}
-  m_LocalScale: {x: 8.927419, y: 8.927419, z: 8.927419}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -145,12 +145,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: "\u5B89\u5168\u9524"
   itemIcon: {fileID: 21300000, guid: b0f440b99c6586b46abbe0ce74a54f0d, type: 3}
-  itemDescription: 
+  itemDescription: "\u7838\u788E\u7A97\u6237"
   carryType: 3
-  destroyOnUse: 1
+  destroyOnUse: 0
   poolTag: Items
-  prefabReference: {fileID: 0}
-  useTrigger: 0
+  prefabReference: {fileID: 7949846422035126487}
+  useTrigger: 1
   isContinuousUse: 0
+  ground: {fileID: 0}
   hitsRequired: 3
-  hitCooldown: 0.5
+  hitCooldown: 0.1

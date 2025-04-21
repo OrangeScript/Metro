@@ -8,6 +8,8 @@ public class UIManager : MonoBehaviour
     private GameObject mazePanel;
     public GameObject messagePanel;
     public Text messageText;
+    public GameObject dialogPanel;
+    public Text dialogText;
 
     [SerializeField] private GameObject interactionPrompt;
     [SerializeField] private Text interactionText;
@@ -19,6 +21,7 @@ public class UIManager : MonoBehaviour
         Instance = this;
         HideInteractionPrompt();
         messagePanel.SetActive(false);
+        dialogPanel.SetActive(false);  
     }
 
     public void ShowInteractionPrompt(string message, Vector3 worldPosition)
@@ -56,6 +59,12 @@ public class UIManager : MonoBehaviour
     {
         messageText.text = message;
         messagePanel.SetActive(true);   
+    }
+
+    public void ShowDialogue(string[] dialogue)
+    {
+        dialogText.text = string.Join("\n", dialogue);
+        dialogPanel.SetActive(true);
     }
 
 }
