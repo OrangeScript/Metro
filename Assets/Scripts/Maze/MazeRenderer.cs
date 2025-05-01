@@ -11,11 +11,11 @@ public class MazeRenderer : MonoBehaviour
     public GameObject endPrefab;
 
     public float cellSize = 1f;
-    public void RenderStartAndEnd(Vector3 startPos,Vector3 endPos)
+    public void RenderStartAndEnd(Vector3 startPos, Vector3 endPos)
     {
-        Instantiate(startPrefab, startPos, Quaternion.identity,transform);
+        Instantiate(startPrefab, startPos, Quaternion.identity, transform);
 
-        Instantiate(endPrefab, endPos, Quaternion.identity,transform);
+        Instantiate(endPrefab, endPos, Quaternion.identity, transform);
     }
 
     public void DrawMaze(int[,] maze)
@@ -41,13 +41,13 @@ public class MazeRenderer : MonoBehaviour
             {
                 if (maze[x, y] == 0)
                 {
-                    Vector3 pos = new Vector3(x * cellSize + offsetX, y*cellSize+offsetY,0);
+                    Vector3 pos = new Vector3(x * cellSize + offsetX, y * cellSize + offsetY, 0);
                     Instantiate(wallPrefab, pos, Quaternion.identity, transform);
                 }
                 else if (maze[x, y] == 1)
                 {
                     Vector3 pos = new Vector3(x * cellSize + offsetX, y * cellSize + offsetY, 0);
-                    var path=Instantiate(pathPrefab, pos, Quaternion.identity, transform);
+                    var path = Instantiate(pathPrefab, pos, Quaternion.identity, transform);
                     path.name = $"Path({x},{y})";
                     //Debug.Log($"Éú³É Path({x},{y})");
                 }

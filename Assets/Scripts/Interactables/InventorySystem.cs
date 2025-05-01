@@ -45,22 +45,36 @@ public class InventorySystem : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             ToggleInventory();
-            return; 
+            return;
         }
 
         if (isInventoryOpen)
         {
             HandleEquipmentInput();
+            UIManager.Instance.ShowInteractUI(false, "[F]拾取");
             Time.timeScale = 0;
         }
         else
         {
             player.HandleInteractionInput();
             player.HandleUseItemInput();
-            Time.timeScale = 1; 
+            Time.timeScale = 1;
+            HandleUnequipment();
+            HandleReturnEquipment();
         }
     }
 
+    public PlayerController GetPlayer()
+    {
+        return player;
+    }
+
+    public void SetPlayer(PlayerController player)
+    {
+        this.player = player;
+    }
+
+    #region 背包操作
     public void ToggleInventory()
     {
         isInventoryOpen = !isInventoryOpen;
@@ -68,7 +82,7 @@ public class InventorySystem : MonoBehaviour
         if (inventoryPanel != null)
         {
             inventoryPanel.SetActive(isInventoryOpen);
-            Debug.Log($"背包状态：{(isInventoryOpen ? "打开" : "关闭")}"); 
+            Debug.Log($"背包状态：{(isInventoryOpen ? "打开" : "关闭")}");
         }
     }
 
@@ -84,14 +98,18 @@ public class InventorySystem : MonoBehaviour
             }
         }
     }
+    #endregion
 
+    #region 装备物品
     public bool AddItem(InteractableObject item)
     {
-        GameObject slot = ObjectPoolManager.Instance.GetObject(inventorySlotPrefab);
-        slot.transform.SetParent(itemContainer);
+        item.gameObject.SetActive(false);
+        item.transform.SetParent(itemContainer);
 
-        ItemSlotUI slotUI = slot.GetComponent<ItemSlotUI>();
-        slotUI.LoadItem(item);
+        ItemSlotUI slot = ObjectPoolManager.Instance
+            .GetObject(inventorySlotPrefab)
+            .GetComponent<ItemSlotUI>();
+        slot.LoadItem(item);
 
         items.Add(item);
         UpdateInventoryUI();
@@ -110,39 +128,32 @@ public class InventorySystem : MonoBehaviour
     public void EquipItem(InteractableObject item)
     {
         if (!items.Contains(item)) return;
+        item.gameObject.SetActive(false);
 
-        // 直接使用物品实例而不是创建新实例
         InteractableObject equipTarget = item;
 
-        // 处理装备逻辑
+
         switch (equipTarget.carryType)
         {
             case InteractableObject.CarryType.Mask:
                 if (player.equippedMask != null)
-                    UnequipItem(player.equippedMask);
+                    ReturnToInventory(player.equippedMask);
                 player.equippedMask = equipTarget;
                 break;
 
             case InteractableObject.CarryType.Item:
                 if (player.equippedItem != null)
-                    UnequipItem(player.equippedItem);
+                    ReturnToInventory(player.equippedItem);
                 player.equippedItem = equipTarget;
                 break;
         }
 
-        // 从背包移动到装备状态
+        //从背包移动到装备状态
         items.Remove(item);
         ApplyEquipmentEffects(equipTarget);
         UpdateUI();
     }
 
-
-
-    private void UpdateUI()
-    {
-        UpdateInventoryUI();
-        UpdateEquippedUI();
-    }
 
 
     public void UnequipItem(InteractableObject item)
@@ -169,61 +180,97 @@ public class InventorySystem : MonoBehaviour
         RemoveEquipmentEffects(item);
         UpdateUI();
     }
+    public void HandleUnequipment()
+    {
+        if (Input.GetKeyDown(KeyCode.Q) && player.equippedItem != null)
+        {
+            UnequipItem(player.equippedItem);
+        }
+        if (Input.GetKeyDown(KeyCode.Q) && player.equippedMask != null)
+        {
+            UnequipItem(player.equippedMask);
+        }
+    }
+
+    public void HandleReturnEquipment()
+    {
+        if (Input.GetKeyDown(KeyCode.E) && player.equippedItem != null)
+        {
+            ReturnToInventory(player.equippedItem);
+        }
+        if (Input.GetKeyDown(KeyCode.E) && player.equippedMask != null)
+        {
+            ReturnToInventory(player.equippedMask);
+        }
+    }
+    public void ReturnToInventory(InteractableObject item)
+    {
+        if (item == null) return;
+
+        if (!items.Contains(item))
+        {
+            UnequipItem(item);
+            AddItem(item);
+
+            UpdateUI();
+        }
+        else
+        {
+            Debug.LogWarning("该物品已在背包中！");
+        }
+    }
+
 
     private void ReturnItemToPool(InteractableObject item)
     {
-        // 重置物品状态
+        item.gameObject.SetActive(true);
+        item.transform.SetParent(null);
         item.ResetLayer();
         item.OnUnequip();
 
-        // 返回对象池并生成世界实例
-        GameObject prefab = item.prefabReference;
-        ObjectPoolManager.Instance.ReturnObject(prefab, item.gameObject);
+        item.transform.position = player.transform.position;
 
-        // 生成新的世界实例
-        GameObject worldInstance = ObjectPoolManager.Instance.GetObject(prefab);
-        worldInstance.transform.position = player.transform.position;
-        worldInstance.SetActive(true);
     }
 
     public void DropItemToWorld(InteractableObject item)
     {
-        // 获取原始预制体
-        GameObject prefab = item.gameObject;
+        // 直接启用现有实例
+        item.gameObject.SetActive(true);
+        item.transform.position = player.transform.position;
 
-        // 从对象池获取新实例
-        GameObject newObj = ObjectPoolManager.Instance.GetObject(prefab);
-        newObj.transform.position = player.transform.position;
-        newObj.SetActive(true);
-
-        // 从背包移除
+ 
         items.Remove(item);
         UpdateInventoryUI();
     }
+    #endregion
 
-
+    #region 效果显示
     private void ApplyEquipmentEffects(InteractableObject item)
     {
-       item.gameObject.SetActive(true);
-       item.SetEquippedLayer();
-       player.EquipItem(item);
-       Debug.Log($"[装备调试] 装备物品: {item.name}，" +
-           $"位置: {item.transform.position}，" +
-            $"缩放: {item.transform.localScale}" +
-            $"父物体: {(item.transform.parent != null ? item.transform.parent.name : "null")}，" +
-            $"Sorting Layer: {item.GetComponent<SpriteRenderer>()?.sortingLayerName}");
+        item.gameObject.SetActive(true);
+        item.SetEquippedLayer();
+        player.EquipItem(item);
+        Debug.Log($"[装备调试] 装备物品: {item.name}，" +
+            $"位置: {item.transform.position}，" +
+             $"缩放: {item.transform.localScale}" +
+             $"父物体: {(item.transform.parent != null ? item.transform.parent.name : "null")}，" +
+             $"Sorting Layer: {item.GetComponent<SpriteRenderer>()?.sortingLayerName}");
     }
 
     private void RemoveEquipmentEffects(InteractableObject item)
     {
         player.UnequipItem(item.carryType);
     }
-
+    private void UpdateUI()
+    {
+        UpdateInventoryUI();
+        UpdateEquippedUI();
+    }
     private void UpdateInventoryUI()
     {
-        items.RemoveAll(item => item == null); 
+        items.RemoveAll(item => item == null);
 
-        var existingSlots = itemContainer.GetComponentsInChildren<ItemSlotUI>(true).ToList(); 
+        var existingSlots = itemContainer.GetComponentsInChildren<ItemSlotUI>(true).ToList();
 
         for (int i = 0; i < Mathf.Max(items.Count, existingSlots.Count); i++)
         {
@@ -232,30 +279,30 @@ public class InventorySystem : MonoBehaviour
                 ItemSlotUI slot;
                 if (i < existingSlots.Count)
                 {
-                    slot = existingSlots[i]; 
+                    slot = existingSlots[i];
                 }
                 else
                 {
                     GameObject slotObj = ObjectPoolManager.Instance.GetObject(inventorySlotPrefab);
                     slot = slotObj.GetComponent<ItemSlotUI>();
-                    slot.transform.SetParent(itemContainer); 
+                    slot.transform.SetParent(itemContainer);
                 }
 
-                slot.LoadItem(items[i]); 
-                slot.gameObject.SetActive(true); 
+                slot.LoadItem(items[i]);
+                slot.gameObject.SetActive(true);
             }
             else
             {
-                existingSlots[i].gameObject.SetActive(false); 
+                existingSlots[i].gameObject.SetActive(false);
                 ObjectPoolManager.Instance.ReturnObject(inventorySlotPrefab, existingSlots[i].gameObject); // 将槽位返回到对象池
             }
         }
-        StartCoroutine(DelayedLayoutRefresh()); 
+        StartCoroutine(DelayedLayoutRefresh());
     }
 
     private IEnumerator DelayedLayoutRefresh()
     {
-        yield return null; 
+        yield return null;
         if (itemContainer.TryGetComponent<GridLayoutGroup>(out var layout))
         {
             LayoutRebuilder.ForceRebuildLayoutImmediate(
@@ -279,7 +326,7 @@ public class InventorySystem : MonoBehaviour
         if (player.equippedMask != null)
             CreateEquippedSlot(player.equippedMask);
         if (player.equippedItem != null)
-            CreateEquippedSlot( player.equippedItem);
+            CreateEquippedSlot(player.equippedItem);
     }
 
     private void CreateEquippedSlot(InteractableObject item)
@@ -288,16 +335,6 @@ public class InventorySystem : MonoBehaviour
         ItemSlotUI slotUI = slot.GetComponent<ItemSlotUI>();
         slotUI.LoadItem(item);
     }
+    #endregion
 
-
-    public PlayerController GetPlayer()
-    {
-        return player;
-    }
-
-    // 设置玩家对象
-    public void SetPlayer(PlayerController player)
-    {
-        this.player = player;
-    }
 }

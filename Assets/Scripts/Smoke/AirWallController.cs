@@ -18,6 +18,7 @@ public class AirWallController : MonoBehaviour
     public void SetMaskState(bool hasMask)
     {
         airWallEnabled = !hasMask; 
+        if(hasMask==false) UIManager.Instance.ShowMessage("烟雾太浓，你无法前进！");
         ApplyState();
     }
 
@@ -25,6 +26,7 @@ public class AirWallController : MonoBehaviour
     {
         if (col2D != null)
         {
+            Debug.Log("空气墙消失!");
             col2D.enabled = airWallEnabled;
         }
 

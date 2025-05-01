@@ -1,7 +1,7 @@
 using UnityEngine;
 using System;
 using UnityEngine.SceneManagement;
-public class MazeManager : MonoBehaviour,ISaveManager
+public class MazeManager : MonoBehaviour
 {
     public static MazeManager instance;
     private Action onMazeComplete; // 迷宫解谜成功后的回调
@@ -10,7 +10,7 @@ public class MazeManager : MonoBehaviour,ISaveManager
     public MazeGenerator mazeGenerator; // 迷宫生成器
     public MazePlayer player; // 监听玩家解谜进度
     [SerializeField] public GameObject playerPrefab;
-    
+
     private void Awake()
     {
         instance = this;
@@ -20,7 +20,8 @@ public class MazeManager : MonoBehaviour,ISaveManager
         //press space to begin//test method
         if (Input.GetKeyDown(KeyCode.F))
         {
-            player=mazeGenerator.GenerateMaze();
+            player = mazeGenerator.GenerateMaze();
+
             //mazeGenerator.RenderMaze();
         }
         //test return
@@ -36,23 +37,10 @@ public class MazeManager : MonoBehaviour,ISaveManager
         }
         if (player != null && player.winTheMaze)
         {
-            Debug.Log("win");
-            //// 迷宫解谜成功，执行回调
-            BackToNormalScene(onMazeComplete);
+            // 迷宫解谜成功，执行回调
+            onMazeComplete?.Invoke();
         }
     }
-
-    private static void BackToNormalScene(Action action)
-    {
-        SaveManager.instance.gameData1.money += 10000;
-        SaveManager.instance.LoadScene("NormalScene",action);
-    }
-
-    private void RestartMaze()
-    {
-        player = mazeGenerator.GenerateMaze();
-    }
-
     private void DestroyMaze()
     {
         Destroy(player.gameObject);
@@ -62,20 +50,11 @@ public class MazeManager : MonoBehaviour,ISaveManager
         }
     }
 
-    public void StartMazePuzzle(Action action,Action failedAction)
+    public void StartMazePuzzle(Action action, Action failedAction)
     {
         player = mazeGenerator.GenerateMaze();
         onMazeComplete = action; // 设置回调
         onMazeFailed = failedAction;
     }
-    [SerializeField] private int mazeM;
-    public void LoadData(GameData _data)
-    {
-        mazeM = _data.mazeMoney;
-    }
 
-    public void SaveData(ref GameData _data)
-    {
-        _data.mazeMoney = mazeM;
-    }
 }

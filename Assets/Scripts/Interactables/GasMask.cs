@@ -5,9 +5,6 @@ using UnityEngine.UI;
 
 public class GasMask : InteractableObject
 {
-
-
-
     public override void OnUnequip()
     {
         base.OnUnequip();

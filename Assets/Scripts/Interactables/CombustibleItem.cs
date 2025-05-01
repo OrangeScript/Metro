@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using static UnityEditor.Progress;
 public class CombustibleItem : InteractableObject
 {
     public enum CombustibleLevel { L1, L2, L3, Sober }
@@ -13,21 +14,31 @@ public class CombustibleItem : InteractableObject
     public SmokeSystem smokeSystem;
     private Coroutine burnCoroutine;
 
+    [Header("烟雾生成控制")]
+    public int maxSmokeCount = 10;     //最大烟雾数量
+    private int currentSmokeCount = 0; //当前已生成数量
+
+    [Header("烟雾随机偏移")]
+    public Vector2 smokeRandomRange = new Vector2(0.5f, 0.5f);
     [Header("视觉表现")]
     public SpriteRenderer targetRenderer; 
     public Sprite visualSprite;
 
     [Header("火焰特效")]
     public GameObject Flame;
-    public Vector3 flameOffset = new Vector3(0, 0.5f, 0);
+    public Vector3 flameOffset = new Vector3(0.15f, 1f, -0.1f);
+    public Vector3 smokeOffset = new Vector3(0f, 0.9f, -0.9f);
 
     private Rigidbody2D rb;
+    public BoxCollider2D itemCollider;
 
     protected override void Start()
     {
         base.Start();
         rb = GetComponent<Rigidbody2D>();
+        smokeSystem=FindObjectOfType<SmokeSystem>();
         if (rb == null) rb = gameObject.AddComponent<Rigidbody2D>();
+        itemCollider = rb.GetComponent<BoxCollider2D>();
         rb.isKinematic = true;
         destroyOnUse = true;
 
@@ -66,10 +77,13 @@ public class CombustibleItem : InteractableObject
 
     private void ThrowAndIgnite()
     {
+        ResetLayer();
         transform.SetParent(null);
         rb.isKinematic = false;
-        rb.AddForce(player.transform.right * 5f, ForceMode2D.Impulse);
-        StartCoroutine(DelayIgnite(0.5f));
+        transform.position = player.transform.position;
+
+        rb.AddForce(player.transform.right * 10f, ForceMode2D.Impulse);
+        StartCoroutine(DelayIgnite(0.2f));
     }
 
     private IEnumerator DelayIgnite(float delay)
@@ -94,14 +108,16 @@ public class CombustibleItem : InteractableObject
         if (!isBurning)
         {
             isBurning = true;
-
+            if (itemCollider != null)
+            {
+                itemCollider.isTrigger = false;  
+            }
             if (Flame != null)
             {
-                Flame.transform.position = transform.position + flameOffset;
+                Flame.transform.localPosition = flameOffset;
                 Flame.SetActive(true);
             }
             burnCoroutine = StartCoroutine(GenerateSmoke());
-            StartCoroutine(DelayedDestroy());
             
             Debug.Log($"{level} 级燃烧物开始燃烧！");
         }
@@ -113,6 +129,10 @@ public class CombustibleItem : InteractableObject
         if (isBurning)
         {
             isBurning = false;
+            if (itemCollider != null)
+            {
+                itemCollider.isTrigger = true;  
+            }
             if (Flame != null)
                 Flame.SetActive(false);
 
@@ -123,20 +143,36 @@ public class CombustibleItem : InteractableObject
         }
     }
 
-    private IEnumerator DelayedDestroy()
-    {
-        yield return new WaitForSeconds(5.0f);
-        Destroy(gameObject);
-    }
     private IEnumerator GenerateSmoke()
     {
         SmokeSystem.SmokeLevel smokeLevel = ConvertToSmokeLevel(level);
-        while (isBurning)
+        currentSmokeCount = 0; 
+
+        while (currentSmokeCount < maxSmokeCount && isBurning)
         {
-            smokeSystem.AddSmoke(transform.position, smokeLevel, 1);
+            Vector3 randomOffset = new Vector3(
+                Random.Range(-smokeRandomRange.x, smokeRandomRange.x),
+                Random.Range(-smokeRandomRange.y, smokeRandomRange.y),
+                0
+            );
+
+            smokeSystem.AddSmoke(
+                transform.position + smokeOffset + randomOffset,
+                smokeLevel,
+                1,
+                Quaternion.Euler(-135f, 0f, 0f)
+            );
+
+            currentSmokeCount++;
             yield return new WaitForSeconds(burnInterval);
         }
+
+        Debug.Log("燃烧结束，物体销毁。");
+        Destroy(gameObject);
     }
+
+
+
 
     private SmokeSystem.SmokeLevel ConvertToSmokeLevel(CombustibleLevel level)
     {

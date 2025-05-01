@@ -24,7 +24,8 @@ public abstract class InteractableObject : MonoBehaviour
     public GameObject prefabReference;
     public UseTrigger useTrigger;
     public bool isContinuousUse = false;
-    [SerializeField] protected Transform ground;
+    //[SerializeField] protected Transform ground;
+
 
     private void Awake()
     {

@@ -10,7 +10,7 @@ public class SafetyHammer : InteractableObject
     private int currentHits; // 当前砸击次数
     private float lastHitTime; // 上次砸击时间
     private Window currentTargetWindow; // 当前目标窗户
-    private float interactRadius = 5f;
+    private float interactRadius = 10f;
 
     protected override void Start()
     {
@@ -63,7 +63,7 @@ public class SafetyHammer : InteractableObject
         }
         else
         {
-            Debug.LogError("Window is null");
+            Debug.Log("Window is null");
         }
     }
 

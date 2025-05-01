@@ -110,14 +110,18 @@ public class ObjectPoolManager : MonoBehaviour
             return;
         }
 
-        obj.SetActive(false); // 确保对象被禁用
-        Renderer renderer = obj.GetComponent<Renderer>();
-        if (renderer != null)
+        // 自动创建对象池如果不存在
+        if (!_prefabPoolMap.ContainsKey(prefab))
         {
-            renderer.enabled = true; // 保证渲染器启用
+            Debug.LogWarning($"检测到未注册的预制体 {prefab.name}，自动创建默认池");
+            CreateNewPool(prefab, 3);
         }
-        obj.transform.SetParent(transform); // 挂载到对象池管理器下
-        _prefabPoolMap[prefab].Enqueue(obj); // 将对象返回到对象池
+
+        obj.SetActive(false);
+        Renderer renderer = obj.GetComponent<Renderer>();
+        if (renderer != null) renderer.enabled = true;
+        obj.transform.SetParent(transform);
+        _prefabPoolMap[prefab].Enqueue(obj);
     }
 
     private void CreateNewPool(GameObject prefab, int initialSize)

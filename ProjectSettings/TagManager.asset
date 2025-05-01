@@ -20,6 +20,12 @@ TagManager:
   - Manager
   - Layout
   - CombustibleItem
+  - UnconsciousNPC
+  - Vent1
+  - Vent2
+  - Vent3
+  - Vent4
+  - Vent5
   layers:
   - Default
   - TransparentFX

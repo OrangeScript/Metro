@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float walkSpeed = 5f;
     [SerializeField]private Vector2 movement;
     private Rigidbody2D rb;
+    private CapsuleCollider2D col;
 
     [Header("组件引用")]
     private Animator anim;
@@ -25,14 +26,12 @@ public class PlayerController : MonoBehaviour
     
     [Header("交互设置")]
     [SerializeField] private Transform maskEquipPoint;
-    [SerializeField] private Transform npcEquipPoint;
     [SerializeField] private Transform itemEquipPoint;
-    [SerializeField] private float npcSpeedPenalty = 0.7f;
     public InteractableObject equippedMask;
     public InteractableObject equippedItem;
     private InteractableObject currentCarriedObject;
     private CarryType currentCarryType = CarryType.None;
-    [SerializeField] private float interactRadius = 3f;
+    [SerializeField] private float interactRadius = 2f;
     [SerializeField] private LayerMask interactableLayer;
     public InteractableObject nearestInteractable;
 
@@ -50,9 +49,9 @@ public class PlayerController : MonoBehaviour
     [Header("动画控制")]
     private int[] protectedStates = { 2, 3, 4 }; // Climbing, Carrying, Illusion
 
-    [Header("传送设置")]
-    public GameObject illusionExitTriggerPrefab;
-    private GameObject currentExitTrigger;
+    [Header("NPC设置")]
+    public NPC currentNPC;
+    private NPC carriedNPC;
     //持久化数字容器，存储传送前数据
     public class PersistentDataContainer : MonoBehaviour
     {
@@ -69,6 +68,7 @@ public class PlayerController : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        col = GetComponent<CapsuleCollider2D>();
         anim = GetComponent<Animator>();
         rb.interpolation = RigidbodyInterpolation2D.Interpolate;//使运动看起来更加平滑
         inventory = GetComponent<InventorySystem>();
@@ -86,14 +86,21 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha5))
-        {
-            SaveManager.instance.LoadScene("Maze");
-        }
         if (ArrowManager.S.IsInWave())
         {
             rb.velocity = Vector2.zero;  
             return; 
+        }
+        TryInteractWithNPC();
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            if (currentState == PlayerState.Carrying) {
+                TryDropNPC();
+            }
+            else
+            {
+                TryCarryNPC();
+            }
         }
         HandleInput();
         HandleImmediateAnimation();
@@ -120,7 +127,7 @@ public class PlayerController : MonoBehaviour
         HandleTunnelState(horizontal, vertical);
         if (isInTunnel) return;
 
-        HandleManualStateSwitch();
+        //HandleManualStateSwitch();
         HandleAutoStateTransition(hasMovementInput);
         HandleMovementDirection(horizontal, vertical);
     }
@@ -157,9 +164,6 @@ public class PlayerController : MonoBehaviour
             case PlayerState.Climbing:
                 movement = new Vector2(0, v);
                 break;
-            case PlayerState.Illusion:
-                movement = new Vector2(h, 0);
-                break;
             default:
                 movement = new Vector2(h, v);
                 break;
@@ -194,6 +198,7 @@ public class PlayerController : MonoBehaviour
     #endregion
 
     #region 动画系统
+
     private void HandleImmediateAnimation()
     {
         if (!anim) return;
@@ -202,8 +207,7 @@ public class PlayerController : MonoBehaviour
         anim.SetFloat("inputX", movement.x);
         anim.SetFloat("inputY", movement.y);
         anim.SetFloat("Speed", CalculateAnimationSpeed());
-        anim.SetBool("InTunnel", isInTunnel);
-        //test:anim.SetBool("IsCrawling", currentState == PlayerState.Crawling);
+        anim.SetBool("IsCrawling", currentState == PlayerState.Crawling);
 
         HandleSpecialAnimations();
     }
@@ -213,7 +217,6 @@ public class PlayerController : MonoBehaviour
         return currentState switch
         {
             PlayerState.Climbing => Mathf.Abs(movement.y),
-            PlayerState.Illusion => Mathf.Abs(movement.x),
             _ => movement.magnitude
         };
     }
@@ -242,7 +245,7 @@ public class PlayerController : MonoBehaviour
         if (currentState == PlayerState.Crawling||(currentState==PlayerState.Carrying&&currentCarryType==InteractableObject.CarryType.NPC))
             baseSpeed *= 0.6f;
         else if (currentState == PlayerState.Illusion)
-            baseSpeed *= 1.2f;
+            baseSpeed *= 0.3f;
 
         return baseSpeed;
     }
@@ -337,6 +340,20 @@ public class PlayerController : MonoBehaviour
     {
         Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, interactRadius, interactableLayer);
         nearestInteractable = GetNearestInteractable(hits);
+        if (nearestInteractable != null)
+        {
+            if (nearestInteractable is CombustibleItem combustibleItem && !combustibleItem.isBurning)
+            {
+                UIManager.Instance.ShowInteractUI(true,"[F]拾取");
+                UIManager.Instance.UpdateInteractUIPosition();
+            }
+            else if (!(nearestInteractable is CombustibleItem))
+            {
+                // 如果不是 CombustibleItem，显示交互UI
+                UIManager.Instance.ShowInteractUI(true, "[F]拾取");
+                UIManager.Instance.UpdateInteractUIPosition();
+            }
+        }
     }
 
     private InteractableObject GetNearestInteractable(Collider2D[] cols)
@@ -444,7 +461,6 @@ public class PlayerController : MonoBehaviour
         return item.carryType switch
         {
             CarryType.Mask => maskEquipPoint,
-            CarryType.NPC => npcEquipPoint,
             CarryType.Item => itemEquipPoint,
             _ => transform 
         };
@@ -478,28 +494,71 @@ public class PlayerController : MonoBehaviour
     #endregion
 
     #region 烟雾交互
-    public void EnterIllusionWorld()
-    {
-        //currentState = PlayerState.Illusion;
-        UIManager.Instance.ShowMessage("你进入了幻觉世界...");
-
-    }
-   
-    public void ReturnFromIllusionWorld()
-    {
-        currentState = PlayerState.Normal;
-        UIManager.Instance.ShowMessage("你恢复了意识。");
-    }
-
-  
-
-
     public void BlockMovement()
     {
         airWall = FindObjectOfType<AirWallController>();
-        airWall.SetMaskState(false);
-        UIManager.Instance.ShowMessage("烟雾太浓，你无法前进！");
+        airWall.SetMaskState(equippedMask);
     }
 
+    #endregion
+
+    #region NPC交互
+    public void TryInteractWithNPC()
+    {
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, interactRadius);
+        foreach (var collider in colliders)
+        {
+            NPC npc = collider.GetComponent<NPC>();
+            if (npc != null)
+            {
+                currentNPC = npc;
+                UIManager.Instance.ShowInteractUI(true, "[T]对话");
+                UIManager.Instance.UpdateInteractWithNPCUIPosition();
+                if (Input.GetKeyDown(KeyCode.T))currentNPC.Interact(this);  
+                break;
+            }
+        }
+    }
+
+    public void TryCarryNPC()
+    {
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, interactRadius);
+        NPC closestNPC = null;
+        float closestDistance = Mathf.Infinity;
+
+        foreach (var collider in colliders)
+        {
+            NPC npc = collider.GetComponent<NPC>();
+            if (npc != null && npc.CompareTag("UnconsciousNPC") && npc.gameObject.activeSelf)
+            {
+                float distance = Vector2.Distance(transform.position, npc.transform.position);
+
+                if (distance < closestDistance)
+                {
+                    closestDistance = distance;
+                    closestNPC = npc;
+                }
+            }
+        }
+
+        if (closestNPC != null)
+        {
+            carriedNPC = closestNPC;
+            carriedNPC.gameObject.SetActive(false);
+            TransitionState(PlayerState.Carrying);
+        }
+    }
+
+    public void TryDropNPC()
+    {
+        if (carriedNPC != null)
+        {
+            carriedNPC.gameObject.SetActive(true);
+            carriedNPC.stateMachine.Initialize(carriedNPC.unconsciousState);
+            carriedNPC.transform.position = transform.position + new Vector3(5f, 0, 0); 
+            carriedNPC = null;
+            TransitionState(PlayerState.Normal);
+        }
+    }
     #endregion
 }

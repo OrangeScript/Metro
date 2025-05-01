@@ -16,10 +16,6 @@ public class NPCNormalState : NPCState
     public override void Update()
     {
         base.Update();
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            stateMachine.ChangeState(npcBase.hallucinatingState);
-        }
     }
     public override void Exit()
     {

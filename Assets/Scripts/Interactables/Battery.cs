@@ -28,7 +28,7 @@ public class Battery : InteractableObject
             {
                 isPowered = true;
                 Debug.Log("车门已通电，请再次按下 F 以修复故障");
-
+                UIManager.Instance.ShowMessage("车门已通电，请再次按下 F 以修复故障");
                 player.awaitingSecondFPress = true;
                 player.poweredDoor = door;
             }

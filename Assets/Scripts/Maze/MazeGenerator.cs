@@ -9,7 +9,7 @@ public class MazeGenerator : MonoBehaviour
 
     [Header("References")]
     public MazeRenderer mazeRenderer;
-    
+
 
     private int[,] maze;
     public Vector3 start;
@@ -84,7 +84,7 @@ public class MazeGenerator : MonoBehaviour
         maze = new int[width, height];
         InitializeMaze();
 
-        startCell = new Vector2Int(Random.Range(1,width-1), Random.Range(1,height-1));
+        startCell = new Vector2Int(Random.Range(1, width - 1), Random.Range(1, height - 1));
         maze[startCell.x, startCell.y] = 1;
 
         Stack<Vector2Int> stack = new Stack<Vector2Int>();
@@ -108,16 +108,16 @@ public class MazeGenerator : MonoBehaviour
                 stack.Push(chosen);
             }
         }
-        while ((endCell=FindRandomDeadEnd() )== startCell)
+        while ((endCell = FindRandomDeadEnd()) == startCell)
         {
         }
         mazeRenderer.DrawMaze(maze);
         float offsetX = -(width * cellSize) / 2f + cellSize / 2f;
         float offsetZ = -(height * cellSize) / 2f + cellSize / 2f;
 
-        Vector3 startPos = new Vector3(startCell.x * cellSize + offsetX, startCell.y * cellSize + offsetZ,0);
+        Vector3 startPos = new Vector3(startCell.x * cellSize + offsetX, startCell.y * cellSize + offsetZ, 0);
 
-        Vector3 endPos = new Vector3(endCell.x * cellSize + offsetX, endCell.y * cellSize + offsetZ,0);
+        Vector3 endPos = new Vector3(endCell.x * cellSize + offsetX, endCell.y * cellSize + offsetZ, 0);
         mazeRenderer.RenderStartAndEnd(startPos, endPos);
         GameObject p = Instantiate(MazeManager.instance.playerPrefab, startPos, Quaternion.identity);
         return p.GetComponent<MazePlayer>();

@@ -12,7 +12,6 @@ public class MetroDoor : MonoBehaviour
     [Header("门的状态")]
     public DoorState currentState = DoorState.Closed;
     public FaultType currentFault = FaultType.None;
-    private FaultType lastHandledFault = FaultType.None;
 
     [Header("门的属性")]
     public float openSpeed = 1.0f;
@@ -80,8 +79,6 @@ public class MetroDoor : MonoBehaviour
 
     private void HandleFaultUpdate()
     {
-        //if (currentFault == lastHandledFault)
-            //return;
         switch (currentFault)
         {
             case FaultType.Type1:
@@ -174,14 +171,21 @@ public class MetroDoor : MonoBehaviour
     }
     public IEnumerator HandleMazePuzzleWithNoChange(MetroDoor door)
     {
-        yield return StartCoroutine(door.StartMazePuzzleWithNoChange(() =>
+        yield return StartCoroutine(door.StartMazePuzzleWithNoChange((success) =>
         {
-            Debug.Log("迷宫解谜完成，后续操作执行！");
-            door.currentFault = MetroDoor.FaultType.Type1;  
+            if (success) // 新增条件判断
+            {
+                Debug.Log("迷宫解谜完成，后续操作执行！");
+                door.currentFault = MetroDoor.FaultType.Type1;
+            }
+            else
+            {
+                Debug.Log("解谜失败，不执行后续操作"); 
+            }
         }));
 
     }
-    public IEnumerator StartMazePuzzleWithNoChange(Action onCompleted) { 
+    public IEnumerator StartMazePuzzleWithNoChange(Action<bool> onCompleted) { 
 
         Debug.Log("进入迷宫解谜界面但不会影响门状态...");
 
@@ -190,15 +194,16 @@ public class MetroDoor : MonoBehaviour
         Action onLocalSolved = () =>
         {
             Debug.Log("迷宫解谜成功，但门状态不变");
+            UIManager.Instance.ShowMessage("按下F进入下一解谜阶段");
             isCompleted = true;
-            onCompleted?.Invoke();
+            onCompleted?.Invoke(true);
         };
 
         Action onLocalFailed = () =>
         {
             Debug.Log("迷宫解谜失败！");
             isCompleted = true;
-            onCompleted?.Invoke();
+            onCompleted?.Invoke(false);
         };
 
         // 注册一次性场景加载监听
@@ -217,6 +222,7 @@ public class MetroDoor : MonoBehaviour
         else
         {
             Debug.LogError("MazeManager 实例未找到！");
+            onCompleted?.Invoke(false);
         }
 
         // 等待解谜完成
@@ -244,15 +250,6 @@ public class MetroDoor : MonoBehaviour
         UIManager.Instance.ShowMessage("迷宫解谜成功，门变为卡住状态!");
         currentState = DoorState.Jammed;
         anim.SetInteger("DoorState", (int)currentState);
-    }
-
-
-    private void OnMazeSolvedNoChange()
-    {
-        Debug.Log("迷宫解谜成功，但门状态不变");
-        UIManager.Instance.ShowMessage("迷宫解谜成功，门状态不变!");
-
-        StartCoroutine(UnloadMazeScene());
     }
 
     private void OnMazeFailed()

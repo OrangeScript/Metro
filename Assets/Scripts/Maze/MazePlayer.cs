@@ -12,7 +12,7 @@ public class MazePlayer : MonoBehaviour
 
     private List<Vector2> mousePositions = new List<Vector2>();
     private bool isTracking = false;
-    [SerializeField]private float minDistance;
+    [SerializeField] private float minDistance;
     [SerializeField] private Camera mazeCamera;
     private List<SpriteRenderer> SRs;
 
@@ -30,13 +30,10 @@ public class MazePlayer : MonoBehaviour
 
     private void Update()
     {
-        //MoveCharacter();
-        if(!isLocked) {
-            MouseInput();
-        }
-        if (Input.GetKeyDown(KeyCode.V))
+        MoveCharacter();
+        if (!isLocked)
         {
-            SaveManager.instance.LoadScene("NormalScene");
+            MouseInput();
         }
     }
 
@@ -61,6 +58,11 @@ public class MazePlayer : MonoBehaviour
         isTracking = false;
         Debug.Log("Stop tracking mouse positions");
         StartCoroutine(ResetRun());
+        // 处理鼠标轨迹
+        //foreach (var pos in mousePositions)
+        //{
+        //    Debug.Log("Mouse Position: " + pos);
+        //}
     }
 
     private void ContinueTracing()
@@ -90,32 +92,32 @@ public class MazePlayer : MonoBehaviour
 
     private void CheckForSpriteInteraction(Vector2 screenPosition)
     {
-        Vector3 worldPos = Camera.main.ScreenToWorldPoint(screenPosition);
+        Vector3 worldPos = mazeCamera.ScreenToWorldPoint(screenPosition);
         Vector2 worldPoint2D = new Vector2(worldPos.x, worldPos.y);
 
         RaycastHit2D hit = Physics2D.Raycast(worldPoint2D, Vector2.zero);
-        if(hit.collider!=null && hit.collider.CompareTag("MazeExit"))
+        if (hit.collider != null && hit.collider.CompareTag("MazeExit"))
         {
             isLocked = true;
             Debug.Log("到达迷宫出口");
             winTheMaze = true;
         }
-        
+
         if (hit.collider != null && hit.collider.CompareTag("MazePath"))
         {
-            hit.collider.GetComponent<SpriteRenderer>().color=Color.yellow;
-            if(!SRs.Contains(hit.collider.GetComponent<SpriteRenderer>()))
+            hit.collider.GetComponent<SpriteRenderer>().color = Color.yellow;
+            if (!SRs.Contains(hit.collider.GetComponent<SpriteRenderer>()))
                 SRs.Add(hit.collider.GetComponent<SpriteRenderer>());
         }
         else if (hit.collider != null && hit.collider.CompareTag("MazeWall"))
         {
             Debug.Log("与墙壁碰撞");
-            isLocked=true;
+            isLocked = true;
             StartCoroutine(ResetRunWithHitWall(hit.collider.GetComponent<SpriteRenderer>()));
             // 处理与墙壁的碰撞
             // 可以在这里添加其他逻辑，比如显示提示信息等
         }
-        
+
     }
     private IEnumerator ResetRunWithHitWall(SpriteRenderer sr)
     {
@@ -161,23 +163,4 @@ public class MazePlayer : MonoBehaviour
         }
     }
 
-    //private void OnTriggerEnter2D(Collider2D collision)
-    //{
-    //    if (collision.CompareTag("MazeWall"))
-    //    {
-    //        // 处理与墙壁的碰撞
-    //        Debug.Log("与墙壁碰撞");
-
-    //        //show fail message
-
-
-    //        //Destroy(gameObject);
-    //    }
-    //    else if (collision.CompareTag("MazeExit"))
-    //    {
-    //        // 处理到达出口的逻辑
-    //        Debug.Log("到达迷宫出口");
-    //        //MazeManager.S.StartMazePuzzle();
-    //    }
-    //}
 }

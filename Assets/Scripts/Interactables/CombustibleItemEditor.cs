@@ -42,6 +42,10 @@ public class CombustibleItemEditor : Editor
                         item.Flame.transform.localPosition = item.flameOffset;
                         item.Flame.SetActive(true);
                     }
+                    if (item.itemCollider != null)
+                    {
+                        item.itemCollider.isTrigger = false;  
+                    }
                 }
                 EditorUtility.SetDirty(item);
             }
@@ -67,6 +71,11 @@ public class CombustibleItemEditor : Editor
                     if (item.Flame != null)
                     {
                         item.Flame.SetActive(false);
+                    }
+
+                    if (item.itemCollider != null)
+                    {
+                        item.itemCollider.isTrigger = true;  
                     }
                 }
                 EditorUtility.SetDirty(item);
