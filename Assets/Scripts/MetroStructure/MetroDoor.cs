@@ -153,7 +153,7 @@ public class MetroDoor : MonoBehaviour
     private void StartMazePuzzle()
     {
         Debug.Log("进入迷宫解谜界面...");
-
+        //Camera Add new overlay camera.
         SceneManager.sceneLoaded += OnMazeSceneLoaded;
         SceneManager.LoadScene("Maze", LoadSceneMode.Additive);
     }
@@ -164,6 +164,7 @@ public class MetroDoor : MonoBehaviour
         {
             Debug.Log("迷宫场景加载完成，开始迷宫解谜逻辑");
 
+            CameraManager.instance.OnSceneLoaded(scene, mode);
             MazeManager.instance?.StartMazePuzzle(OnMazeSolved, OnMazeFailed);
             SceneManager.SetActiveScene(scene);
             SceneManager.sceneLoaded -= OnMazeSceneLoaded;

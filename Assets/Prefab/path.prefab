@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2486171877357701622}
   - component: {fileID: 6019336274735212176}
   - component: {fileID: -1538947506230186036}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: path
   m_TagString: MazePath
   m_Icon: {fileID: 0}
