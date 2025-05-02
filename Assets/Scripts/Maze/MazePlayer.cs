@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class MazePlayer : MonoBehaviour
 {
@@ -30,7 +31,6 @@ public class MazePlayer : MonoBehaviour
 
     private void Update()
     {
-        MoveCharacter();
         if (!isLocked)
         {
             MouseInput();
@@ -58,11 +58,6 @@ public class MazePlayer : MonoBehaviour
         isTracking = false;
         Debug.Log("Stop tracking mouse positions");
         StartCoroutine(ResetRun());
-        // 处理鼠标轨迹
-        //foreach (var pos in mousePositions)
-        //{
-        //    Debug.Log("Mouse Position: " + pos);
-        //}
     }
 
     private void ContinueTracing()
@@ -94,18 +89,27 @@ public class MazePlayer : MonoBehaviour
     {
         Vector3 worldPos = mazeCamera.ScreenToWorldPoint(screenPosition);
         Vector2 worldPoint2D = new Vector2(worldPos.x, worldPos.y);
+        int mazeLayerMask = 1 << LayerMask.NameToLayer("Maze");
+        RaycastHit2D hit = Physics2D.Raycast(worldPoint2D, Vector2.zero,0f,mazeLayerMask);
 
-        RaycastHit2D hit = Physics2D.Raycast(worldPoint2D, Vector2.zero);
         if (hit.collider != null && hit.collider.CompareTag("MazeExit"))
         {
             isLocked = true;
             Debug.Log("到达迷宫出口");
             winTheMaze = true;
         }
-
+        //if (hit.collider == null)
+        //{
+        //    Debug.Log("Raycast hit nothing!");
+        //}
+        //else
+        //{
+        //    Debug.Log($"Hit: {hit.collider.name}, Tag: {hit.collider.tag}");
+        //}
         if (hit.collider != null && hit.collider.CompareTag("MazePath"))
         {
-            hit.collider.GetComponent<SpriteRenderer>().color = Color.yellow;
+            Debug.Log("a");
+            hit.collider.GetComponent<SpriteRenderer>().color = Color.blue;
             if (!SRs.Contains(hit.collider.GetComponent<SpriteRenderer>()))
                 SRs.Add(hit.collider.GetComponent<SpriteRenderer>());
         }
@@ -114,8 +118,6 @@ public class MazePlayer : MonoBehaviour
             Debug.Log("与墙壁碰撞");
             isLocked = true;
             StartCoroutine(ResetRunWithHitWall(hit.collider.GetComponent<SpriteRenderer>()));
-            // 处理与墙壁的碰撞
-            // 可以在这里添加其他逻辑，比如显示提示信息等
         }
 
     }
@@ -145,22 +147,22 @@ public class MazePlayer : MonoBehaviour
     }
 
     // abadoned
-    private void MoveCharacter()
-    {
-        // 获取玩家输入
-        float moveX = Input.GetAxis("Horizontal");
-        float moveY = Input.GetAxis("Vertical");
-        // 计算移动方向sdaw
-        Vector2 moveDirection = new Vector2(moveX, moveY);
-        // 移动玩家
-        if (Input.GetKey(KeyCode.LeftShift))
-        {
-            rb.velocity = moveDirection * speed * 2; // 按住左Shift加速
-        }
-        else
-        {
-            rb.velocity = moveDirection * speed; // 恢复正常速度
-        }
-    }
+    //private void MoveCharacter()
+    //{
+    //    // 获取玩家输入
+    //    float moveX = Input.GetAxis("Horizontal");
+    //    float moveY = Input.GetAxis("Vertical");
+    //    // 计算移动方向sdaw
+    //    Vector2 moveDirection = new Vector2(moveX, moveY);
+    //    // 移动玩家
+    //    if (Input.GetKey(KeyCode.LeftShift))
+    //    {
+    //        rb.velocity = moveDirection * speed * 2; // 按住左Shift加速
+    //    }
+    //    else
+    //    {
+    //        rb.velocity = moveDirection * speed; // 恢复正常速度
+    //    }
+    //}
 
 }
