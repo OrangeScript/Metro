@@ -20295,8 +20295,6 @@ Transform:
   - {fileID: 873582797}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-<<<<<<< HEAD
-=======
 --- !u!114 &2111378667
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20399,7 +20397,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e3b0f7af2b6fe2042b4103a419c40273, type: 3}
->>>>>>> e317302c790d1df52305e124a5343836dec5cc7a
 --- !u!1 &2130301795
 GameObject:
   m_ObjectHideFlags: 0
