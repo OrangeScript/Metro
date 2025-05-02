@@ -64,7 +64,6 @@
     <Compile Include="Assets\Scripts\Maze\MazeRenderer.cs" />
     <Compile Include="Assets\Scripts\Manager\TooltipManager.cs" />
     <Compile Include="Assets\Scripts\NPC\NPCState.cs" />
-    <Compile Include="Assets\Scripts\Interactables\Ventilation.cs" />
     <Compile Include="Assets\Scripts\Camera\CameraSwitcher.cs" />
     <Compile Include="Assets\Scripts\Interactables\InteractableObject.cs" />
     <Compile Include="Assets\Scripts\Camera\CameraEffectsController.cs" />
@@ -74,6 +73,7 @@
     <Compile Include="Assets\Scripts\Arrow\InputManager.cs" />
     <Compile Include="Assets\Scripts\Dialogue\DialogueNode.cs" />
     <Compile Include="Assets\Scripts\Camera\RotatingCamera.cs" />
+    <Compile Include="Assets\Scripts\Smoke\SmokeShapeTransition.cs" />
     <Compile Include="Assets\Scripts\FileDataHandler.cs" />
     <Compile Include="Assets\Scripts\Interactables\Window.cs" />
     <Compile Include="Assets\Scripts\Interactables\ItemSlotUI.cs" />
@@ -114,7 +114,6 @@
     <Compile Include="Assets\Scripts\NPC\Entity.cs" />
     <Compile Include="Assets\Scripts\Smoke\AirWallController.cs" />
     <Compile Include="Assets\Scripts\MetroStructure\MetroGround.cs" />
-    <Compile Include="Assets\Scripts\Smoke\SmokeMaskController.cs" />
     <Compile Include="Assets\Scripts\NPC\NPC.cs" />
     <Compile Include="Assets\Scripts\LevelEditor\LevelEditor.cs" />
   </ItemGroup>

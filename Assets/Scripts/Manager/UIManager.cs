@@ -22,8 +22,13 @@ public class UIManager : MonoBehaviour
     public GameObject optionButtonPrefab;
     private Action<int> onOptionSelectedCallback;
 
+    [Header("Ωªª•œ‘ æ")]
     public GameObject interactUI;
     public Text interactText;
+
+    [Header("…Ë÷√")]
+    public GameObject settingsPanel;
+    private bool isSettingsOpen = false;
 
     private Action onDialogueCompleteCallback;
     private string[] currentDialogue;
@@ -43,8 +48,21 @@ public class UIManager : MonoBehaviour
     public void Update()
     {
         if (isDialogueOn) { interactUI.gameObject.SetActive(false); }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            ToggleSettings();
+        }
     }
 
+    public void ToggleSettings()
+    {
+        isSettingsOpen = !isSettingsOpen;
+
+        if (settingsPanel != null)
+        {
+            settingsPanel.SetActive(isSettingsOpen);
+        }
+    }
     public void ShowMessage(string message)
     {
         messageText.text = message;

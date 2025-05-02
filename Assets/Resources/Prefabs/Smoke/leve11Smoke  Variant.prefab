@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1750548004403190586}
   - component: {fileID: 1014276484178753879}
   - component: {fileID: 3504506138441853115}
+  - component: {fileID: 2853414312316816502}
   m_Layer: 8
   m_Name: leve11Smoke  Variant
   m_TagString: Level1Smoke
@@ -4876,3 +4877,15 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 8.913975, y: 6.701169}
   m_EdgeRadius: 0
+--- !u!114 &2853414312316816502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 465713493119271700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8289ae15dc2c8c048997923ff53a3e0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

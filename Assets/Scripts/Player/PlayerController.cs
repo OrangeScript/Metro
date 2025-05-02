@@ -40,11 +40,6 @@ public class PlayerController : MonoBehaviour
     public bool awaitingSecondFPress = false;
     public MetroDoor poweredDoor = null;
 
-    [Header("管道设置")]
-    [SerializeField] private LayerMask tunnelLayer;
-    [SerializeField] private float tunnelSpeedMultiplier = 0.4f;
-    private bool isInTunnel = false;
-    private PlayerState previousStateBeforeTunnel;
 
     [Header("动画控制")]
     private int[] protectedStates = { 2, 3, 4 }; // Climbing, Carrying, Illusion
@@ -60,9 +55,6 @@ public class PlayerController : MonoBehaviour
 
     [Header("烟雾设置")]
     private AirWallController airWall;
-
-    [Header("test")]
-    [SerializeField] private bool no;
 
 
     void Awake()
@@ -124,9 +116,6 @@ public class PlayerController : MonoBehaviour
         vertical = input.y;
         bool hasMovementInput = horizontal != 0 || vertical != 0;
 
-        HandleTunnelState(horizontal, vertical);
-        if (isInTunnel) return;
-
         //HandleManualStateSwitch();
         HandleAutoStateTransition(hasMovementInput);
         HandleMovementDirection(horizontal, vertical);
@@ -171,31 +160,6 @@ public class PlayerController : MonoBehaviour
     }
     #endregion
 
-    #region 管道系统
-
-    private void HandleTunnelState(float h, float v)
-    {
-        if (isInTunnel)
-        {
-            movement = new Vector2(h, v) * tunnelSpeedMultiplier;
-            currentState = PlayerState.Crawling;
-        }
-    }
-
-    public void EnterTunnel(Ventilation vent)
-    {
-        previousStateBeforeTunnel = currentState;
-        isInTunnel = true;
-        tunnelSpeedMultiplier = vent.crawlSpeedMultiplier; 
-    }
-
-    public void ExitTunnel()
-    {
-        isInTunnel = false;
-        TransitionState(previousStateBeforeTunnel);
-    }
-
-    #endregion
 
     #region 动画系统
 

@@ -18,16 +18,15 @@ public class CombustibleItem : InteractableObject
     public int maxSmokeCount = 10;     //最大烟雾数量
     private int currentSmokeCount = 0; //当前已生成数量
 
-    [Header("烟雾随机偏移")]
-    public Vector2 smokeRandomRange = new Vector2(0.5f, 0.5f);
+
     [Header("视觉表现")]
-    public SpriteRenderer targetRenderer; 
+    public SpriteRenderer targetRenderer;
     public Sprite visualSprite;
 
     [Header("火焰特效")]
     public GameObject Flame;
     public Vector3 flameOffset = new Vector3(0.15f, 1f, -0.1f);
-    public Vector3 smokeOffset = new Vector3(0f, 0.9f, -0.9f);
+    public Vector3 smokeOffest = new Vector3(0f, 0.9f, -0.9f);
 
     private Rigidbody2D rb;
     public BoxCollider2D itemCollider;
@@ -36,7 +35,7 @@ public class CombustibleItem : InteractableObject
     {
         base.Start();
         rb = GetComponent<Rigidbody2D>();
-        smokeSystem=FindObjectOfType<SmokeSystem>();
+        smokeSystem = FindObjectOfType<SmokeSystem>();
         if (rb == null) rb = gameObject.AddComponent<Rigidbody2D>();
         itemCollider = rb.GetComponent<BoxCollider2D>();
         rb.isKinematic = true;
@@ -110,7 +109,7 @@ public class CombustibleItem : InteractableObject
             isBurning = true;
             if (itemCollider != null)
             {
-                itemCollider.isTrigger = false;  
+                itemCollider.isTrigger = false;
             }
             if (Flame != null)
             {
@@ -118,7 +117,7 @@ public class CombustibleItem : InteractableObject
                 Flame.SetActive(true);
             }
             burnCoroutine = StartCoroutine(GenerateSmoke());
-            
+
             Debug.Log($"{level} 级燃烧物开始燃烧！");
         }
     }
@@ -131,7 +130,7 @@ public class CombustibleItem : InteractableObject
             isBurning = false;
             if (itemCollider != null)
             {
-                itemCollider.isTrigger = true;  
+                itemCollider.isTrigger = true;
             }
             if (Flame != null)
                 Flame.SetActive(false);
@@ -146,24 +145,14 @@ public class CombustibleItem : InteractableObject
     private IEnumerator GenerateSmoke()
     {
         SmokeSystem.SmokeLevel smokeLevel = ConvertToSmokeLevel(level);
-        currentSmokeCount = 0; 
 
-        while (currentSmokeCount < maxSmokeCount && isBurning)
+        for (int i = 0; i < maxSmokeCount; i++)
         {
-            Vector3 randomOffset = new Vector3(
-                Random.Range(-smokeRandomRange.x, smokeRandomRange.x),
-                Random.Range(-smokeRandomRange.y, smokeRandomRange.y),
-                0
-            );
+            if (!isBurning)
+                break;
 
-            smokeSystem.AddSmoke(
-                transform.position + smokeOffset + randomOffset,
-                smokeLevel,
-                1,
-                Quaternion.Euler(-135f, 0f, 0f)
-            );
+            smokeSystem.AddSmoke(transform.position + smokeOffest, smokeLevel, 1, Quaternion.Euler(-135f, 0f, 0f));
 
-            currentSmokeCount++;
             yield return new WaitForSeconds(burnInterval);
         }
 
