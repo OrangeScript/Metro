@@ -6,6 +6,8 @@ public class SmokeShapeTransition : MonoBehaviour
 {
     private ParticleSystem ps;
     private Vector3 originalPosition;
+    [SerializeField] private float shapeChangeDelay = 6f;   
+    [SerializeField] private float destroyDelay = 4f;
 
     void Start()
     {
@@ -32,7 +34,7 @@ public class SmokeShapeTransition : MonoBehaviour
 
     IEnumerator ChangeShapeOverTime()
     {
-        yield return new WaitForSeconds(6f);
+        yield return new WaitForSeconds(shapeChangeDelay);
 
         // 切换为 Hemisphere
         var shape = ps.shape;
@@ -51,7 +53,7 @@ public class SmokeShapeTransition : MonoBehaviour
         newColor.a = 0.5f;
         main.startColor = newColor;
 
-        yield return new WaitForSeconds(4f); // 根据需求调整这个时间
+        yield return new WaitForSeconds(destroyDelay); 
         Destroy(gameObject);
     }
 }

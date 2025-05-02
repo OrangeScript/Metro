@@ -18,7 +18,6 @@ public class SmokeSystem : MonoBehaviour
     [Header("—ÃŒÌº‡≤‚…Ë÷√")]
     public float detectionRadius = 20f;
     public float spreadInterval = 1.0f;
-    public float smokeLifetime = 20f;
     public int initialSmokeAmount = 100;
     public CameraEffectsController cameraEffects;
 
@@ -107,7 +106,6 @@ public class SmokeSystem : MonoBehaviour
             amount = amount
         });
 
-        StartCoroutine(RemoveSmokeAfterTime(position, smokeLifetime));
     }
 
     private void UpdateExistingSmoke(Vector2 position, SmokeLevel newLevel, int addAmount)
@@ -126,17 +124,7 @@ public class SmokeSystem : MonoBehaviour
             }
         }
     }
-
-    private IEnumerator RemoveSmokeAfterTime(Vector2 position, float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        if (smokeParticles.TryGetValue(position, out GameObject particle))
-        {
-            activeSmoke.RemoveAll(s => s.smokeObject == particle);
-            smokeParticles.Remove(position);
-            Destroy(particle);
-        }
-    }
+  
     #endregion
 
     #region º‡≤‚œµÕ≥
