@@ -327,6 +327,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4007730758462392182, guid: b433cf19be51af9428c9c6eede391a31, type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4494056099938885116, guid: b433cf19be51af9428c9c6eede391a31, type: 3}
       propertyPath: mazeCamera
       value: 
