@@ -335,6 +335,10 @@ PrefabInstance:
       propertyPath: mazeCamera
       value: 
       objectReference: {fileID: 441016819}
+    - target: {fileID: 4494056099938885116, guid: b433cf19be51af9428c9c6eede391a31, type: 3}
+      propertyPath: minDistance
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

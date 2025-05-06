@@ -38,6 +38,7 @@ public class MazeManager : MonoBehaviour
         if (player != null && player.winTheMaze)
         {
             // 迷宫解谜成功，执行回调
+            DestroyMaze();
             onMazeComplete?.Invoke();
         }
     }
