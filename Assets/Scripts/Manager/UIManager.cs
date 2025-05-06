@@ -3,10 +3,20 @@ using UnityEngine.UI;
 using System.Collections;
 using UnityEditor.Rendering;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 public class UIManager : MonoBehaviour
 {
     public static UIManager Instance;
+    public class InteractRequest
+    {
+        public string text;
+        public Vector3 worldPosition;
+        public int priority;
+        public object source;
+    }
+
     [Header("信息显示")]
     public GameObject messagePanel;
     public Text messageText;
@@ -25,11 +35,13 @@ public class UIManager : MonoBehaviour
     [Header("交互显示")]
     public GameObject interactUI;
     public Text interactText;
+    [SerializeField] private int uiUpdateInterval = 5;
 
     [Header("设置")]
     public GameObject settingsPanel;
     private bool isSettingsOpen = false;
 
+    private List<InteractRequest> activeRequests = new List<InteractRequest>();
     private Action onDialogueCompleteCallback;
     private string[] currentDialogue;
     private int currentLineIndex = 0;
@@ -37,23 +49,70 @@ public class UIManager : MonoBehaviour
 
     private bool isDialogueOn=false;
 
+    #region 初始化
     private void Awake()
     {
         player = FindObjectOfType<PlayerController>();
-        Instance = this;
-        messagePanel.SetActive(false);
-        dialoguePanel.SetActive(false);  
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
+        InitializeUIState();
     }
 
-    public void Update()
+    private void InitializeUIState()
     {
-        if (isDialogueOn) { interactUI.gameObject.SetActive(false); }
+        messagePanel.SetActive(false);
+        dialoguePanel.SetActive(false);
+        interactUI.SetActive(false);
+        settingsPanel.SetActive(false);
+    }
+
+
+    private void Start()
+    {
+        nextButton.onClick.AddListener(OnNextButtonClicked);
+        nextButton.gameObject.SetActive(false);
+    }
+    private void Update()
+    {
+        HandleUIState();
+        HandleSettingsToggle();
+        HandleOptimizedRefresh();
+    }
+
+    private void HandleUIState()
+    {
+        if (isDialogueOn || isSettingsOpen||InventorySystem.Instance.isInventoryOpen|| activeRequests.Count == 0)
+        {
+            interactUI.SetActive(false);
+        }
+    }
+
+    private void HandleSettingsToggle()
+    {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             ToggleSettings();
         }
     }
 
+    private void HandleOptimizedRefresh()
+    {
+        if (Time.frameCount % uiUpdateInterval == 0)
+        {
+            UpdateBestInteract();
+        }
+    }
+    #endregion
+
+    #region 设置
     public void ToggleSettings()
     {
         isSettingsOpen = !isSettingsOpen;
@@ -63,6 +122,9 @@ public class UIManager : MonoBehaviour
             settingsPanel.SetActive(isSettingsOpen);
         }
     }
+    #endregion
+
+    #region 信息显示
     public void ShowMessage(string message)
     {
         messageText.text = message;
@@ -75,12 +137,9 @@ public class UIManager : MonoBehaviour
         messagePanel.SetActive(false); 
     }
 
-    private void Start()
-    {
-        nextButton.onClick.AddListener(OnNextButtonClicked);
-        nextButton.gameObject.SetActive(false);
-    }
+    #endregion
 
+    #region 对话显示
     public void ShowDialogue(string[] dialogue, Action onDialogueComplete, string npcName = "")
     {
         currentDialogue = dialogue;
@@ -166,49 +225,61 @@ public class UIManager : MonoBehaviour
             Destroy(child.gameObject);
         }
     }
-
-    // 隐藏对话框
     public void HideDialogue()
     {
         isDialogueOn = false;
         dialoguePanel.SetActive(false);
     }
+    #endregion
 
-    public void ShowInteractUI(bool show,string text)
+    #region 交互显示
+    public void RegisterInteract(InteractRequest request)
     {
-        if (interactUI != null)
+        if (!activeRequests.Contains(request))
         {
-            interactUI.SetActive(show);
-        }
-        interactText.text = text;
-    }
-
-    public void UpdateInteractUIPosition()
-    {
-        if (interactUI != null && player.nearestInteractable != null)
-        {
-            Vector3 worldPosition = player.nearestInteractable.transform.position;
-            Vector3 offset = new Vector3(0, -0.5f, 0);
-
-            worldPosition += offset;
-            Vector3 screenPosition = Camera.main.WorldToScreenPoint(worldPosition);
-
-            interactUI.GetComponent<RectTransform>().position = screenPosition;
+            activeRequests.Add(request);
+            UpdateBestInteract();
         }
     }
 
-    public void UpdateInteractWithNPCUIPosition()
+    public void UnregisterInteract(InteractRequest request)
     {
-        if (interactUI != null && player.currentNPC != null)
+        if (activeRequests.Contains(request))
         {
-            Vector3 worldPosition = player.currentNPC.transform.position;
-            Vector3 offset = new Vector3(0, -0.5f, 0);
-
-            worldPosition += offset;
-            Vector3 screenPosition = Camera.main.WorldToScreenPoint(worldPosition);
-
-            interactUI.GetComponent<RectTransform>().position = screenPosition;
+            activeRequests.Remove(request);
+            UpdateBestInteract();
         }
     }
 
+    private void UpdateBestInteract()
+    {
+        var validRequests = activeRequests.Where(r => {
+            if (r.source is CombustibleItem ci)
+                return !ci.isBurning;
+            return true;
+        }).ToList();
+
+        if (validRequests.Count == 0)
+        {
+            interactUI.SetActive(false);
+            return;
+        }
+        var bestRequest = activeRequests
+            .OrderByDescending(r => r.priority)
+            .FirstOrDefault();
+
+        if (bestRequest != null)
+        {
+            UpdateInteractUI(bestRequest);
+        }
+    }
+
+    private void UpdateInteractUI(InteractRequest request)
+    {
+        interactText.text = request.text;
+        Vector3 screenPos = Camera.main.WorldToScreenPoint(request.worldPosition);
+        interactUI.GetComponent<RectTransform>().position = screenPos;
+        interactUI.SetActive(true);
+    }
+    #endregion
 }

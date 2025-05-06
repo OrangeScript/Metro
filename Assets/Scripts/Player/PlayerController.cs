@@ -7,12 +7,18 @@ using static InteractableObject;
 using static UnityEditor.Progress;
 using System.Collections;
 using UnityEngine.Rendering;
+using System.Collections.Generic;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(Animator))]
 public class PlayerController : MonoBehaviour
 {
     public enum PlayerState { Idle, Normal, Climbing, Carrying, Illusion, Crawling }
 
+    public class InteractionPriorities
+    {
+        public const int NPC = 0;
+        public const int Item = 1;
+    }
     [Header("基础设置")]
     public PlayerState currentState = PlayerState.Normal;
     [SerializeField] private float walkSpeed = 5f;
@@ -56,6 +62,7 @@ public class PlayerController : MonoBehaviour
     [Header("烟雾设置")]
     private AirWallController airWall;
 
+    private Dictionary<System.Type, UIManager.InteractRequest> activeRequests = new();
 
     void Awake()
     {
@@ -99,6 +106,8 @@ public class PlayerController : MonoBehaviour
         CheckInteractables();
         CheckNearestMetroDoor();
         CheckPoweredDoor();
+        HandleNPCPutOutFire();
+        ManageInteractionRequests();
     }
 
     void FixedUpdate()
@@ -304,19 +313,21 @@ public class PlayerController : MonoBehaviour
     {
         Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, interactRadius, interactableLayer);
         nearestInteractable = GetNearestInteractable(hits);
-        if (nearestInteractable != null)
+
+        if (nearestInteractable != null && !(nearestInteractable is CombustibleItem ci && ci.isBurning))
         {
-            if (nearestInteractable is CombustibleItem combustibleItem && !combustibleItem.isBurning)
+            var request = new UIManager.InteractRequest
             {
-                UIManager.Instance.ShowInteractUI(true,"[F]拾取");
-                UIManager.Instance.UpdateInteractUIPosition();
-            }
-            else if (!(nearestInteractable is CombustibleItem))
-            {
-                // 如果不是 CombustibleItem，显示交互UI
-                UIManager.Instance.ShowInteractUI(true, "[F]拾取");
-                UIManager.Instance.UpdateInteractUIPosition();
-            }
+                text = "[F]拾取",
+                worldPosition = nearestInteractable.transform.position + Vector3.down * 0.5f,
+                priority = InteractionPriorities.Item,
+                source = nearestInteractable
+            };
+            RegisterRequest(typeof(InteractableObject), request);
+        }
+        else
+        {
+            UnregisterRequest(typeof(InteractableObject));
         }
     }
 
@@ -344,8 +355,7 @@ public class PlayerController : MonoBehaviour
 
     private void CheckNearestMetroDoor()
     {
-        float radius = 10f;
-        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, radius);
+        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, interactRadius);
 
         MetroDoor closestDoor = null;
         float minDist = Mathf.Infinity;
@@ -394,6 +404,36 @@ public class PlayerController : MonoBehaviour
                 awaitingSecondFPress = false;
                 poweredDoor = null;
             }
+        }
+    }
+
+    private void ManageInteractionRequests()
+    {
+        // 自动清理无效请求
+        var keysToRemove = activeRequests.Where(p => p.Value.source == null).Select(p => p.Key).ToList();
+        foreach (var key in keysToRemove)
+        {
+            UIManager.Instance.UnregisterInteract(activeRequests[key]);
+            activeRequests.Remove(key);
+        }
+    }
+
+    private void RegisterRequest(System.Type type, UIManager.InteractRequest request)
+    {
+        if (activeRequests.TryGetValue(type, out var existing))
+        {
+            UIManager.Instance.UnregisterInteract(existing);
+        }
+        UIManager.Instance.RegisterInteract(request);
+        activeRequests[type] = request;
+    }
+
+    private void UnregisterRequest(System.Type type)
+    {
+        if (activeRequests.TryGetValue(type, out var request))
+        {
+            UIManager.Instance.UnregisterInteract(request);
+            activeRequests.Remove(type);
         }
     }
     #endregion
@@ -476,11 +516,25 @@ public class PlayerController : MonoBehaviour
             if (npc != null)
             {
                 currentNPC = npc;
-                UIManager.Instance.ShowInteractUI(true, "[T]对话");
-                UIManager.Instance.UpdateInteractWithNPCUIPosition();
                 if (Input.GetKeyDown(KeyCode.T))currentNPC.Interact(this);  
                 break;
             }
+        }
+
+        if (currentNPC != null)
+        {
+            var request = new UIManager.InteractRequest
+            {
+                text = "[T]交谈",
+                worldPosition = currentNPC.transform.position + Vector3.down * 0.5f,
+                priority = InteractionPriorities.NPC,
+                source = currentNPC
+            };
+            RegisterRequest(typeof(NPC), request);
+        }
+        else
+        {
+            UnregisterRequest(typeof(NPC));
         }
     }
 
@@ -504,7 +558,6 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
-
         if (closestNPC != null)
         {
             carriedNPC = closestNPC;
@@ -523,6 +576,25 @@ public class PlayerController : MonoBehaviour
             carriedNPC = null;
             TransitionState(PlayerState.Normal);
         }
+    }
+
+    private void HandleNPCPutOutFire()
+    {
+        if (currentNPC != null )
+        {
+            CombustibleItem burningItem = currentNPC.GetComponentInChildren<CombustibleItem>();
+
+            if (burningItem != null && burningItem.isBurning)
+            {
+                StartCoroutine(ExtinguishAfterDelay(burningItem));
+            }
+        }
+    }
+
+    private IEnumerator ExtinguishAfterDelay(CombustibleItem item)
+    {
+        yield return new WaitForSeconds(3f);
+        item.Extinguish();
     }
     #endregion
 }

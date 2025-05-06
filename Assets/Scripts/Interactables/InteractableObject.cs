@@ -50,6 +50,7 @@ public abstract class InteractableObject : MonoBehaviour
         if (InventorySystem.Instance.AddItem(this))
         {
             gameObject.SetActive(false); // 禁用当前实例
+            player.nearestInteractable = null;
         }
     }
 

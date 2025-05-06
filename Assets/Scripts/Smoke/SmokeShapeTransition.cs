@@ -52,7 +52,6 @@ public class SmokeShapeTransition : MonoBehaviour
         Color newColor = main.startColor.color;
         newColor.a = 0.5f;
         main.startColor = newColor;
-
         yield return new WaitForSeconds(destroyDelay); 
         Destroy(gameObject);
     }

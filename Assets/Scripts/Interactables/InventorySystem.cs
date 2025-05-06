@@ -17,7 +17,7 @@ public class InventorySystem : MonoBehaviour
     public GameObject inventorySlotPrefab;
     public Sprite background;
     private ItemSlotUI hoveredSlot;
-    bool isInventoryOpen = false;
+    public bool isInventoryOpen = false;
 
     [Header("装备栏设置")]
     public Transform equippedItemsContainer;//装备容器
@@ -51,7 +51,6 @@ public class InventorySystem : MonoBehaviour
         if (isInventoryOpen)
         {
             HandleEquipmentInput();
-            UIManager.Instance.ShowInteractUI(false, "[F]拾取");
             Time.timeScale = 0;
         }
         else

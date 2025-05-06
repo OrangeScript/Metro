@@ -10,10 +10,17 @@ public class VentExit : MonoBehaviour
 
     private PlayerController player;
     private bool playerInTrigger = false;
-
+    private UIManager.InteractRequest ventRequest;
     private void Start()
     {
         player = FindObjectOfType<PlayerController>();
+        ventRequest = new UIManager.InteractRequest
+        {
+            text = "[R]离开通风口",
+            worldPosition = transform.position + Vector3.down * 0.5f,
+            priority = 2,
+            source = this
+        };
     }
 
     private void Update()
@@ -22,13 +29,15 @@ public class VentExit : MonoBehaviour
         {
             if (CanTeleport())
             {
-                UIManager.Instance.ShowInteractUI(true, "[R]离开通风口");
-                UpdateInteractUIPosition();
-
+                UIManager.Instance.RegisterInteract(ventRequest);
                 if (Input.GetKeyDown(KeyCode.R))
                 {
                     TeleportPlayer();
                 }
+            }
+            else
+            {
+                UIManager.Instance.UnregisterInteract(ventRequest);
             }
         }
     }
@@ -47,6 +56,7 @@ public class VentExit : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             playerInTrigger = false;
+            UIManager.Instance.UnregisterInteract(ventRequest);
         }
     }
 
@@ -61,7 +71,6 @@ public class VentExit : MonoBehaviour
     {
         if (targetExitPoint != null)
         {
-            UIManager.Instance.ShowInteractUI(false, "");
             player.transform.position = targetExitPoint.position;
             player.currentState = PlayerController.PlayerState.Normal;
             Debug.Log($"[VentExit] 玩家传送到了出口位置: {targetExitPoint.name}");
@@ -70,13 +79,5 @@ public class VentExit : MonoBehaviour
         {
             Debug.LogError("[VentExit] 未设置目标出口位置！");
         }
-    }
-
-    private void UpdateInteractUIPosition()
-    {
-        Vector3 worldPosition = transform.position + new Vector3(0, -0.5f, 0);
-        Vector3 screenPosition = Camera.main.WorldToScreenPoint(worldPosition);
-
-        UIManager.Instance.interactUI.GetComponent<RectTransform>().position = screenPosition;
     }
 }

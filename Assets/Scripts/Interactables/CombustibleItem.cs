@@ -16,7 +16,6 @@ public class CombustibleItem : InteractableObject
 
     [Header("烟雾生成控制")]
     public int maxSmokeCount = 10;     //最大烟雾数量
-    private int currentSmokeCount = 0; //当前已生成数量
 
 
     [Header("视觉表现")]
@@ -73,7 +72,6 @@ public class CombustibleItem : InteractableObject
     {
         ThrowAndIgnite();
     }
-
     private void ThrowAndIgnite()
     {
         ResetLayer();
