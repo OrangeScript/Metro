@@ -16,6 +16,9 @@ public class UIManager : MonoBehaviour
         public int priority;
         public object source;
     }
+    [Header("开始菜单")]
+    public GameObject startPanel;
+    public GameObject loadingPanel;
 
     [Header("信息显示")]
     public GameObject messagePanel;
@@ -37,8 +40,14 @@ public class UIManager : MonoBehaviour
     public Text interactText;
     [SerializeField] private int uiUpdateInterval = 5;
 
+    [Header("提示显示")]
+    public GameObject tipPanel;
+    public Text tipText;
+
     [Header("设置")]
     public GameObject settingsPanel;
+    public Toggle bgmToggle;
+    public Slider volumeSlider;
     private bool isSettingsOpen = false;
 
     private List<InteractRequest> activeRequests = new List<InteractRequest>();
@@ -63,20 +72,24 @@ public class UIManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-        InitializeUIState();
     }
 
-    private void InitializeUIState()
+    private void ShowMainMenu()
     {
+        //startPanel.SetActive(true);
         messagePanel.SetActive(false);
         dialoguePanel.SetActive(false);
         interactUI.SetActive(false);
         settingsPanel.SetActive(false);
+        tipPanel.SetActive(false);  
     }
 
 
     private void Start()
     {
+        ShowMainMenu();
+        bgmToggle.onValueChanged.AddListener(OnBGMToggle);
+        volumeSlider.onValueChanged.AddListener(OnVolumeChange);
         nextButton.onClick.AddListener(OnNextButtonClicked);
         nextButton.gameObject.SetActive(false);
     }
@@ -86,7 +99,32 @@ public class UIManager : MonoBehaviour
         HandleSettingsToggle();
         HandleOptimizedRefresh();
     }
+    public void OnStartGame()
+    {
+        startPanel.SetActive(false);
+        //loadingPanel.SetActive(true);
+        GameManager.Instance.StartGame();
+        //StartCoroutine(LoadGameScene());
+    }
 
+    private IEnumerator LoadGameScene()
+    {
+        yield return new WaitForSeconds(2f);
+        loadingPanel.SetActive(false);
+    }
+
+    public void OnBackToMenu()
+    {
+        ShowMainMenu();
+    }
+
+    public void OnExitGame()
+    {
+        Application.Quit();
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#endif
+    }
     private void HandleUIState()
     {
         if (isDialogueOn || isSettingsOpen||InventorySystem.Instance.isInventoryOpen|| activeRequests.Count == 0)
@@ -116,12 +154,26 @@ public class UIManager : MonoBehaviour
     public void ToggleSettings()
     {
         isSettingsOpen = !isSettingsOpen;
-
         if (settingsPanel != null)
         {
             settingsPanel.SetActive(isSettingsOpen);
+            if (settingsPanel.transform.parent != null)
+            {
+                settingsPanel.transform.SetSiblingIndex(startPanel.transform.GetSiblingIndex() + 1);
+            }
         }
     }
+
+    private void OnBGMToggle(bool isOn)
+    {
+        AudioManager.Instance.SetBGMState(isOn);
+    }
+
+    private void OnVolumeChange(float volume)
+    {
+        AudioManager.Instance.SetVolume(volume);
+    }
+
     #endregion
 
     #region 信息显示
@@ -282,4 +334,13 @@ public class UIManager : MonoBehaviour
         interactUI.SetActive(true);
     }
     #endregion
+
+    #region 提示显示
+    public void ShowTips(string Text)
+    {
+        tipPanel.SetActive(true);
+        tipText.text = Text;    
+    }
+    #endregion
+
 }

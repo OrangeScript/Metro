@@ -1,18 +1,32 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public static AudioManager Instance { get; private set; }
+
+    public AudioSource bgm;
+    public bool IsBGMOn { get; private set; } = true;
+    public float Volume { get; private set; } = 1f;
+
+    private void Awake()
     {
-        
+        if (Instance != null) Destroy(gameObject);
+        else
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SetBGMState(bool isOn)
     {
-        
+        IsBGMOn = isOn;
+        bgm.mute = !isOn;
+    }
+
+    public void SetVolume(float volume)
+    {
+        Volume = volume;
+        bgm.volume = volume;
     }
 }

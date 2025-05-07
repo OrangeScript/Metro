@@ -49,6 +49,11 @@ public abstract class InteractableObject : MonoBehaviour
     {
         if (InventorySystem.Instance.AddItem(this))
         {
+            if (InventorySystem.Instance.isFirstAdd == false)
+            {
+                InventorySystem.Instance.isFirstAdd = true;
+                InventorySystem.Instance.ShowAddTips();
+            }
             gameObject.SetActive(false); // 禁用当前实例
             player.nearestInteractable = null;
         }

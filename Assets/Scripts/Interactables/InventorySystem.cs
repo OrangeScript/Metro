@@ -18,10 +18,16 @@ public class InventorySystem : MonoBehaviour
     public Sprite background;
     private ItemSlotUI hoveredSlot;
     public bool isInventoryOpen = false;
+    public bool isFirstAdd = false;
+    public bool isFirstEquipped = false;
 
     [Header("装备栏设置")]
     public Transform equippedItemsContainer;//装备容器
     private PlayerController player;
+
+    [Header("提示设置")]
+    public string firstAddText;
+    public string firstEquipText;
 
 
     private void Awake()
@@ -127,10 +133,13 @@ public class InventorySystem : MonoBehaviour
     public void EquipItem(InteractableObject item)
     {
         if (!items.Contains(item)) return;
+        if(isFirstEquipped==false) {
+            isFirstEquipped=true;
+            ShowEquipTips();
+        }
         item.gameObject.SetActive(false);
 
         InteractableObject equipTarget = item;
-
 
         switch (equipTarget.carryType)
         {
@@ -333,6 +342,24 @@ public class InventorySystem : MonoBehaviour
         GameObject slot = Instantiate(inventorySlotPrefab, equippedItemsContainer);
         ItemSlotUI slotUI = slot.GetComponent<ItemSlotUI>();
         slotUI.LoadItem(item);
+    }
+    #endregion
+
+    #region 提示显示
+    public void ShowAddTips()
+    {
+        if (isFirstAdd)
+        {
+            UIManager.Instance.ShowTips(firstAddText);
+        }
+    }
+
+    public void ShowEquipTips()
+    {
+        if (isFirstEquipped)
+        {
+            UIManager.Instance.ShowTips(firstEquipText);
+        }
     }
     #endregion
 
