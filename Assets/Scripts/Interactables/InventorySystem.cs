@@ -27,7 +27,6 @@ public class InventorySystem : MonoBehaviour
 
     [Header("Ã· æ…Ë÷√")]
     public string firstAddText;
-    public string firstEquipText;
 
 
     private void Awake()
@@ -133,10 +132,6 @@ public class InventorySystem : MonoBehaviour
     public void EquipItem(InteractableObject item)
     {
         if (!items.Contains(item)) return;
-        if(isFirstEquipped==false) {
-            isFirstEquipped=true;
-            ShowEquipTips();
-        }
         item.gameObject.SetActive(false);
 
         InteractableObject equipTarget = item;
@@ -354,13 +349,6 @@ public class InventorySystem : MonoBehaviour
         }
     }
 
-    public void ShowEquipTips()
-    {
-        if (isFirstEquipped)
-        {
-            UIManager.Instance.ShowTips(firstEquipText);
-        }
-    }
     #endregion
 
 }

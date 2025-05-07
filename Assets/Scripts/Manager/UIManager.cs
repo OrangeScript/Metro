@@ -76,7 +76,7 @@ public class UIManager : MonoBehaviour
 
     private void ShowMainMenu()
     {
-        //startPanel.SetActive(true);
+        startPanel.SetActive(true);
         messagePanel.SetActive(false);
         dialoguePanel.SetActive(false);
         interactUI.SetActive(false);
@@ -87,6 +87,9 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
+        startPanel.transform.SetAsFirstSibling();
+        settingsPanel.transform.SetSiblingIndex(1);
+        tipPanel.transform.SetAsLastSibling();
         ShowMainMenu();
         bgmToggle.onValueChanged.AddListener(OnBGMToggle);
         volumeSlider.onValueChanged.AddListener(OnVolumeChange);
@@ -95,7 +98,6 @@ public class UIManager : MonoBehaviour
     }
     private void Update()
     {
-        HandleUIState();
         HandleSettingsToggle();
         HandleOptimizedRefresh();
     }
@@ -125,13 +127,6 @@ public class UIManager : MonoBehaviour
         UnityEditor.EditorApplication.isPlaying = false;
 #endif
     }
-    private void HandleUIState()
-    {
-        if (isDialogueOn || isSettingsOpen||InventorySystem.Instance.isInventoryOpen|| activeRequests.Count == 0)
-        {
-            interactUI.SetActive(false);
-        }
-    }
 
     private void HandleSettingsToggle()
     {
@@ -153,16 +148,13 @@ public class UIManager : MonoBehaviour
     #region ÉèÖÃ
     public void ToggleSettings()
     {
-        isSettingsOpen = !isSettingsOpen;
-        if (settingsPanel != null)
-        {
-            settingsPanel.SetActive(isSettingsOpen);
-            if (settingsPanel.transform.parent != null)
-            {
-                settingsPanel.transform.SetSiblingIndex(startPanel.transform.GetSiblingIndex() + 1);
-            }
-        }
+        bool isCurrentlyActive = settingsPanel.activeSelf;
+        bool newState = !isCurrentlyActive;
+
+        settingsPanel.SetActive(newState);
+        isSettingsOpen = newState;
     }
+
 
     private void OnBGMToggle(bool isOn)
     {
@@ -305,7 +297,9 @@ public class UIManager : MonoBehaviour
 
     private void UpdateBestInteract()
     {
-        var validRequests = activeRequests.Where(r => {
+        if (isDialogueOn || isSettingsOpen || InventorySystem.Instance.isInventoryOpen || activeRequests.Count == 0)
+            return;
+            var validRequests = activeRequests.Where(r => {
             if (r.source is CombustibleItem ci)
                 return !ci.isBurning;
             return true;

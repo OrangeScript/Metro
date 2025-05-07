@@ -24,6 +24,8 @@ public class MetroDoor : MonoBehaviour
     private float arrowTime = 0;
     public bool isDancing;
     public int correctInputs;
+    private bool isSolvingPuzzle = false;
+
     private PlayerController player;
     private void Awake()
     {
@@ -65,6 +67,12 @@ public class MetroDoor : MonoBehaviour
 
     public void TryInteract(PlayerController player)
     {
+        if (isSolvingPuzzle)
+        {
+            Debug.Log("谜题进行中，无法交互");
+            return;
+        }
+
         if (!Battery.isPowered)
         {
             if (currentFault == FaultType.Type3 || currentFault == FaultType.Type4||currentFault==FaultType.Type5)
@@ -74,21 +82,26 @@ public class MetroDoor : MonoBehaviour
             }
         }
 
-        HandleFaultUpdate();
+        HandleFaultUpdate(player);
     }
 
-    private void HandleFaultUpdate()
+    private void HandleFaultUpdate(PlayerController player)
     {
-        switch (currentFault)
+        if (isSolvingPuzzle)
+            return;
+        if (player.equippedItem == null&&currentState==DoorState.Closed)
         {
-            case FaultType.Type1:
-                StartArrowPuzzle();
-                break;
-            case FaultType.Type2:
-                StartMazePuzzle();
-                break;
-            default:
-                break;
+            switch (currentFault)
+            {
+                case FaultType.Type1:
+                    StartArrowPuzzle();
+                    break;
+                case FaultType.Type2:
+                    StartMazePuzzle();
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
@@ -112,6 +125,8 @@ public class MetroDoor : MonoBehaviour
     private void StartArrowPuzzle()
     {
         Debug.Log("进入QQ炫舞解谜界面...");
+        isSolvingPuzzle = true;
+        arrowTime = 0f;
         if (ArrowManager.S != null)
         {
             ArrowManager.S.CreateWave(10, this);
@@ -127,6 +142,7 @@ public class MetroDoor : MonoBehaviour
     public void FinishWave()
     {
         isDancing = false;
+        isSolvingPuzzle = false;
         ArrowManager.S?.ClearWave();
         Debug.Log($"结束解谜，正确数为 {correctInputs}");
         UIManager.Instance.ShowMessage("解谜失败，门状态不变!");
@@ -153,6 +169,7 @@ public class MetroDoor : MonoBehaviour
     private void StartMazePuzzle()
     {
         Debug.Log("进入迷宫解谜界面...");
+        isSolvingPuzzle = true;
         //Camera Add new overlay camera.
         SceneManager.sceneLoaded += OnMazeSceneLoaded;
         SceneManager.LoadScene("Maze", LoadSceneMode.Additive);
@@ -178,10 +195,12 @@ public class MetroDoor : MonoBehaviour
             {
                 Debug.Log("迷宫解谜完成，后续操作执行！");
                 door.currentFault = MetroDoor.FaultType.Type1;
+                isSolvingPuzzle = false;
             }
             else
             {
-                Debug.Log("解谜失败，不执行后续操作"); 
+                Debug.Log("解谜失败，不执行后续操作");
+                isSolvingPuzzle = false;
             }
         }));
 
@@ -246,7 +265,7 @@ public class MetroDoor : MonoBehaviour
     private void OnMazeSolved()
     {
         Debug.Log("迷宫解谜成功，门变为卡住状态");
-
+        isSolvingPuzzle = false;
         StartCoroutine(UnloadMazeScene());
         UIManager.Instance.ShowMessage("迷宫解谜成功，门变为卡住状态!");
         currentState = DoorState.Jammed;
@@ -256,6 +275,7 @@ public class MetroDoor : MonoBehaviour
     private void OnMazeFailed()
     {
         Debug.Log("迷宫解谜失败！");
+        isSolvingPuzzle = false;
         UIManager.Instance.ShowMessage("迷宫解谜失败!");
         StartCoroutine(UnloadMazeScene());
     }

@@ -17,13 +17,7 @@ public class MazeManager : MonoBehaviour
     }
     private void Update()
     {
-        //press space to begin//test method
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            player = mazeGenerator.GenerateMaze();
 
-            //mazeGenerator.RenderMaze();
-        }
         //test return
         if (Input.GetKeyDown(KeyCode.K))
         {
