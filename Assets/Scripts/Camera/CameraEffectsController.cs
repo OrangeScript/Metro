@@ -6,10 +6,11 @@ public class CameraEffectsController : MonoBehaviour
 {
     public Volume illusionVolume;
     public bool isIllusion;
-
+    private PlayerController player;
 
     private void Start()
     {
+        player= FindObjectOfType<PlayerController>();
         if (illusionVolume != null)
         {
             illusionVolume.gameObject.SetActive(false);
@@ -23,7 +24,13 @@ public class CameraEffectsController : MonoBehaviour
             illusionVolume.gameObject.SetActive(true);
         }
         isIllusion = true;
-        UIManager.Instance.ShowMessage("你进入了幻觉世界...");
+        if (!(player.equippedItem is SmokeDetector smokeDetector)) { 
+            UIManager.Instance.ShowMessage("你进入了幻觉世界...");
+        }
+        else
+        {
+            UIManager.Instance.ShowMessage("危险烟雾，请佩戴防毒面具");
+        }
     }
 
     public void ReturnFromIllusionWorld()

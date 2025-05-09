@@ -105,41 +105,6 @@ public abstract class InteractableObject : MonoBehaviour
         }
     }
 
-    public virtual void ResetItemState()
-    {
-        // 重置物理状态
-        if (TryGetComponent<Rigidbody2D>(out var rb))
-        {
-            rb.velocity = Vector2.zero;
-            rb.angularVelocity = 0f;
-        }
-
-        // 重置碰撞体
-        if (TryGetComponent<Collider2D>(out var col))
-        {
-            col.enabled = true;
-        }
-
-        // 重置渲染器
-        if (TryGetComponent<SpriteRenderer>(out var sr))
-        {
-            sr.enabled = true;
-        }
-    }
-
-    void OnValidate()
-    {
-        if (prefabReference == null)
-        {
-            // 自动获取预制体引用
-            var prefab = UnityEditor.PrefabUtility.GetCorrespondingObjectFromSource(gameObject);
-            if (prefab != null)
-            {
-                prefabReference = prefab;
-                UnityEditor.EditorUtility.SetDirty(this);
-            }
-        }
-    }
 
     protected virtual void HandleEquip() { }
     protected virtual void HandleUnequip() { }
