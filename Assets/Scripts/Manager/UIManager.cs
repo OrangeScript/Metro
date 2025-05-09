@@ -57,6 +57,7 @@ public class UIManager : MonoBehaviour
     private PlayerController player;
 
     private bool isDialogueOn=false;
+    private string lastMessage = "";
 
     #region 初始化
     private void Awake()
@@ -176,13 +177,16 @@ public class UIManager : MonoBehaviour
     #region 信息显示
     public void ShowMessage(string message)
     {
+        if (message == lastMessage) return;
+
+        lastMessage = message;
         messageText.text = message;
         messagePanel.SetActive(true);
         StartCoroutine(HideMessageAfterDelay());
     }
     private IEnumerator HideMessageAfterDelay()
     {
-        yield return new WaitForSeconds(3f);  
+        yield return new WaitForSeconds(5f);  
         messagePanel.SetActive(false); 
     }
 

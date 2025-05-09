@@ -7,9 +7,11 @@ public class AirWallController : MonoBehaviour
     private Collider2D col2D;
     public bool destroyAfterParticleGone = true;
     private ParticleSystem ps;
+    private PlayerController player;
 
     void Awake()
     {
+        player=FindObjectOfType<PlayerController>();
         col2D = GetComponent<Collider2D>();
         ps = GetComponentInChildren<ParticleSystem>();
         ApplyState();
@@ -17,9 +19,19 @@ public class AirWallController : MonoBehaviour
 
     public void SetMaskState(bool hasMask)
     {
-        airWallEnabled = !hasMask; 
-        if(hasMask==false) UIManager.Instance.ShowMessage("烟雾太浓，你无法前进！");
-        ApplyState();
+        airWallEnabled = !hasMask;
+        if (hasMask == false)
+        {
+            if (!(player.equippedItem is SmokeDetector smokeDetector))
+            {
+                UIManager.Instance.ShowMessage("烟雾太浓，你无法前进");
+            }
+            else
+            {
+                UIManager.Instance.ShowMessage("危险烟雾，请佩戴防毒面具");
+            }
+        }
+            ApplyState();
     }
 
     private void ApplyState()

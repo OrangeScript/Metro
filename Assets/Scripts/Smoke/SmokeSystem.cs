@@ -59,15 +59,11 @@ public class SmokeSystem : MonoBehaviour
 
     void Start()
     {
-        if (!GameManager.Instance.isGameStarted)
-            return;
         InitializeSceneSmoke();
     }
 
     private void Update()
     {
-        if (!GameManager.Instance.isGameStarted)
-            return;
         HandleCharacterEnterSmoke(player, player.transform.position);
     }
 

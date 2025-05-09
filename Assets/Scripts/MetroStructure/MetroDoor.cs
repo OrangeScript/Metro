@@ -208,7 +208,7 @@ public class MetroDoor : MonoBehaviour
     public IEnumerator StartMazePuzzleWithNoChange(Action<bool> onCompleted) { 
 
         Debug.Log("进入迷宫解谜界面但不会影响门状态...");
-
+        isSolvingPuzzle = true;
         // 定义局部回调函数
         bool isCompleted = false;
         Action onLocalSolved = () =>
@@ -258,8 +258,7 @@ public class MetroDoor : MonoBehaviour
     {
         if (scene.name == "Maze")
         {
-            // 移除多余的StartMazePuzzle调用，仅注销事件
-            SceneManager.sceneLoaded -= OnMazeSceneLoaded_NoChange;
+            CameraManager.instance.OnSceneLoaded(scene, mode);
         }
     }
     private void OnMazeSolved()
