@@ -25,14 +25,13 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
-        //Time.timeScale = 1;
         isGameStarted = true;
         isGameWon = false;
     }
 
     public void EndGame()
     {
-        //Time.timeScale = 0;
+        Time.timeScale = 0;
         isGameStarted = false;
         if (isGameWon)
         {

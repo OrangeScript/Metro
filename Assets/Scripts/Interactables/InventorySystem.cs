@@ -28,7 +28,6 @@ public class InventorySystem : MonoBehaviour
     [Header("Ã· æ…Ë÷√")]
     public string firstAddText;
 
-
     private void Awake()
     {
         if (Instance == null)
@@ -47,6 +46,8 @@ public class InventorySystem : MonoBehaviour
     }
     private void Update()
     {
+        if (!GameManager.Instance.isGameStarted)
+            return;
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             ToggleInventory();

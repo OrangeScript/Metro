@@ -100,6 +100,10 @@ public class UIManager : MonoBehaviour
     {
         HandleSettingsToggle();
         HandleOptimizedRefresh();
+        if (startPanel.activeSelf || settingsPanel.activeSelf)
+        {
+            Time.timeScale = 0;
+        }
     }
     public void OnStartGame()
     {
@@ -117,6 +121,7 @@ public class UIManager : MonoBehaviour
 
     public void OnBackToMenu()
     {
+        Time.timeScale = 0;
         ShowMainMenu();
     }
 
@@ -298,7 +303,10 @@ public class UIManager : MonoBehaviour
     private void UpdateBestInteract()
     {
         if (isDialogueOn || isSettingsOpen || InventorySystem.Instance.isInventoryOpen || activeRequests.Count == 0)
+        {
+            interactUI.SetActive(false); 
             return;
+        }
             var validRequests = activeRequests.Where(r => {
             if (r.source is CombustibleItem ci)
                 return !ci.isBurning;

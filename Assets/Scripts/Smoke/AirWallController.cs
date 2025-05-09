@@ -34,6 +34,8 @@ public class AirWallController : MonoBehaviour
 
     void Update()
     {
+        if (!GameManager.Instance.isGameStarted)
+            return;
         if (!ps.IsAlive(true))  // 粒子全部死亡（包括子系统）
         {
             if (col2D != null)

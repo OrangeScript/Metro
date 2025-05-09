@@ -85,6 +85,8 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        if (!GameManager.Instance.isGameStarted)
+            return;
         if (ArrowManager.S.IsInWave())
         {
             rb.velocity = Vector2.zero;  
@@ -112,6 +114,8 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (!GameManager.Instance.isGameStarted)
+            return;
         HandleMovement();
     }
 
