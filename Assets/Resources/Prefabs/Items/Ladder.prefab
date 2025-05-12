@@ -157,9 +157,15 @@ MonoBehaviour:
   extendedSprite: {fileID: 21300000, guid: 262a828a7e6392c4e8e6806ff65a7028, type: 3}
   spriteRenderer: {fileID: 993644987255957352}
   teleportDelay: 0.5
-  ventTags:
-  - Vent1
-  - Vent2
-  - Vent3
-  - Vent4
-  - Vent5
+  closestDistance: 22
+  ventTargets:
+  - tag: Vent1
+    targetTransform: {fileID: 0}
+  - tag: Vent2
+    targetTransform: {fileID: 0}
+  - tag: Vent3
+    targetTransform: {fileID: 0}
+  - tag: Vent4
+    targetTransform: {fileID: 0}
+  - tag: Vent5
+    targetTransform: {fileID: 0}

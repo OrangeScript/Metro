@@ -38,7 +38,6 @@ public class AirWallController : MonoBehaviour
     {
         if (col2D != null)
         {
-            Debug.Log("¿ÕÆøÇ½ÏûÊ§!");
             col2D.enabled = airWallEnabled;
         }
 

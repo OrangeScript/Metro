@@ -37,6 +37,7 @@ public class Ladder : InteractableObject
             Debug.LogError("[Ladder] 未设置任何传送目标！");
             enabled = false;
         }
+        Debug.Log($"当前通风管道数目：{ventTargets.Count}");
     }
 
     protected override void HandleUse()
@@ -81,6 +82,7 @@ public class Ladder : InteractableObject
         float minDistance = closestDistance;
         Transform resultTransform = null;
 
+        Debug.Log($"当前通风管道数目：{ventTargets.Count}");
         foreach (var vent in ventTargets)
         {
             GameObject[] vents = GameObject.FindGameObjectsWithTag(vent.tag);
