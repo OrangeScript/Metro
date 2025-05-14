@@ -52,7 +52,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("NPC设置")]
     public NPC currentNPC;
-    private NPC carriedNPC;
+    public NPC carriedNPC;
     //持久化数字容器，存储传送前数据
     public class PersistentDataContainer : MonoBehaviour
     {
@@ -226,7 +226,7 @@ public class PlayerController : MonoBehaviour
 #endregion
 
     #region 状态系统
-    private void TransitionState(PlayerState newState)
+    public void TransitionState(PlayerState newState)
     {
         if (currentState == newState) return;
         currentState = newState;
@@ -316,13 +316,23 @@ public class PlayerController : MonoBehaviour
 
         if (nearestInteractable != null && !(nearestInteractable is CombustibleItem ci && ci.isBurning))
         {
+            string text = "[F]拾取"; 
+            Vector3 worldPos = nearestInteractable.transform.position + Vector3.down * 0.5f;
+
+            if (nearestInteractable is Window window)
+            {
+                text = window.IsBroken() ? "[F]救出NPC" : "敲击";
+                worldPos = window.transform.position + Vector3.up * 0.5f;
+            }
+
             var request = new UIManager.InteractRequest
             {
-                text = "[F]拾取",
-                worldPosition = nearestInteractable.transform.position + Vector3.down * 0.5f,
+                text = text,
+                worldPosition = worldPos,
                 priority = InteractionPriorities.Item,
                 source = nearestInteractable
             };
+
             RegisterRequest(typeof(InteractableObject), request);
         }
         else
@@ -521,7 +531,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (currentNPC != null)
+        if (currentNPC != null && currentNPC.gameObject.activeSelf)
         {
             var request = new UIManager.InteractRequest
             {

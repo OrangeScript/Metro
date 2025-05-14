@@ -27,7 +27,6 @@ public class UIManager : MonoBehaviour
     [Header("对话显示")]
     public GameObject dialoguePanel;
     public Text dialogueText;
-    public Button nextButton;
     public Text npcNameText;
 
     [Header("选项按钮显示")]
@@ -45,10 +44,14 @@ public class UIManager : MonoBehaviour
     public Text tipText;
 
     [Header("设置")]
+    public GameObject settings;
     public GameObject settingsPanel;
     public Toggle bgmToggle;
     public Slider volumeSlider;
+    public GameObject inventoryCanvas;
+    public GameObject timer;
     private bool isSettingsOpen = false;
+
 
     private List<InteractRequest> activeRequests = new List<InteractRequest>();
     private Action onDialogueCompleteCallback;
@@ -78,6 +81,9 @@ public class UIManager : MonoBehaviour
     private void ShowMainMenu()
     {
         startPanel.SetActive(true);
+        timer.SetActive(false);
+        settings.SetActive(false);
+        inventoryCanvas.SetActive(false);
         messagePanel.SetActive(false);
         dialoguePanel.SetActive(false);
         interactUI.SetActive(false);
@@ -94,8 +100,6 @@ public class UIManager : MonoBehaviour
         ShowMainMenu();
         bgmToggle.onValueChanged.AddListener(OnBGMToggle);
         volumeSlider.onValueChanged.AddListener(OnVolumeChange);
-        nextButton.onClick.AddListener(OnNextButtonClicked);
-        nextButton.gameObject.SetActive(false);
     }
     private void Update()
     {
@@ -109,17 +113,22 @@ public class UIManager : MonoBehaviour
     public void OnStartGame()
     {
         startPanel.SetActive(false);
-        //loadingPanel.SetActive(true);
         GameManager.Instance.StartGame();
-        //StartCoroutine(LoadGameScene());
     }
 
-    private IEnumerator LoadGameScene()
+    public void ShowSet()
     {
-        yield return new WaitForSeconds(2f);
-        loadingPanel.SetActive(false);
+        timer.SetActive(true);
+        settings.SetActive(true);
+        inventoryCanvas.SetActive(true);
     }
 
+    public void HideSet()
+    {
+        timer.SetActive(false);
+        settings.SetActive(false);
+        inventoryCanvas.SetActive(false);
+    }
     public void OnBackToMenu()
     {
         Time.timeScale = 0;
@@ -203,14 +212,13 @@ public class UIManager : MonoBehaviour
             npcNameText.text = npcName;
 
         dialoguePanel.SetActive(true);
-        nextButton.gameObject.SetActive(true);
         ShowNextLine();
         isDialogueOn = true;
     }
 
 
     // 显示下一句话
-    private void OnNextButtonClicked()
+    public void OnNextButtonClicked()
     {
         currentLineIndex++;
         if (currentLineIndex < currentDialogue.Length)
@@ -219,7 +227,6 @@ public class UIManager : MonoBehaviour
         }
         else
         {
-            nextButton.gameObject.SetActive(false); 
             onDialogueCompleteCallback?.Invoke();   
         }
     }
@@ -348,5 +355,6 @@ public class UIManager : MonoBehaviour
         tipText.text = Text;    
     }
     #endregion
+
 
 }

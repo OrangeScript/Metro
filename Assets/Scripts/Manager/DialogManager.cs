@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using UnityEngine;
-
 public class DialogManager : MonoBehaviour
 {
     public static DialogManager Instance { get; private set; }
@@ -27,40 +27,59 @@ public class DialogManager : MonoBehaviour
         }
     }
 
-    //从CSV加载对话数据
     public void LoadDialogueFromCSV(string csvPath)
     {
         try
         {
-            var lines = File.ReadAllLines(csvPath);
+            string csvContent = File.ReadAllText(csvPath);
+            List<string> lines = ReadCsvLines(csvContent);
+
             Debug.Log("开始加载对话数据，文件路径：" + csvPath);
 
-            for (int i = 1; i < lines.Length; i++)  // 跳过头部
+            for (int i = 1; i < lines.Count; i++) // 跳过头部
             {
-                var line = lines[i].Split(',');
+                string[] fields = SplitCsvLine(lines[i]);
 
-                int npcId = int.Parse(line[0]);
-                int dialogueId = int.Parse(line[1]);
-                string dialogueText = line[2];
-                string option1 = line[3];
-                string option2 = line[4];
-                string option3 = line[5];
-                int nextDialogue1 = string.IsNullOrEmpty(line[6]) ? -1 : int.Parse(line[6]);
-                int nextDialogue2 = string.IsNullOrEmpty(line[7]) ? -1 : int.Parse(line[7]);
-                int nextDialogue3 = string.IsNullOrEmpty(line[8]) ? -1 : int.Parse(line[8]);
+                if (fields.Length < 10)
+                {
+                    Debug.LogWarning($"跳过不完整的行：{lines[i]}");
+                    continue;
+                }
+
+                int npcId = int.Parse(fields[0]);
+                int dialogueId = int.Parse(fields[1]);
+                string dialogueText = fields[2];
+                string option1 = fields[3];
+                string option2 = fields[4];
+                string option3 = fields[5];
+                int nextDialogue1 = string.IsNullOrEmpty(fields[6]) ? -1 : int.Parse(fields[6]);
+                int nextDialogue2 = string.IsNullOrEmpty(fields[7]) ? -1 : int.Parse(fields[7]);
+                int nextDialogue3 = string.IsNullOrEmpty(fields[8]) ? -1 : int.Parse(fields[8]);
                 GameObject itemRewardPrefab = null;
 
                 // 解析物品奖励
-                if (!string.IsNullOrEmpty(line[9]))
+                if (!string.IsNullOrEmpty(fields[9]))
                 {
-                    // 假设物品Prefab路径存储在CSV的第10列
-                    itemRewardPrefab = Resources.Load<GameObject>(line[9]);
+                    string path = fields[9].Trim(); // 防止意外的空格导致路径错误
+                    itemRewardPrefab = Resources.Load<GameObject>(path);
+                    if (itemRewardPrefab == null)
+                    {
+                        Debug.LogWarning($"无法加载预制体，路径：{path}，请检查路径是否正确，以及资源是否放在 Resources 文件夹内。");
+                    }
+                    else
+                    {
+                        Debug.Log($"成功加载物品预制体：{itemRewardPrefab.name}，路径：{path}");
+                    }
                 }
 
-                //创建对话节点
-                string npcName = line.Length > 10 ? line[10] : "";
-                DialogueNode node = new DialogueNode(npcId, dialogueId, dialogueText, option1, option2, option3,
-                                                      nextDialogue1, nextDialogue2, nextDialogue3, itemRewardPrefab, npcName);
+                // 创建对话节点
+                string npcName = fields.Length > 10 ? fields[10] : "";
+                DialogueNode node = new DialogueNode(
+                    npcId, dialogueId, dialogueText,
+                    option1, option2, option3,
+                    nextDialogue1, nextDialogue2, nextDialogue3,
+                    itemRewardPrefab, npcName
+                );
 
                 if (!dialogues.ContainsKey(npcId))
                 {
@@ -80,14 +99,100 @@ public class DialogManager : MonoBehaviour
         }
     }
 
+    private List<string> ReadCsvLines(string csvContent)
+    {
+        List<string> lines = new List<string>();
+        StringBuilder currentLine = new StringBuilder();
+        bool inQuotes = false;
+
+        foreach (char c in csvContent)
+        {
+            if (c == '"')
+            {
+                inQuotes = !inQuotes;
+            }
+
+            // 检测换行符（考虑不同系统的换行符）
+            if ((c == '\n' && !inQuotes) || (c == '\r' && !inQuotes))
+            {
+                // 遇到非引号内的换行符时完成一行
+                if (c == '\n')
+                {
+                    lines.Add(currentLine.ToString().Trim());
+                    currentLine.Clear();
+                }
+            }
+            else
+            {
+                // 忽略回车符（\r），只处理换行符（\n）
+                if (c != '\r')
+                {
+                    currentLine.Append(c);
+                }
+            }
+        }
+
+        // 添加最后一行
+        if (currentLine.Length > 0)
+        {
+            lines.Add(currentLine.ToString().Trim());
+        }
+
+        return lines;
+    }
+
+    private string[] SplitCsvLine(string line)
+    {
+        List<string> fields = new List<string>();
+        StringBuilder currentField = new StringBuilder();
+        bool inQuotes = false;
+
+        for (int i = 0; i < line.Length; i++)
+        {
+            char c = line[i];
+
+            if (c == '"')
+            {
+                // 处理双引号转义
+                if (inQuotes && i < line.Length - 1 && line[i + 1] == '"')
+                {
+                    currentField.Append('"');
+                    i++; // 跳过下一个引号
+                }
+                else
+                {
+                    inQuotes = !inQuotes;
+                }
+            }
+            else if (c == ',' && !inQuotes)
+            {
+                fields.Add(currentField.ToString().Trim());
+                currentField.Clear();
+            }
+            else
+            {
+                currentField.Append(c);
+            }
+        }
+
+        // 添加最后一个字段
+        fields.Add(currentField.ToString().Trim());
+
+        // 移除字段首尾的引号并处理转义
+        for (int i = 0; i < fields.Count; i++)
+        {
+            if (fields[i].StartsWith("\"") && fields[i].EndsWith("\""))
+            {
+                fields[i] = fields[i].Substring(1, fields[i].Length - 2);
+                fields[i] = fields[i].Replace("\"\"", "\"");
+            }
+        }
+
+        return fields.ToArray();
+    }
     // 开始对话
     public void StartDialogue(int npcId, int startDialogueId = 1)
     {
-        /*if (finishedNpcIds.Contains(npcId))
-        {
-            ShowOnlyText("...");
-            return;
-        }*/
         player = FindObjectOfType<PlayerController>();
         currentDialogue = GetDialogueNode(npcId, startDialogueId);
         if (currentDialogue != null)
@@ -104,8 +209,6 @@ public class DialogManager : MonoBehaviour
         // 先显示对话文本
         string[] dialogueLines = new string[] { currentDialogue.dialogueText };
         UIManager.Instance.ShowDialogue(dialogueLines, OnDialogueComplete, currentDialogue.npcName);
-
-
 
     }
     private void OnDialogueComplete()
@@ -167,9 +270,9 @@ public class DialogManager : MonoBehaviour
             {
                 if (currentDialogue.itemRewardPrefab != null)
                 {
+                    Debug.Log("2");
                     GiveCollectibleItem(currentDialogue.itemRewardPrefab);
                 }
-
                 ShowDialogue();
             }
             else
