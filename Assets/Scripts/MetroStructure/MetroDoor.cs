@@ -17,6 +17,12 @@ public class MetroDoor : MonoBehaviour
     public float openSpeed = 1.0f;
     public AudioClip openSound;
 
+    [Header("摄像机距离检测")]
+    public Camera mainCamera;
+    public float minDistance = 12f;
+    //private SpriteRenderer[] spriteRenderers;
+
+
     private Animator anim;
     private AudioSource audioSource;
 
@@ -31,6 +37,9 @@ public class MetroDoor : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
+        //spriteRenderers = GetComponentsInChildren<SpriteRenderer>(true);
+        if (mainCamera == null)
+            mainCamera = Camera.main;
 
         if (ArrowManager.S == null)
             ArrowManager.S = FindObjectOfType<ArrowManager>();
@@ -65,6 +74,7 @@ public class MetroDoor : MonoBehaviour
     }
 
 
+
     public void TryInteract(PlayerController player)
     {
         if (isSolvingPuzzle)
@@ -75,8 +85,9 @@ public class MetroDoor : MonoBehaviour
 
         if (!Battery.isPowered)
         {
-            if (currentFault == FaultType.Type3 || currentFault == FaultType.Type4||currentFault==FaultType.Type5)
+            if (player.equippedItem == null&&(currentFault == FaultType.Type3 || currentFault == FaultType.Type4||currentFault==FaultType.Type5))
             {
+                UIManager.Instance.ShowMessage("需要备用电池才能修复门");
                 Debug.Log("需要备用电池才能修复门！");
                 return;
             }

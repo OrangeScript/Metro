@@ -252,7 +252,7 @@ public class InventorySystem : MonoBehaviour
     private void ApplyEquipmentEffects(InteractableObject item)
     {
         item.gameObject.SetActive(true);
-        item.SetEquippedLayer();
+        //item.SetEquippedLayer();
         player.EquipItem(item);
         Debug.Log($"[装备调试] 装备物品: {item.name}，" +
             $"位置: {item.transform.position}，" +

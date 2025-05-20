@@ -85,6 +85,8 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        if (!GameManager.Instance.isGameStarted)
+            return;
         if (ArrowManager.S.IsInWave())
         {
             rb.velocity = Vector2.zero;  
@@ -101,6 +103,7 @@ public class PlayerController : MonoBehaviour
                 TryCarryNPC();
             }
         }
+        UpdateFootstepSFX();
         HandleInput();
         HandleImmediateAnimation();
         CheckInteractables();
@@ -112,6 +115,8 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (!GameManager.Instance.isGameStarted)
+            return;
         HandleMovement();
     }
 
@@ -125,18 +130,8 @@ public class PlayerController : MonoBehaviour
         vertical = input.y;
         bool hasMovementInput = horizontal != 0 || vertical != 0;
 
-        //HandleManualStateSwitch();
         HandleAutoStateTransition(hasMovementInput);
         HandleMovementDirection(horizontal, vertical);
-    }
-
-    private void HandleManualStateSwitch()
-    {
-        if (Input.GetKeyDown(KeyCode.C) && !IsProtectedState())
-        {
-            currentState = currentState == PlayerState.Crawling ?
-                PlayerState.Normal : PlayerState.Crawling;
-        }
     }
 
     private void HandleAutoStateTransition(bool hasInput)
@@ -236,13 +231,31 @@ public class PlayerController : MonoBehaviour
     {
         return System.Array.Exists(protectedStates, s => s == (int)currentState);
     }
+
+    private void UpdateFootstepSFX()
+    {
+        if (movement.magnitude > 0.1f)
+        {
+            if (currentState == PlayerState.Crawling)
+                AudioManager.Instance.PlayLoopSFX(AudioManager.Instance.crawlClip);
+            else
+                AudioManager.Instance.PlayLoopSFX(AudioManager.Instance.walkClip);
+        }
+        else
+        {
+            AudioManager.Instance.StopLoopSFX();
+        }
+    }
+
     #endregion
 
     #region ½»»¥ÏµÍ³
     public void HandleInteractionInput()
     {
-        if (Input.GetKeyDown(KeyCode.F) && nearestInteractable)       
+        if (Input.GetKeyDown(KeyCode.F) && nearestInteractable)
+        {
             nearestInteractable.OnInteract(); 
+        }
     }
 
     public void HandleUseItemInput()

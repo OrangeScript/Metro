@@ -68,6 +68,7 @@ public class GameManager : MonoBehaviour
         UIPanelFader.Instance.Play(() =>
         {
             Debug.Log("开始面板加载完成，继续流程");
+            UIPanelFader.Instance.gameObject.SetActive(false);
             UIManager.Instance.ShowSet();
         });
         isGameStarted = true;
@@ -80,6 +81,7 @@ public class GameManager : MonoBehaviour
         isGameOver = true;
         isGameStarted = false;
         string message = isGameWon ? wonMessage : failMessage;
+        UIPanelFader.Instance.gameObject.SetActive(true);
         UIPanelFader.Instance.Setup(UIPanelFader.FadeMode.FadePanelAndText, message);
         UIPanelFader.Instance.Play(() =>
         {

@@ -98,7 +98,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d74ad1a897d8e1240915e108313940f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  brokenWindowSprite: {fileID: -6536004677518967806, guid: d436f9306d1867c44b4d0c5c013fcb7e, type: 3}
+  itemName: "\u7A97\u6237"
+  itemIcon: {fileID: 0}
+  itemDescription: 
+  carryType: 0
+  destroyOnUse: 0
+  poolTag: Items
+  prefabReference: {fileID: 0}
+  useTrigger: 0
+  isContinuousUse: 0
   windowCollider: {fileID: 5493912720692188711}
 --- !u!61 &5493912720692188711
 BoxCollider2D:

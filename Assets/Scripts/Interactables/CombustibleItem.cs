@@ -115,7 +115,10 @@ public class CombustibleItem : InteractableObject
                 Flame.SetActive(true);
             }
             burnCoroutine = StartCoroutine(GenerateSmoke());
-
+            if (AudioManager.Instance != null && AudioManager.Instance.fireClip != null)
+            {
+                AudioManager.Instance.PlayLoopSFX(AudioManager.Instance.fireClip);
+            }
             Debug.Log($"{level} 级燃烧物开始燃烧！");
         }
     }
@@ -135,7 +138,10 @@ public class CombustibleItem : InteractableObject
 
             if (burnCoroutine != null)
                 StopCoroutine(burnCoroutine);
-
+            if (AudioManager.Instance != null)
+            {
+                AudioManager.Instance.StopLoopSFX();
+            }
             Debug.Log("燃烧物已扑灭！");
         }
     }
@@ -155,6 +161,10 @@ public class CombustibleItem : InteractableObject
         }
 
         Debug.Log("燃烧结束，物体销毁。");
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.StopLoopSFX();
+        }
         Destroy(gameObject);
     }
 

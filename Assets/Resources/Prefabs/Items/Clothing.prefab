@@ -100,7 +100,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: "\u8863\u670D"
   itemIcon: {fileID: 21300000, guid: 48738480ba4fcab45b9330323d605cb5, type: 3}
-  itemDescription: "\u6251\u706D\u71C3\u70E7\u7269"
+  itemDescription: 
   carryType: 3
   destroyOnUse: 1
   poolTag: Items

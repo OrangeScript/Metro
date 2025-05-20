@@ -8,6 +8,7 @@ public class CreditsScroller : MonoBehaviour
     public RectTransform contentTransform; // 制作人名单内容
     public float scrollSpeed = 30f;
     public float startDelay = 0.5f;
+    public float scrollTime = 10f;
 
     private bool isScrolling = false;
 
@@ -39,7 +40,7 @@ public class CreditsScroller : MonoBehaviour
         float elapsedTime = 0f;
         Vector2 startPos = contentTransform.anchoredPosition;
 
-        while (elapsedTime < 5f)
+        while (elapsedTime < scrollTime)
         {
             float deltaY = scrollSpeed * Time.unscaledDeltaTime;
             contentTransform.anchoredPosition += new Vector2(0f, deltaY);

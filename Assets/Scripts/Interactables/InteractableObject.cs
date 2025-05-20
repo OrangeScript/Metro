@@ -8,6 +8,7 @@ public abstract class InteractableObject : MonoBehaviour
     protected bool isEquipped = false;
 
     protected PlayerController player;
+    [TextArea(3, 5)]
     public string itemDescription;
 
     public enum CarryType { None, Mask, NPC, Item }
@@ -56,6 +57,7 @@ public abstract class InteractableObject : MonoBehaviour
             }
             gameObject.SetActive(false); // 禁用当前实例
             player.nearestInteractable = null;
+            AudioManager.Instance.PlayPickupItemSFX();
         }
     }
 
@@ -121,7 +123,7 @@ public abstract class InteractableObject : MonoBehaviour
     }
     public string GetDescription()
     {
-        return $"名称: {itemName}\n描述: {itemDescription}";
+        return $"{itemName}\n{itemDescription}";
     }
 
     void OnDrawGizmos()

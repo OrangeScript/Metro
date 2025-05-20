@@ -5,7 +5,7 @@ public class Flashlight : InteractableObject
 {
     [Header("手电筒设置")]
     public bool isFlashlightOn = false; // 是否开启手电筒
-    [SerializeField]private new Light light;
+    public new Light light;
 
     protected override void Start()
     {
@@ -22,7 +22,7 @@ public class Flashlight : InteractableObject
     protected override void HandleUse()
     {
         light.gameObject.SetActive(true);
-        isFlashlightOn = !isFlashlightOn;
+        isFlashlightOn = true;
         light.enabled = isFlashlightOn;
     }
     
